@@ -228,6 +228,16 @@ a {
   line-height: 1.8;
 }
 
+.hero-card .report-figure {
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.hero-card .report-figure img {
+  border-radius: 8px;
+}
+
 .content-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.9fr);
@@ -322,6 +332,72 @@ a {
   gap: 1.3rem;
 }
 
+.carousel-shell {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.carousel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.carousel-controls {
+  display: inline-flex;
+  gap: 0.6rem;
+}
+
+.carousel-controls button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.7rem 0.95rem;
+  background: rgba(23, 37, 47, 0.08);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", monospace;
+  cursor: pointer;
+}
+
+.carousel-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(min(100%, 1040px), 1fr);
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-slide {
+  scroll-snap-align: start;
+}
+
+.landscape-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.landscape-panel .placeholder-panel {
+  min-height: unset;
+}
+
+.stacked-copy {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.stacked-copy h3 {
+  margin: 0;
+}
+
 .report-figure-grid {
   display: grid;
   gap: 1rem;
@@ -349,6 +425,29 @@ a {
   width: 100%;
   height: auto;
   border-radius: 10px;
+}
+
+.report-figure.compact {
+  padding: 0.5rem;
+}
+
+.report-figure.compact img {
+  max-height: 180px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.report-figure.micro img {
+  max-height: 130px;
+}
+
+.report-figure-grid.four-up {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.report-figure-grid.team-figures {
+  grid-template-columns: repeat(2, minmax(120px, 190px));
+  justify-content: start;
 }
 
 .report-figure figcaption {
@@ -398,6 +497,34 @@ a {
   color: var(--ink);
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.83rem;
+}
+
+.code-frame {
+  width: 100%;
+  min-height: 420px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.details-panel {
+  padding: 0;
+  overflow: hidden;
+}
+
+.details-panel summary {
+  padding: 1.1rem 1.35rem;
+  cursor: pointer;
+  font-family: "IBM Plex Mono", monospace;
+  list-style: none;
+}
+
+.details-panel summary::-webkit-details-marker {
+  display: none;
+}
+
+.details-panel .details-body {
+  padding: 0 1.35rem 1.35rem;
 }
 
 .page-header h1 {
@@ -466,7 +593,9 @@ a {
   .placeholder-grid,
   .rule-strip,
   .report-figure-grid.two-up,
-  .report-figure-grid.three-up {
+  .report-figure-grid.three-up,
+  .report-figure-grid.four-up,
+  .landscape-panel {
     grid-template-columns: 1fr;
   }
 

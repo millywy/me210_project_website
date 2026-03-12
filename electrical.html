@@ -39,71 +39,108 @@
           <p class="page-kicker">Imported From Report</p>
           <h1>Electrical</h1>
           <p class="page-subtitle">
-            The exported electrical section focuses on tape sensor design, wiring reliability, and the final schematic.
+            The electrical page now keeps the full extracted writeup together and groups the tape sensor circuit work into one calculation section.
           </p>
         </section>
 
         <section class="content-stack">
           <article class="placeholder-panel">
-            <p class="placeholder-label">Reliability</p>
-            <h2>Wiring lessons</h2>
+            <p class="placeholder-label">Electrical Notes</p>
+            <h2>Wiring, debugging, and reliability</h2>
+            <p class="report-note">Wire Management: BE EXTRA NICE TO THE ELECTRONS!</p>
             <p>
               During earlier stages of testing, we spent a lot of time debugging simply due to flimsy
               connections that would come loose as the robot moved. Adding wire connectors and cleaning
               up our wiring, learning how to crimp important wires (and using tape when necessary!) helped
               us a lot.
             </p>
+            <ul class="placeholder-list">
+              <li>However, this setup was still not robust enough. Even towards the end of the project, we would sometimes still not get valid readings due to loose wires.</li>
+              <li>Overall, we believe that our logic was sound and when the robot functioned it never got stuck in a loop or failed on itself and that the main culprit was the loose connections.</li>
+              <li>As we progressed with more testing attempts, moving the robot more, we think the wiring got more and more loose which ended up sabotaging our performance in the competition as our main issue was a singular loose wire!</li>
+              <li>Conclusion: Taking the time to clean up and fix the wiring early on would have saved us hours of confusion and debugging and would have potentially led to better results for us on the competition!</li>
+            </ul>
+            <p class="report-note">Arduino</p>
+            <ul class="placeholder-list">
+              <li>Initially we were using an arduino UNO but it did not have enough pins, so we explored using I2C communication between both Arduinos. We were unable to establish a successful connection between both Arduinos and we are suspecting that ChatGPT’s generated code is the culprit in this situation.</li>
+              <li>Again, due to messy wiring, we accidentally fried our Arduino UNO since we accidentally connected it to 12V, this also led to overcurrent to our ultrasonic sensors and delayed our progress for a couple days.</li>
+              <li>Since we needed more pins and communication between two Arduinos was difficult to establish, we changed to an Arduino MEGA, and we really had to take care of this Arduino and not accidentally fry it too.</li>
+              <li>Tape the bottom of the arduino pins so that they dont short with heat sink on motor drivers!</li>
+            </ul>
+            <p class="report-note">Crimping</p>
+            <ul class="placeholder-list">
+              <li>On the day of the competition, a wire broke since it was never inserted into its Molex connector plastic cap so everytime the wire was attached and detached, we were tugging on the wire itself. During the process of crimping it again, we realized that the orientation of the plastic cap mattered as it had different shapes on both leads.</li>
+            </ul>
+            <p class="report-note">Tape sensor</p>
+            <ul class="placeholder-list">
+              <li>22k and 47k with OPB704WZ → terrible</li>
+              <li>Used instead</li>
+            </ul>
+            <p class="report-note">Ultrasound sensors</p>
+            <ul class="placeholder-list">
+              <li>Tried to use library <a href="https://projecthub.arduino.cc/Isaac100/getting-started-with-the-hc-sr04-ultrasonic-sensor-7cabe1">https://projecthub.arduino.cc/Isaac100/getting-started-with-the-hc-sr04-ultrasonic-sensor-7cabe1</a> - unreliable</li>
+              <li>Very accurate to the CM precision</li>
+            </ul>
+            <p class="report-note">Making electrical connections reliable</p>
+            <ul class="placeholder-list">
+              <li>Take the time to solder nicely with heat shrink!</li>
+              <li>Tape the connecting wires!</li>
+              <li>If you need to use a crocodile clip for more than 1 hour, use an actual wire instead.</li>
+            </ul>
+            <p class="report-note">Debugging tips</p>
+            <ul class="placeholder-list">
+              <li>Multimeter is your g</li>
+            </ul>
+            <p class="report-note">Total components fried</p>
+            <ul class="placeholder-list">
+              <li>3 Arduinos</li>
+              <li>Milly’s nice Apple adaptor</li>
+            </ul>
           </article>
 
-          <article class="placeholder-panel">
-            <p class="placeholder-label">Tape Sensor Circuit</p>
-            <h2>Tape Sensor circuit</h2>
-            <p>LED</p>
-            <p>R_led = (5-1.7)/0.04 = 82.5 ohms</p>
-            <figure class="report-figure">
-              <img src="report-images/image3.png" alt="Tape sensor LED circuit" />
-            </figure>
-            <p>5V ── 200Ω ── Orange</p>
-            <p>GND ─────── Green</p>
-          </article>
-
-          <article class="placeholder-panel">
-            <p class="placeholder-label">Phototransistor</p>
-            <h2>Common emitter config phototransistor</h2>
-            <p>
-              Reminder: When the sensor sees white, phototransistor current is higher → it pulls the node down.
-              When it sees black, current is low → node stays high.
-            </p>
-            <figure class="report-figure">
-              <img src="report-images/image2.png" alt="Common emitter phototransistor circuit" />
-            </figure>
-            <p>I_c(on)= 0.2mA</p>
-            <p>Vo= 5- I_c*R_pu &lt; 0.8</p>
-            <p>I_c*R_pu &gt;4.2</p>
-            <p>R_pu &gt; 21k ohms</p>
-            <p>Vo= 5- I_c*R_pu &gt; 4</p>
-            <p>I_c*R_pu &lt; 1</p>
-            <p>R_pu &lt; 1/20u =50k ohms</p>
-            <p>21k &lt; R_pull-up &lt;50k</p>
-            <p>5V ── 10kΩ ──┐</p>
-            <p>White (Collector) ── Arduino A0</p>
-            <p>GND ─────────┘</p>
-            <p>GND ───────── Blue</p>
-            <p>
-              <a href="https://www.ttelectronics.com/TTElectronics/media/ProductFiles/Datasheet/OPB703-70_70A-70F-B-704.pdf">
-                OPB703-70 datasheet
-              </a>
-            </p>
-          </article>
-
-          <article class="placeholder-panel">
-            <p class="placeholder-label">Schematic</p>
-            <h2>KiCad final schematic</h2>
-            <figure class="report-figure">
-              <img src="report-images/image33.png" alt="KiCad final schematic" />
-            </figure>
-            <p>KiCad final schematic (cindy doing)</p>
-          </article>
+          <section class="landscape-panel">
+            <article class="placeholder-panel stacked-copy">
+              <p class="placeholder-label">Tape Sensor Circuit Calculation</p>
+              <h2>Tape sensor circuit calculation</h2>
+              <p>Tape Sensor circuit:</p>
+              <p>LED</p>
+              <p>R_led = (5-1.7)/0.04 = 82.5 ohms</p>
+              <p>5V ── 200Ω ── Orange</p>
+              <p>GND ─────── Green</p>
+              <p>Common emitter config phototransistor</p>
+              <p>
+                Reminder: When the sensor sees white, phototransistor current is higher → it pulls the node down.
+                When it sees black, current is low → node stays high.
+              </p>
+              <p>White seen as low</p>
+              <p>I_c(on)= 0.2mA</p>
+              <p>Vo= 5- I_c*R_pu &lt; 0.8</p>
+              <p>I_c*R_pu &gt;4.2</p>
+              <p>R_pu &gt; 21k ohms</p>
+              <p>Black seen as high</p>
+              <p>Vo= 5- I_c*R_pu &gt; 4</p>
+              <p>I_c*R_pu &lt; 1</p>
+              <p>R_pu &lt; 1/20u =50k ohms</p>
+              <p>21k &lt; R_pull-up &lt;50k</p>
+              <p>5V ── 10kΩ ──┐</p>
+              <p>White (Collector) ── Arduino A0</p>
+              <p>GND ─────────┘</p>
+              <p>GND ───────── Blue</p>
+              <p>
+                <a href="https://www.ttelectronics.com/TTElectronics/media/ProductFiles/Datasheet/OPB703-70_70A-70F-B-704.pdf">
+                  https://www.ttelectronics.com/TTElectronics/media/ProductFiles/Datasheet/OPB703-70_70A-70F-B-704.pdf
+                </a>
+              </p>
+              <p>KiCad final schematic (cindy doing)</p>
+            </article>
+            <article class="placeholder-panel">
+              <div class="report-figure-grid">
+                <figure class="report-figure compact micro"><img src="report-images/image3.png" alt="Tape sensor LED circuit" /></figure>
+                <figure class="report-figure compact micro"><img src="report-images/image2.png" alt="Common emitter phototransistor circuit" /></figure>
+                <figure class="report-figure compact micro"><img src="report-images/image33.png" alt="KiCad final schematic" /></figure>
+              </div>
+            </article>
+          </section>
         </section>
       </main>
     </div>

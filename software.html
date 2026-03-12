@@ -39,60 +39,164 @@
           <p class="page-kicker">Imported From Report</p>
           <h1>Software</h1>
           <p class="page-subtitle">
-            The software section in the exported report is image-heavy and includes both state diagrams
-            and a long final code dump.
+            This section is now laid out as a horizontal carousel so the text and code imagery stay side-by-side instead of turning into a long portrait page.
           </p>
         </section>
 
-        <section class="content-stack">
-          <article class="placeholder-panel">
-            <p class="placeholder-label">Finite State Diagrams</p>
-            <h2>Finite State Diagrams</h2>
-            <figure class="report-figure">
-              <img src="report-images/image17.jpg" alt="Finite state diagram from the software section" />
-            </figure>
-          </article>
-
-          <article class="placeholder-panel">
-            <p class="placeholder-label">Code Structure</p>
-            <h2>Changing the entire structure of our code</h2>
-            <div class="report-figure-grid three-up">
-              <figure class="report-figure"><img src="report-images/image35.png" alt="Code structure image 1" /></figure>
-              <figure class="report-figure"><img src="report-images/image25.png" alt="Code structure image 2" /></figure>
-              <figure class="report-figure"><img src="report-images/image27.png" alt="Code structure image 3" /></figure>
-              <figure class="report-figure"><img src="report-images/image29.png" alt="Code structure image 4" /></figure>
-              <figure class="report-figure"><img src="report-images/image13.png" alt="Code structure image 5" /></figure>
+        <section class="carousel-shell">
+          <div class="carousel-head">
+            <p class="placeholder-label">Software Walkthrough</p>
+            <div class="carousel-controls">
+              <button type="button" data-carousel-target="software-carousel" data-carousel-dir="prev">Prev</button>
+              <button type="button" data-carousel-target="software-carousel" data-carousel-dir="next">Next</button>
             </div>
-          </article>
+          </div>
 
-          <article class="placeholder-panel">
-            <p class="placeholder-label">Code Excerpts</p>
-            <h2>Code Excerpts</h2>
-            <div class="report-figure-grid two-up">
-              <figure class="report-figure"><img src="report-images/image1.png" alt="Code excerpt 1" /></figure>
-              <figure class="report-figure"><img src="report-images/image4.png" alt="Code excerpt 2" /></figure>
-              <figure class="report-figure"><img src="report-images/image24.png" alt="Code excerpt 3" /></figure>
-              <figure class="report-figure"><img src="report-images/image23.png" alt="Code excerpt 4" /></figure>
-              <figure class="report-figure"><img src="report-images/image32.png" alt="Code excerpt 5" /></figure>
-              <figure class="report-figure"><img src="report-images/image31.png" alt="Code excerpt 6" /></figure>
-              <figure class="report-figure"><img src="report-images/image30.png" alt="Code excerpt 7" /></figure>
-              <figure class="report-figure"><img src="report-images/image22.png" alt="Code excerpt 8" /></figure>
-              <figure class="report-figure"><img src="report-images/image7.png" alt="Code excerpt 9" /></figure>
-              <figure class="report-figure"><img src="report-images/image16.png" alt="Code excerpt 10" /></figure>
-            </div>
-          </article>
+          <div id="software-carousel" class="carousel-track">
+            <section class="carousel-slide landscape-panel">
+              <article class="placeholder-panel stacked-copy">
+                <p class="placeholder-label">Slide 1</p>
+                <h2>Finite State Diagrams</h2>
+                <p>Finite State Diagrams:</p>
+                <p class="report-note">Inputs:</p>
+                <ul class="placeholder-list">
+                  <li>Left ultrasonic sensor</li>
+                  <li>Back ultrasonic sensor 1</li>
+                  <li>Back ultrasonic sensor 2</li>
+                  <li>Line sensor middle</li>
+                  <li>Line sensor Left</li>
+                  <li>Line sensor Right</li>
+                </ul>
+                <p class="report-note">Outputs:</p>
+                <ul class="placeholder-list">
+                  <li>Motor for drive train</li>
+                  <li>Moving forward, backward, left, right, clockwise, anticlockwise</li>
+                  <li>Servo motor for opening gate for shooting</li>
+                </ul>
+              </article>
+              <article class="placeholder-panel">
+                <figure class="report-figure compact micro">
+                  <img src="report-images/image17.jpg" alt="Finite state diagram from the software section" />
+                </figure>
+              </article>
+            </section>
 
-          <article class="placeholder-panel">
-            <p class="placeholder-label">Extra</p>
-            <h2>Extra</h2>
-            <figure class="report-figure">
-              <img src="report-images/image36.png" alt="Extra software image from the report" />
-            </figure>
-            <p>Final code: in subtab to this</p>
-            <a class="report-code-link" href="software-final-code.txt">Open final code text export</a>
-            <p class="report-note">We incrementally tested our codes from subsystems to integration.</p>
-          </article>
+            <section class="carousel-slide landscape-panel">
+              <article class="placeholder-panel stacked-copy">
+                <p class="placeholder-label">Slide 2</p>
+                <h2>Changing the entire structure of our code</h2>
+                <p class="report-note">Before event driven programming</p>
+                <p>
+                  We had a metro timer that called the sensor reading functions every 500 milliseconds and called the state machine ie. The state machine was not in the loop because we were scared of it being called too many times. But that was causing there to be a delay where it would not stop parallel, but drift/would keep spinning forever. Our states would also update and change the motors and check the sensors within the same functions, which made it really hard to debug exactly what was going wrong with software. For example:
+                </p>
+                <p class="report-note">Changed to event based programming completely</p>
+                <p>
+                  Changed to event based programming completely, with states inside loops and global event checkers. The structure of this was we had our loop which had a switch state statement. The different states would ONLY call the motors/servo. Then we have a checkGlobalEvents() function inside the loop which were a set of event checking functions and responding functions. The event checking functions would respond a boolean depending on the input they got from the timers/ultrasonic sensors/line sensors and if they responded true, it would trigger the corresponding response function which would ONLY change the previous state and current state variable.
+                </p>
+                <p>This helped us separate sensor and motor logic and helped SO much with debugging.</p>
+                <p class="report-note">Timers</p>
+                <ul class="placeholder-list">
+                  <li>We were also using delays which were blocking code, and used metro() timer instead for small timers in our code.</li>
+                  <li>When we started using the metro() timer we were pretty perplexed because it would keep saying the timer automatically expired even when it had not started. After trying a lot of Serial.print statements and debugging, we realised it is because we started them in the switch state, not within the previous response function (RespToMovedRight()) in global events, and in the loop global events was first so it would automatically expire the timer. To explain, this was because our GlobalEvents() function was a series of Event() and Resp(). So our RespToMovedRight() function changed the currState to STATE_MOVE_FORWARD_1. Then the next Event() function would check if the timer had expired which it thought it had because it never started (inside the state) so it automatically responds to the timer expiring and skips the STATE_MOVE_FORWARD_1 completely. Sometimes bugs are tough to catch!</li>
+                  <li>Improving efficiency: return false right away in check global events bool functions if not in the appropriate corresponding state</li>
+                </ul>
+              </article>
+              <article class="placeholder-panel">
+                <div class="report-figure-grid two-up">
+                  <figure class="report-figure compact micro"><img src="report-images/image35.png" alt="Code structure image 1" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image25.png" alt="Code structure image 2" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image27.png" alt="Code structure image 3" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image29.png" alt="Code structure image 4" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image13.png" alt="Code structure image 5" /></figure>
+                </div>
+              </article>
+            </section>
+
+            <section class="carousel-slide landscape-panel">
+              <article class="placeholder-panel stacked-copy">
+                <p class="placeholder-label">Slide 3</p>
+                <h2>Code Excerpts</h2>
+                <p class="report-note">Orientation (Spin it till you win it!)</p>
+                <ul class="placeholder-list">
+                  <li>Our strategy was to rotate the robot anticlockwise until our ultrasonic sensors aligned with the wall, as it could be placed in any initial position inside the starting box</li>
+                  <li>Initially we just had one ultrasonic sensor on the back of the robot and one on the left, but we noticed that it would not stop perfectly parallel, but in a diagonal position when the thresholds reached</li>
+                  <li>So, we discussed within software to keep track of the minimum distance the ultrasonics read through a full rotation initially, and then rotate again till it aligned up with those readings in order to prevent premature stopping</li>
+                  <li>However, we decided to simply add another ultrasonic sensor on the back side of the robot and in addition to checking that the sensors were within the correct distance threshold range to detect the wall corners, it also checked if the difference between the 2 back sensors was under a certain amount, this helped us greatly!</li>
+                  <li>Interestingly, motor speed was a huge factor for us during orientation. When the motors were too fast, the robot would end up hitting the walls and drift after aligned and motors stopped. When they were too slow, then the robot would not be able to move or spin properly.</li>
+                  <li>We also had the motors only run once instead of continuously being called in the loop ie. become set (using prevState logic) which reduces jitters. The previous state logic helped a lot, and we also created an empty state STATE_EMPTY which helped us set previous state to something that would not mess with the rest of our code for eg. the first pass is set up.</li>
+                  <li>Software debugging is also closely tied to hardware! For example, our ultrasonic sensors were not giving valid readings and we realised it was just due to flimsy wires.</li>
+                </ul>
+                <p class="report-note">Navigation (Line sensing)</p>
+                <ul class="placeholder-list">
+                  <li>Had 3 different line sensors: a middle one which was at the bottom of the chassis, and 2 on the left and right side which were sticking out in front slightly, positioned diagonally to stop the robot when they sensed the hog line at the front</li>
+                  <li>Learnt the hard way that the thresholds for black and white change a lot during the day depending on how much general sunlight/artificial light is present in the environment</li>
+                  <li>We noticed that the line sensors thought the edge of the starting bounding box was the hog line and would shoot pucks out early, so we created 2 states (STATE_TAPE_MOVE_FORWARD_1 and STATE_TAPE_MOVE_FORWARD_2). In the first variation, we were not checking the right and left line sensor and started a 3 second timer as it moved forward. When the timer expired, it triggered the 2nd variation of move forward which would then start checking the right and left sensors to stop at the hog line and the line following logic</li>
+                  <li>We also noticed that because of the inertia/tremors, the robot would sometimes be not perfectly pointing straight ahead even after orientation was working completely, and if so, would move diagonally across the board instead of directly straight to shoot as we wanted. To mitigate this, we added a block of line following logic which turned the robot anticlockwise if it was drifting right (detected if the left most sensor read black) and vice versa.</li>
+                  <li>Also, initially instead of the robot turning clockwise or anticlockwise, we had it move left or right, but this did not help too much as it would not straighten it which is why we moved to clockwise and anticlockwise. We also noticed, it would keep going back and forth between the 2 because initially we were also checking if the middle sensor was reading white but as the robot turned by the time it would recheck, it would have turned too much and the middle sensor would have crossed the black tape and would read white again. To fix this, we stopped checking the middle sensor at all for the line following logic.</li>
+                </ul>
+                <p>Final code: in subtab to this</p>
+              </article>
+              <article class="placeholder-panel">
+                <div class="report-figure-grid two-up">
+                  <figure class="report-figure compact micro"><img src="report-images/image1.png" alt="Code excerpt 1" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image4.png" alt="Code excerpt 2" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image24.png" alt="Code excerpt 3" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image23.png" alt="Code excerpt 4" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image32.png" alt="Code excerpt 5" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image31.png" alt="Code excerpt 6" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image30.png" alt="Code excerpt 7" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image22.png" alt="Code excerpt 8" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image7.png" alt="Code excerpt 9" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image16.png" alt="Code excerpt 10" /></figure>
+                </div>
+              </article>
+            </section>
+
+            <section class="carousel-slide landscape-panel">
+              <article class="placeholder-panel stacked-copy">
+                <p class="placeholder-label">Slide 4</p>
+                <h2>Extra and testing codes</h2>
+                <p class="report-note">Shooting and reloading (Whurl it! Curl it!)</p>
+                <ul class="placeholder-list">
+                  <li>Initially were planning to control a flywheel using a high torque motor, but due to simplicity, weight, and issues with the flywheel generating enough torque, we decided to pivot to a gate that opened and closed to release the pucks</li>
+                  <li>Used a continuous rotation servo instead of normal, needed to use a timer for it as could only set speeds</li>
+                  <li>In the state logic decided to use delays and a boolean as the event which triggered it to move to next state (boolean was doneShooting which was false and only become true at the end of the state (this was the event that moved us to the next state in CheckGlobalEvents()))</li>
+                </ul>
+                <p class="report-note">Ultrasonic sensor</p>
+                <ul class="placeholder-list">
+                  <li>Decided to calculate distance in cm manually using function below. Initially tried using the library provided but we realised it was blocking code and buggy to work with. Would recommend calculating manually for teams!</li>
+                  <li>In general for sensors, instead of reading inside the loop, we only called functions to read values when it was needed, inside the event() function itself</li>
+                </ul>
+                <p>Extra:</p>
+                <ul class="placeholder-list">
+                  <li>Do not use ChatGPT to help write your code! We initially used it to help us write some functions but this became really buggy and hard to debug! We recommend creating a clear state diagram, and within your loop have a switch state which only controls your outputs, and a checkGlobalEvents() consisting of a series of boolean Event() functions which check for changes in input, and Resp() functions which switch between states</li>
+                  <li>Serial.print() values within our loop (every 250 ms using another Metro() timer: Metro debugMetro(250);) helped us a lot with debugging, as was changing the initial state to focus on a specific part of our state diagram</li>
+                </ul>
+                <p class="report-note">testing codes</p>
+                <p>[[software_codes]]</p>
+                <p>We incrementally tested our codes from subsystems to integration</p>
+                <a class="report-code-link" href="software-final-code.txt">Open final code text export</a>
+              </article>
+              <article class="placeholder-panel">
+                <div class="report-figure-grid two-up">
+                  <figure class="report-figure compact micro"><img src="report-images/image31.png" alt="Shooting code excerpt 1" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image30.png" alt="Shooting code excerpt 2" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image22.png" alt="Shooting code excerpt 3" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image7.png" alt="Shooting code excerpt 4" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image16.png" alt="Ultrasonic sensor code excerpt" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image36.png" alt="Testing codes image from the software section" /></figure>
+                </div>
+              </article>
+            </section>
+          </div>
         </section>
+
+        <details class="placeholder-panel details-panel">
+          <summary>Final Code</summary>
+          <div class="details-body">
+            <iframe class="code-frame" src="software-final-code.txt" title="Final software code text export"></iframe>
+          </div>
+        </details>
       </main>
     </div>
     <script src="script.js"></script>

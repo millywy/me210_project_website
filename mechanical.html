@@ -39,188 +39,204 @@
           <p class="page-kicker">Imported From Report</p>
           <h1>Mechanical</h1>
           <p class="page-subtitle">
-            This page combines the detailed mechanical writeup with the nearby concept and subsystem images
-            preserved from the exported report.
+            The subsystem pages now move horizontally like a carousel so the writeup reads more like a landscape slide deck.
           </p>
         </section>
 
-        <section class="content-stack">
-          <article class="placeholder-panel">
-            <p class="placeholder-label">Subsystem 1</p>
-            <h2>Navigation</h2>
-            <h3>Brainstorming/Design Tradeoffs</h3>
-            <p>
-              For a drivetrain subsystem, we were considering standard wheels and omni-directional wheels.
-              We were also considering different orientations of passive vs active drive wheels based on each wheel type.
-              For a standard wheel:
-            </p>
-            <div class="report-figure-grid two-up">
-              <figure class="report-figure"><img src="report-images/image11.png" alt="Navigation concept image 1" /></figure>
-              <figure class="report-figure"><img src="report-images/image14.png" alt="Navigation concept image 2" /></figure>
-              <figure class="report-figure"><img src="report-images/image19.png" alt="Navigation concept image 3" /></figure>
-              <figure class="report-figure"><img src="report-images/image12.png" alt="Navigation concept image 4" /></figure>
+        <section class="carousel-shell">
+          <div class="carousel-head">
+            <p class="placeholder-label">Subsystem Carousel</p>
+            <div class="carousel-controls">
+              <button type="button" data-carousel-target="mechanical-carousel" data-carousel-dir="prev">Prev</button>
+              <button type="button" data-carousel-target="mechanical-carousel" data-carousel-dir="next">Next</button>
             </div>
-            <p>;:</p>
-            <div class="report-figure-grid two-up">
-              <figure class="report-figure"><img src="report-images/image5.png" alt="Wheel concept image 5" /></figure>
-              <figure class="report-figure"><img src="report-images/image10.png" alt="Wheel concept image 6" /></figure>
-            </div>
-            <p>Omni-directional wheel:</p>
-            <ul class="placeholder-list">
-              <li>We were leaning towards a four-wheel drive omniwheel system because:</li>
-              <li>We wanted to eliminate complexity when it comes to steering and turning</li>
-              <li>Due to spatial constraints of exiting the starting box successfully and never crossing the hog lines, eliminating turn radii was the best strategy.</li>
-              <li>A two-wheel drive with omni-directional wheels risked turning instead of translating when we would turn on one motor</li>
-              <li>Especially since we will be carrying the weight of 3x pucks + 2x batteries, more drive torque was needed.</li>
-            </ul>
-            <h3>Testing</h3>
-            <p>
-              One of our main priorities was to put together hardware and start testing as early as possible and avoid getting too invested in perfecting the design from the first pass.
-            </p>
-            <h3>Prototype progress</h3>
-            <ul class="placeholder-list">
-              <li>We cut a 10inx10in sheet of wood, with our team logo etched on it.</li>
-              <li>We drilled holes into this board, zip-tied motors in, and hot-glued omni-directional wheels to the chassis.</li>
-              <li>Within a couple days we had a fully working navigating subsystems and had a headstart on the hardware overall.</li>
-              <li>The other components added to the prototype were the sensors and they were simply taped onto the board.</li>
-            </ul>
-            <h3>Final design</h3>
-            <ul class="placeholder-list">
-              <li>Make mounts for motors (L-brackets)</li>
-              <li>Make mounts for shaft-wheel interface</li>
-              <li>Make corresponding cutouts on new chassis</li>
-              <li>Push wheels into chassis so that robot outer dimension is bound by chassis and real estate is maximized while staying within guideline dimensions</li>
-              <li>Place all navigation-related components on chassis underside to free up real estate on the upper side</li>
-              <li>4x Motor mounts</li>
-              <li>4x Wheels + Shaft-Wheel Interfaces</li>
-              <li>2x L298N H-bridge Motor Drivers</li>
-            </ul>
-          </article>
+          </div>
 
-          <article class="placeholder-panel">
-            <p class="placeholder-label">Subsystem 2</p>
-            <h2>Sensing</h2>
-            <h3>Brainstorming/Design Tradeoffs</h3>
-            <p>We broke off the sensing subsystem into two portions:</p>
-            <ul class="placeholder-list">
-              <li>Orientation in starting zone</li>
-              <li>Navigating to scoring zone</li>
-            </ul>
-            <p>We had IR beacons at the center of the sheet, so we initially thought to include IR sensors.</p>
-            <ul class="placeholder-list">
-              <li>Can tell us which way is forward and help with orienting the robot to the right direction.</li>
-              <li>One of our lab assignments for the class was a similar circuit and it was very complicated</li>
-              <li>It depended on the accuracy of the IR phototransistor,</li>
-              <li>As a result, and to ensure simplicity, we ended up going with a more reliable set of sensors albeit more in quantity.</li>
-              <li>3x Ultrasonic sensors</li>
-              <li>3x Line sensors</li>
-            </ul>
-            <h3>Final design</h3>
-            <p>
-              This subsystem will be discussed in more detail in the electrical section of this report. The mechanical interface with this subsystem was the sensor mounts that enabled a secure attachment to the chassis and location/angle adjustment if needed.
-            </p>
-            <ul class="placeholder-list">
-              <li>3x Ultrasonic sensor mounts</li>
-              <li>3x Line sensor mounts</li>
-            </ul>
-          </article>
+          <div id="mechanical-carousel" class="carousel-track">
+            <section class="carousel-slide landscape-panel">
+              <article class="placeholder-panel stacked-copy">
+                <p class="placeholder-label">Slide 1</p>
+                <h2>Subsystem 1 - Navigation</h2>
+                <h3>Brainstorming/Design Tradeoffs</h3>
+                <p>
+                  For a drivetrain subsystem, we were considering standard wheels and omni-directional wheels.
+                  We were also considering different orientations of passive vs active drive wheels based on each wheel type.
+                  For a standard wheel:
+                </p>
+                <p>Omni-directional wheel:</p>
+                <ul class="placeholder-list">
+                  <li>We were leaning towards a four-wheel drive omniwheel system because:</li>
+                  <li>We wanted to eliminate complexity when it comes to steering and turning</li>
+                  <li>Due to spatial constraints of exiting the starting box successfully and never crossing the hog lines, eliminating turn radii was the best strategy.</li>
+                  <li>A two-wheel drive with omni-directional wheels risked turning instead of translating when we would turn on one motor</li>
+                  <li>Especially since we will be carrying the weight of 3x pucks + 2x batteries, more drive torque was needed.</li>
+                </ul>
+                <h3>Testing</h3>
+                <p>
+                  One of our main priorities was to put together hardware and start testing as early as possible and avoid getting too invested in perfecting the design from the first pass.
+                </p>
+                <h3>Prototype progress</h3>
+                <ul class="placeholder-list">
+                  <li>We cut a 10inx10in sheet of wood, with our team logo etched on it.</li>
+                  <li>We drilled holes into this board, zip-tied motors in, and hot-glued omni-directional wheels to the chassis.</li>
+                  <li>Within a couple days we had a fully working navigating subsystems and had a headstart on the hardware overall.</li>
+                  <li>The other components added to the prototype were the sensors and they were simply taped onto the board.</li>
+                </ul>
+                <h3>Final design</h3>
+                <ul class="placeholder-list">
+                  <li>Make mounts for motors (L-brackets)</li>
+                  <li>Make mounts for shaft-wheel interface</li>
+                  <li>Make corresponding cutouts on new chassis</li>
+                  <li>Push wheels into chassis so that robot outer dimension is bound by chassis and real estate is maximized while staying within guideline dimensions</li>
+                  <li>Place all navigation-related components on chassis underside to free up real estate on the upper side</li>
+                  <li>4x Motor mounts</li>
+                  <li>4x Wheels + Shaft-Wheel Interfaces</li>
+                  <li>2x L298N H-bridge Motor Drivers</li>
+                </ul>
+              </article>
+              <article class="placeholder-panel">
+                <div class="report-figure-grid four-up">
+                  <figure class="report-figure compact micro"><img src="report-images/image11.png" alt="Navigation concept image 1" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image14.png" alt="Navigation concept image 2" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image19.png" alt="Navigation concept image 3" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image12.png" alt="Navigation concept image 4" /></figure>
+                </div>
+                <p class="report-note">Omni-directional wheel:</p>
+                <div class="report-figure-grid two-up">
+                  <figure class="report-figure compact micro"><img src="report-images/image5.png" alt="Omni wheel image 1" /></figure>
+                  <figure class="report-figure compact micro"><img src="report-images/image10.png" alt="Omni wheel image 2" /></figure>
+                </div>
+              </article>
+            </section>
 
-          <article class="placeholder-panel">
-            <p class="placeholder-label">Subsystems 3 and 4</p>
-            <h2>Storing and Shooting Pucks</h2>
-            <p>
-              The storing/shooting pucks subsystems took a bit more iteration from us as we kept gathering data and adapting to the components we had at the time.
-            </p>
-            <h3>Brainstorming</h3>
-            <p>
-              During our brainstorming session, we chose a primary shooting mechanism and a backup mechanism. Our primary shooting mechanism was a dual flywheel system.
-            </p>
-            <h3>Testing</h3>
-            <p>The prototype was functional with some concerns.</p>
-            <h3>Concerns</h3>
-            <ul class="placeholder-list">
-              <li>Friction between puck and surface puck sits on</li>
-              <li>Motor has low RPM, wheels not pushing puck out far enough</li>
-            </ul>
-            <p>Based on that we made some design changes where we:</p>
-            <ul class="placeholder-list">
-              <li>Switched out puck interface surface for a roller system (passive conveyor rollers) to reduce friction</li>
-              <li>Picked a different motor with higher RPM and slightly lower torque</li>
-            </ul>
-            <p>We tested those changes and observed the following:</p>
-            <ul class="placeholder-list">
-              <li>Roller system with a height-adjustable ramp was very reliable and smooth</li>
-              <li>Pillars (with slotted holes to enable height adjustment)</li>
-              <li>Side walls</li>
-              <li>Roller cores (with tapered ends to ensure tight fit)</li>
-              <li>Roller sleeves</li>
-              <li>New motor with lower torque would sometimes stop based on the interference distance, adding another variable to our system</li>
-            </ul>
-            <p>
-              Based on that we made a design change so that the wheels are assisted in shooting the puck away and implemented a singular flywheel system with puck interfacing with roller.
-            </p>
-            <p>
-              We went through the initial CAD work of the motor mount and the coupler for the shaft/flywheel but the measurements were off and we could not put the system together.
-            </p>
-            <p>
-              Further testing showed that sliding the pucks down the rollers passively was sufficient to score in the 5-point region, and it proved to be a less complicated and more robust design.
-            </p>
-            <p>
-              So we made the change to a servo with a gate-like arm to block the pucks from falling and then releasing the pucks when the robot gets to the hog line. The process was as follows:
-            </p>
-            <ul class="placeholder-list">
-              <li>We had two servo motor options</li>
-              <li>Positional servo</li>
-              <li>Pros: Easier control</li>
-              <li>Cons: Very weak</li>
-              <li>
-                Continuous rotation servo: FS5103R
-                <a href="https://cdn-shop.adafruit.com/product-files/154/P154+C50-003+FS5103R+SPEC.pdf">spec sheet</a>
-              </li>
-              <li>Pros: Stronger</li>
-              <li>Cons: More complicated control code</li>
-              <li>
-                Ended up selecting FS5103R
-                <a href="https://cdn-shop.adafruit.com/product-files/154/P154+C50-003+FS5103R+SPEC.pdf">spec sheet</a>
-                after software workaround to have servo behave like a positional servo
-              </li>
-              <li>CADed gate and initial servo mount</li>
-              <li>Gate is press-fit on servo</li>
-              <li>Initially, gate hole was hot glued to positional servo</li>
-              <li>After we made the switch to continuous rotation servo, we removed the hot glue to clear the hole</li>
-              <li>Printed another gate on competition day for redundancy</li>
-              <li>Had last minute issues with new printed part, fit was too loose, suggesting earlier tolerances were too loose and leftover hot glue is what kept earlier gate part intact with servo</li>
-              <li>Gate was coming off the servo gear due to pucks swinging it away</li>
-              <li>Tight mount for servo that screws motor in</li>
-              <li>Bracket from pillar extending past gate for it to press against</li>
-            </ul>
-          </article>
+            <section class="carousel-slide landscape-panel">
+              <article class="placeholder-panel stacked-copy">
+                <p class="placeholder-label">Slide 2</p>
+                <h2>Subsystem 2 - Sensing</h2>
+                <h3>Brainstorming/Design Tradeoffs</h3>
+                <p>We broke off the sensing subsystem into two portions:</p>
+                <ul class="placeholder-list">
+                  <li>Orientation in starting zone</li>
+                  <li>Navigating to scoring zone</li>
+                </ul>
+                <p>We had IR beacons at the center of the sheet, so we initially thought to include IR sensors.</p>
+                <ul class="placeholder-list">
+                  <li>Can tell us which way is forward and help with orienting the robot to the right direction.</li>
+                  <li>One of our lab assignments for the class was a similar circuit and it was very complicated</li>
+                  <li>It depended on the accuracy of the IR phototransistor,</li>
+                  <li>As a result, and to ensure simplicity, we ended up going with a more reliable set of sensors albeit more in quantity.</li>
+                  <li>3x Ultrasonic sensors</li>
+                  <li>3x Line sensors</li>
+                </ul>
+                <h3>Final design</h3>
+                <p>
+                  This subsystem will be discussed in more detail in the electrical section of this report. The mechanical interface with this subsystem was the sensor mounts that enabled a secure attachment to the chassis and location/angle adjustment if needed.
+                </p>
+                <ul class="placeholder-list">
+                  <li>3x Ultrasonic sensor mounts</li>
+                  <li>3x Line sensor mounts</li>
+                </ul>
+              </article>
+              <article class="placeholder-panel stacked-copy">
+                <p class="report-note">This subsystem does not have nearby exported images in the report, so the slide stays text-first.</p>
+              </article>
+            </section>
 
-          <article class="placeholder-panel">
-            <p class="placeholder-label">Iteration</p>
-            <h2>Importance of rapid prototyping</h2>
-            <p>
-              We gathered a lot of data on these subsystems from day one and that is why we were able to adapt to many changes and still deliver the system early enough.
-            </p>
-            <ul class="placeholder-list">
-              <li>Within the first few days of the project, we tested out a low fidelity prototype of our flywheel shooting mechanism, and identified that the RPM/shooting distance was two short.</li>
-              <li>We then tested with a geared motor with slightly less torque and higher RPM, and saw that it was too weak as a dual flywheel.</li>
-              <li>We then pivoted to using a singular flywheel but testing also showed the importance of tweaking the interference distance and raised concerns about reliably implementing the system.</li>
-              <li>In addition to the first round of parts not fitting due to inaccurate tolerances, we switched to a passive ramp mechanism. With the initial tests of this, we hot glued and taped components, and while that rendition of hardware was not reliable, it helped us ensure that the idea was viable and then we went on to make the fully nicer, well-designed parts that fit well together.</li>
-            </ul>
-          </article>
+            <section class="carousel-slide landscape-panel">
+              <article class="placeholder-panel stacked-copy">
+                <p class="placeholder-label">Slide 3</p>
+                <h2>Subsystems 3/4 - Storing and Shooting Pucks</h2>
+                <p>
+                  The storing/shooting pucks subsystems took a bit more iteration from us as we kept gathering data and adapting to the components we had at the time.
+                </p>
+                <h3>Brainstorming</h3>
+                <p>
+                  During our brainstorming session, we chose a primary shooting mechanism and a backup mechanism. Our primary shooting mechanism was a dual flywheel system.
+                </p>
+                <h3>Testing</h3>
+                <p>The prototype was functional with some concerns.</p>
+                <h3>Concerns</h3>
+                <ul class="placeholder-list">
+                  <li>Friction between puck and surface puck sits on</li>
+                  <li>Motor has low RPM, wheels not pushing puck out far enough</li>
+                </ul>
+                <p>Based on that we made some design changes where we:</p>
+                <ul class="placeholder-list">
+                  <li>Switched out puck interface surface for a roller system (passive conveyor rollers) to reduce friction</li>
+                  <li>Picked a different motor with higher RPM and slightly lower torque</li>
+                </ul>
+              </article>
+              <article class="placeholder-panel stacked-copy">
+                <p>We tested those changes and observed the following:</p>
+                <ul class="placeholder-list">
+                  <li>Roller system with a height-adjustable ramp was very reliable and smooth</li>
+                  <li>Pillars (with slotted holes to enable height adjustment)</li>
+                  <li>Side walls</li>
+                  <li>Roller cores (with tapered ends to ensure tight fit)</li>
+                  <li>Roller sleeves</li>
+                  <li>New motor with lower torque would sometimes stop based on the interference distance, adding another variable to our system</li>
+                </ul>
+                <p>
+                  Based on that we made a design change so that the wheels are assisted in shooting the puck away and implemented a singular flywheel system with puck interfacing with roller.
+                </p>
+                <p>
+                  We went through the initial CAD work of the motor mount and the coupler for the shaft/flywheel but the measurements were off and we could not put the system together.
+                </p>
+                <p>
+                  Further testing showed that sliding the pucks down the rollers passively was sufficient to score in the 5-point region, and it proved to be a less complicated and more robust design.
+                </p>
+                <p>
+                  So we made the change to a servo with a gate-like arm to block the pucks from falling and then releasing the pucks when the robot gets to the hog line. The process was as follows:
+                </p>
+                <ul class="placeholder-list">
+                  <li>We had two servo motor options</li>
+                  <li>Positional servo</li>
+                  <li>Pros: Easier control</li>
+                  <li>Cons: Very weak</li>
+                  <li>Continuous rotation servo: FS5103R</li>
+                  <li>Pros: Stronger</li>
+                  <li>Cons: More complicated control code</li>
+                  <li>Ended up selecting FS5103R after software workaround to have servo behave like a positional servo</li>
+                  <li>CADed gate and initial servo mount</li>
+                  <li>Gate is press-fit on servo</li>
+                  <li>Initially, gate hole was hot glued to positional servo</li>
+                  <li>After we made the switch to continuous rotation servo, we removed the hot glue to clear the hole</li>
+                  <li>Printed another gate on competition day for redundancy</li>
+                  <li>Had last minute issues with new printed part, fit was too loose, suggesting earlier tolerances were too loose and leftover hot glue is what kept earlier gate part intact with servo</li>
+                  <li>Gate was coming off the servo gear due to pucks swinging it away</li>
+                  <li>Tight mount for servo that screws motor in</li>
+                  <li>Bracket from pillar extending past gate for it to press against</li>
+                </ul>
+              </article>
+            </section>
 
-          <article class="placeholder-panel">
-            <p class="placeholder-label">Structure</p>
-            <h2>Chassis Design</h2>
-            <ul class="placeholder-list">
-              <li>Our initial prototype was a duron sheet with zip-tied motors that have wheels hot glued to them, and that to us through the majority of testing and integrating our navigation/sending subsystems.</li>
-              <li>After sensor counts and locations were finalized, as well as how the storing/shooting puck subsystems would look like, we were able to design a well-organized chassis that accounted for different components and was adaptable to the different shooting mechanisms changes that we had.</li>
-              <li>The picture below shows the hole locations for the different mounts for the motors, motor drivers, Arduino, sensors, and finally the pillars that carried the ramp and later the servo motor for the gate.</li>
-              <li>A very useful feature that was implemented in this chassis is the slotted holes that enabled the pillars to move back and forth to account for any angle changes/motor mounting changes that could happen.</li>
-              <li>Since this chassis was first cut, we never had to redo it, while also never having to compromise on the functionality of our parts.</li>
-            </ul>
-          </article>
+            <section class="carousel-slide landscape-panel">
+              <article class="placeholder-panel stacked-copy">
+                <p class="placeholder-label">Slide 4</p>
+                <h2>Importance of rapid prototyping</h2>
+                <p>
+                  We gathered a lot of data on these subsystems from day one and that is why we were able to adapt to many changes and still deliver the system early enough.
+                </p>
+                <ul class="placeholder-list">
+                  <li>Within the first few days of the project, we tested out a low fidelity prototype of our flywheel shooting mechanism, and identified that the RPM/shooting distance was two short.</li>
+                  <li>We then tested with a geared motor with slightly less torque and higher RPM, and saw that it was too weak as a dual flywheel.</li>
+                  <li>We then pivoted to using a singular flywheel but testing also showed the importance of tweaking the interference distance and raised concerns about reliably implementing the system.</li>
+                  <li>In addition to the first round of parts not fitting due to inaccurate tolerances, we switched to a passive ramp mechanism. With the initial tests of this, we hot glued and taped components, and while that rendition of hardware was not reliable, it helped us ensure that the idea was viable and then we went on to make the fully nicer, well-designed parts that fit well together.</li>
+                </ul>
+              </article>
+              <article class="placeholder-panel stacked-copy">
+                <p class="placeholder-label">Slide 5</p>
+                <h2>Chassis Design</h2>
+                <ul class="placeholder-list">
+                  <li>Our initial prototype was a duron sheet with zip-tied motors that have wheels hot glued to them, and that to us through the majority of testing and integrating our navigation/sending subsystems.</li>
+                  <li>After sensor counts and locations were finalized, as well as how the storing/shooting puck subsystems would look like, we were able to design a well-organized chassis that accounted for different components and was adaptable to the different shooting mechanisms changes that we had.</li>
+                  <li>The picture below shows the hole locations for the different mounts for the motors, motor drivers, Arduino, sensors, and finally the pillars that carried the ramp and later the servo motor for the gate.</li>
+                  <li>A very useful feature that was implemented in this chassis is the slotted holes that enabled the pillars to move back and forth to account for any angle changes/motor mounting changes that could happen.</li>
+                  <li>Since this chassis was first cut, we never had to redo it, while also never having to compromise on the functionality of our parts.</li>
+                </ul>
+              </article>
+            </section>
+          </div>
         </section>
       </main>
     </div>
