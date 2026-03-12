@@ -36,31 +36,73 @@
 
       <main>
         <section class="page-header">
-          <p class="page-kicker">Page Placeholder</p>
+          <p class="page-kicker">Imported From Report</p>
           <h1>Electrical</h1>
           <p class="page-subtitle">
-            Send the exact wording for your electrical system page and I will drop it in directly.
+            The exported electrical section focuses on tape sensor design, wiring reliability, and the final schematic.
           </p>
         </section>
 
-        <section class="placeholder-grid">
+        <section class="content-stack">
           <article class="placeholder-panel">
-            <p class="placeholder-label">Suggested Content</p>
-            <h2>Electrical architecture</h2>
-            <ul class="placeholder-list">
-              <li>Power distribution</li>
-              <li>Motor and sensor connections</li>
-              <li>Controller choices and wiring decisions</li>
-            </ul>
+            <p class="placeholder-label">Reliability</p>
+            <h2>Wiring lessons</h2>
+            <p>
+              During earlier stages of testing, we spent a lot of time debugging simply due to flimsy
+              connections that would come loose as the robot moved. Adding wire connectors and cleaning
+              up our wiring, learning how to crimp important wires (and using tape when necessary!) helped
+              us a lot.
+            </p>
           </article>
+
           <article class="placeholder-panel">
-            <p class="placeholder-label">Suggested Assets</p>
-            <h2>Visuals to add</h2>
-            <ul class="placeholder-list">
-              <li>Wiring diagrams</li>
-              <li>PCB or breadboard photos</li>
-              <li>Annotated component photos</li>
-            </ul>
+            <p class="placeholder-label">Tape Sensor Circuit</p>
+            <h2>Tape Sensor circuit</h2>
+            <p>LED</p>
+            <p>R_led = (5-1.7)/0.04 = 82.5 ohms</p>
+            <figure class="report-figure">
+              <img src="report-images/image3.png" alt="Tape sensor LED circuit" />
+            </figure>
+            <p>5V ── 200Ω ── Orange</p>
+            <p>GND ─────── Green</p>
+          </article>
+
+          <article class="placeholder-panel">
+            <p class="placeholder-label">Phototransistor</p>
+            <h2>Common emitter config phototransistor</h2>
+            <p>
+              Reminder: When the sensor sees white, phototransistor current is higher → it pulls the node down.
+              When it sees black, current is low → node stays high.
+            </p>
+            <figure class="report-figure">
+              <img src="report-images/image2.png" alt="Common emitter phototransistor circuit" />
+            </figure>
+            <p>I_c(on)= 0.2mA</p>
+            <p>Vo= 5- I_c*R_pu &lt; 0.8</p>
+            <p>I_c*R_pu &gt;4.2</p>
+            <p>R_pu &gt; 21k ohms</p>
+            <p>Vo= 5- I_c*R_pu &gt; 4</p>
+            <p>I_c*R_pu &lt; 1</p>
+            <p>R_pu &lt; 1/20u =50k ohms</p>
+            <p>21k &lt; R_pull-up &lt;50k</p>
+            <p>5V ── 10kΩ ──┐</p>
+            <p>White (Collector) ── Arduino A0</p>
+            <p>GND ─────────┘</p>
+            <p>GND ───────── Blue</p>
+            <p>
+              <a href="https://www.ttelectronics.com/TTElectronics/media/ProductFiles/Datasheet/OPB703-70_70A-70F-B-704.pdf">
+                OPB703-70 datasheet
+              </a>
+            </p>
+          </article>
+
+          <article class="placeholder-panel">
+            <p class="placeholder-label">Schematic</p>
+            <h2>KiCad final schematic</h2>
+            <figure class="report-figure">
+              <img src="report-images/image33.png" alt="KiCad final schematic" />
+            </figure>
+            <p>KiCad final schematic (cindy doing)</p>
           </article>
         </section>
       </main>
