@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Joy of Curling | ME 210</title>
+    <meta
+      name="description"
+      content="ME 210 project website for The Joy of Curling, an autonomous robotic curling competition entry."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html">
+          <span class="brand-kicker">ME 210</span>
+          <span class="brand-title">The Joy of Curling</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          Menu
+        </button>
+        <nav id="site-nav" class="site-nav">
+          <a href="index.html" aria-current="page">Home</a>
+          <a href="initial-design.html">Initial Design</a>
+          <a href="milestones.html">Milestones</a>
+          <a href="software.html">Software</a>
+          <a href="electrical.html">Electrical</a>
+          <a href="mechanical.html">Mechanical</a>
+          <a href="integration-challenges.html">Integration Challenges</a>
+          <a href="team-learning.html">Team and Learning</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">2026 Competition Theme</p>
+            <h1>The Joy of Curling</h1>
+            <p class="lede">
+              An autonomous robot built for a head-to-head robotic curling match, where every shot,
+              return path, and collision can change the score.
+            </p>
+            <div class="hero-tags">
+              <span>Autonomy</span>
+              <span>Navigation</span>
+              <span>Puck launching</span>
+              <span>Competition strategy</span>
+            </div>
+          </div>
+
+          <aside class="hero-card">
+            <p class="card-label">Quick Match Facts</p>
+            <ul>
+              <li>Field size: 4 ft x 16 ft</li>
+              <li>Match length: 2 minutes</li>
+              <li>Pucks per match: up to 8</li>
+              <li>Starting load: up to 3 pucks</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section class="content-grid">
+          <article class="feature-panel">
+            <p class="section-kicker">The Arena</p>
+            <h2>The challenge</h2>
+            <p>
+              For the 2026 ME210 competition, The Joy of Curling, teams were challenged to design
+              and build an autonomous robot capable of competing in a head-to-head robotic curling
+              match. Inspired by the Olympic sport of curling, our robot had to autonomously
+              navigate a 4 ft x 16 ft playing field, collect and shoot pucks toward a target known
+              as the house, and compete against an opponent doing the same.
+            </p>
+            <p>
+              Starting from a randomly oriented position within a designated starting zone, the
+              robot begins with up to three pucks and must autonomously deliver them toward the
+              target. After launching its shots, the robot must return to the starting zone to
+              reload before continuing play. Over the course of a two-minute match, each robot can
+              play up to eight pucks while attempting to place them as close to the center of the
+              target, the button, as possible.
+            </p>
+            <p>
+              Because both robots compete simultaneously, shots may collide, block opponents, or
+              knock other pucks into or out of scoring zones. Success requires precise navigation,
+              reliable sensing, and accurate puck launching, all within strict constraints on size,
+              power, and cost.
+            </p>
+          </article>
+
+          <article class="scoring-panel">
+            <p class="section-kicker">Match Rules</p>
+            <h2>Scoring system</h2>
+            <ul class="score-list">
+              <li><strong>+5</strong> for a puck landing in the center (white)</li>
+              <li><strong>+2</strong> for a puck landing in the middle ring (red)</li>
+              <li><strong>+1</strong> for a puck landing in the outer ring (blue)</li>
+              <li><strong>-3</strong> for a puck that travels past the opponent's hog line</li>
+              <li><strong>-3</strong> for a more than 3 second stay across self hog line</li>
+              <li><strong>-5</strong> for a robot that travels past the opponent's hog line</li>
+            </ul>
+            <p class="annotation">
+              Color note placeholder: colors depend on whether the final scoring graphic comes from
+              the real arena photo or from the document diagram.
+            </p>
+          </article>
+        </section>
+
+        <section class="rule-strip">
+          <div class="rule-card">
+            <p class="rule-number">01</p>
+            <p>Robots may play up to eight pucks within the two-minute match.</p>
+          </div>
+          <div class="rule-card">
+            <p class="rule-number">02</p>
+            <p>A robot must return fully to the starting zone before reloading more pucks.</p>
+          </div>
+          <div class="rule-card">
+            <p class="rule-number">03</p>
+            <p>If a puck knocks another puck into a different scoring zone, the new positions determine the final score.</p>
+          </div>
+          <div class="rule-card">
+            <p class="rule-number">04</p>
+            <p>A manual reset during gameplay results in a 1 point penalty.</p>
+          </div>
+        </section>
+
+        <section class="placeholder-stage">
+          <div class="placeholder-card">
+            <p class="section-kicker">Still Needed</p>
+            <h2>Assets for this page</h2>
+            <ul>
+              <li>Hero image or arena photo</li>
+              <li>Scoring diagram with confirmed ring colors</li>
+              <li>Team names and a short one-line project subtitle if you want it shown in the hero</li>
+            </ul>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
