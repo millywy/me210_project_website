@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 const mount = document.getElementById('viewer');
 const status = document.getElementById('viewer-status');
@@ -43,41 +43,39 @@ try {
   floor.position.y = -35;
   scene.add(floor);
 
-  const loader = new STLLoader();
+  // ---- GLB Loader ----
+  const loader = new GLTFLoader();
   loader.load(
-    'full-assembly.stl',
-    (geometry) => {
-      geometry.computeVertexNormals();
-      geometry.center();
-
-      const material = new THREE.MeshStandardMaterial({
-        color: 0x1b6f74,
-        roughness: 0.46,
-        metalness: 0.08,
+    'full-assembly.glb', // your exported GLB from Blender
+    (gltf) => {
+      const model = gltf.scene;
+      model.traverse((child) => {
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
       });
+      scene.add(model);
 
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.rotation.x = -Math.PI / 2;
-      scene.add(mesh);
-
-      const box = new THREE.Box3().setFromObject(mesh);
+      // Center model
+      const box = new THREE.Box3().setFromObject(model);
       const size = box.getSize(new THREE.Vector3());
       const maxDim = Math.max(size.x, size.y, size.z) || 1;
       const fov = camera.fov * (Math.PI / 180);
       const distance = maxDim / (2 * Math.tan(fov / 2));
       camera.position.set(distance * 1.25, distance * 0.95, distance * 1.25);
-      controls.target.set(0, 0, 0);
+      controls.target.copy(box.getCenter(new THREE.Vector3()));
       controls.update();
 
       if (status) {
-        status.textContent = 'STL loaded successfully.';
+        status.textContent = 'GLB loaded successfully.';
       }
     },
     undefined,
     (error) => {
       console.error(error);
       if (status) {
-        status.textContent = 'The STL could not be loaded in the browser.';
+        status.textContent = 'The GLB could not be loaded in the browser.';
       }
     }
   );
