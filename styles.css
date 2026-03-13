@@ -791,6 +791,54 @@ main {
   min-height: 320px;
 }
 
+.nav-layout {
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+}
+
+.nav-gallery-tight {
+  gap: 8px;
+}
+
+.nav-pair {
+  gap: 8px;
+}
+
+.nav-gallery-tight .media-frame.micro img {
+  max-height: 228px;
+}
+
+.nav-gallery-tight .media-frame {
+  border-radius: 18px;
+}
+
+.video-frame {
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow);
+}
+
+.video-frame iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  display: block;
+}
+
+.portrait-video iframe {
+  aspect-ratio: 9 / 16;
+}
+
+.video-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.video-grid.three-up {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .footer-note {
   margin-top: 12px;
   color: var(--muted);
@@ -805,6 +853,7 @@ main {
   .card-grid.three,
   .card-grid.four,
   .story-grid.two,
+  .video-grid.three-up,
   .page-layout,
   .team-grid,
   .photo-strip,

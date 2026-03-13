@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curl'y Fries | Videos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html">
+          <span class="brand-kicker">ME 210</span>
+          <span class="brand-title">Curl'y Fries</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav id="site-nav" class="site-nav">
+          <a href="index.html">Home</a>
+          <a href="competition.html">Competition</a>
+          <a href="brainstorm.html">Brainstorm</a>
+          <a href="mechanical.html">Mechanical</a>
+          <a href="software.html">Software</a>
+          <a href="electrical.html">Electrical</a>
+          <a href="team.html">Team</a>
+          <a href="videos.html" aria-current="page">Videos</a>
+          <a href="cad-viewer.html">CAD</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="page-header">
+          <p class="page-kicker">Media</p>
+          <h1>Videos</h1>
+          <p class="page-subtitle">
+            Competition footage, checkoff footage, and the project journey reel in one place.
+          </p>
+        </section>
+
+        <section class="video-grid three-up">
+          <article class="story-block">
+            <p class="section-kicker">Competition day</p>
+            <h2>Competition day short</h2>
+            <div class="video-frame portrait-video">
+              <iframe
+                src="https://www.youtube.com/embed/bcDLLwRfHXs"
+                title="Competition day video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </article>
+
+          <article class="story-block">
+            <p class="section-kicker">Checkoff</p>
+            <h2>Checkoff short</h2>
+            <div class="video-frame portrait-video">
+              <iframe
+                src="https://www.youtube.com/embed/2a9Uszq2c8I"
+                title="Checkoff video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </article>
+
+          <article class="story-block">
+            <p class="section-kicker">Journey reel</p>
+            <h2>Our journey reel</h2>
+            <div class="video-frame portrait-video">
+              <iframe
+                src="https://www.youtube.com/embed/nIkP9gBbkeE"
+                title="Project journey reel"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
