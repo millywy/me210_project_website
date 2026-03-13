@@ -46,7 +46,7 @@ try {
   // ---- GLB Loader ----
   const loader = new GLTFLoader();
   loader.load(
-    'full-assembly.glb', // your exported GLB from Blender
+    'assembly.glb', // your exported GLB from Blender
     (gltf) => {
       const model = gltf.scene;
       model.traverse((child) => {
