@@ -11,24 +11,91 @@ if (menuButton && nav) {
 const spyLinks = [...document.querySelectorAll('[data-spy-link]')];
 const spySections = [...document.querySelectorAll('[data-spy-section]')];
 
-if (spyLinks.length && spySections.length && 'IntersectionObserver' in window) {
+if (spyLinks.length && spySections.length) {
   const byId = new Map(spyLinks.map((link) => [link.getAttribute('href').slice(1), link]));
-  const observer = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-      if (!visible) return;
+  const updateActiveLink = () => {
+    const offset = 170;
+    let activeId = spySections[0].id;
 
-      const id = visible.target.id;
-      spyLinks.forEach((link) => link.classList.toggle('is-active', link === byId.get(id)));
-    },
-    {
-      rootMargin: '-25% 0px -55% 0px',
-      threshold: [0.15, 0.4, 0.7],
+    for (const section of spySections) {
+      const top = section.getBoundingClientRect().top;
+      if (top - offset <= 0) activeId = section.id;
     }
-  );
 
-  spySections.forEach((section) => observer.observe(section));
+    spyLinks.forEach((link) => link.classList.toggle('is-active', link === byId.get(activeId)));
+  };
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  window.addEventListener('resize', updateActiveLink);
+  updateActiveLink();
 }
+
+const carousels = [...document.querySelectorAll('[data-carousel]')];
+
+carousels.forEach((carousel) => {
+  const track = carousel.querySelector('[data-carousel-track]');
+  const slides = [...carousel.querySelectorAll('[data-carousel-slide]')];
+  const prev = carousel.querySelector('[data-carousel-prev]');
+  const next = carousel.querySelector('[data-carousel-next]');
+  const dots = carousel.querySelector('[data-carousel-dots]');
+  const autoplay = carousel.dataset.autoplay !== 'false';
+  const intervalMs = Number(carousel.dataset.interval || 3600);
+  let index = 0;
+  let timer = null;
+
+  if (!track || !slides.length) return;
+
+  const update = () => {
+    track.style.transform = `translateX(-${index * 100}%)`;
+    if (dots) {
+      [...dots.children].forEach((dot, dotIndex) => {
+        dot.classList.toggle('is-active', dotIndex === index);
+      });
+    }
+  };
+
+  const goTo = (nextIndex) => {
+    index = (nextIndex + slides.length) % slides.length;
+    update();
+  };
+
+  const start = () => {
+    if (!autoplay || slides.length < 2) return;
+    stop();
+    timer = window.setInterval(() => goTo(index + 1), intervalMs);
+  };
+
+  const stop = () => {
+    if (timer) window.clearInterval(timer);
+  };
+
+  if (dots && slides.length > 1) {
+    slides.forEach((_, slideIndex) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `Go to slide ${slideIndex + 1}`);
+      dot.addEventListener('click', () => {
+        goTo(slideIndex);
+        start();
+      });
+      dots.appendChild(dot);
+    });
+  }
+
+  prev?.addEventListener('click', () => {
+    goTo(index - 1);
+    start();
+  });
+
+  next?.addEventListener('click', () => {
+    goTo(index + 1);
+    start();
+  });
+
+  carousel.addEventListener('mouseenter', stop);
+  carousel.addEventListener('mouseleave', start);
+
+  update();
+  start();
+});

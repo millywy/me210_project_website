@@ -54,14 +54,14 @@
             <section id="navigation" class="section-block" data-spy-section>
               <p class="section-kicker">Subsystem 1</p>
               <h2>Navigation</h2>
-              <div class="split-layout">
+              <div class="split-layout shooting-layout">
                 <div>
                   <p><strong>Brainstorming/Design Tradeoffs:</strong></p>
                   <p>For a drivetrain subsystem, we were considering standard wheels and omni-directional wheels. We were also considering different orientations of passive vs active drive wheels based on each wheel type.</p>
                   <p><strong>For a standard wheel:</strong></p>
                   <p><strong>For an omni-directional wheel:</strong></p>
+                  <p>We were leaning towards a four-wheel drive omniwheel system because:</p>
                   <ul class="detail-list">
-                    <li>We were leaning towards a four-wheel drive omniwheel system because:</li>
                     <li>We wanted to eliminate complexity when it comes to steering and turning</li>
                     <li>Due to spatial constraints of exiting the starting box successfully and never crossing the hog lines, eliminating turn radii was the best strategy.</li>
                     <li>A two-wheel drive with omni-directional wheels risked turning instead of translating when we would turn on one motor</li>
@@ -86,42 +86,32 @@
                     <li>4x Wheels + Shaft-Wheel Interfaces</li>
                     <li>2x L298N H-bridge Motor Drivers</li>
                   </ul>
-                  <p><strong>Chassis Design:</strong></p>
-                  <ul class="detail-list">
-                    <li>Our initial prototype was a duron sheet with zip-tied motors that had wheels hot glued to them, and that to us through the majority of testing and integrating our navigation/sending subsystems.</li>
-                    <li>After sensor counts and locations were finalized, as well as how the storing/shooting puck subsystems would look like, we were able to design a well-organized chassis that accounted for different components and was adaptable to the different shooting mechanisms changes that we had.</li>
-                    <li>The picture below shows the hole locations for the different mounts for the motors, motor drivers, Arduino, sensors, and finally the pillars that carried the ramp and later the servo motor for the gate.</li>
-                    <li>A very useful feature that was implemented in this chassis is the slotted holes that enabled the pillars to move back and forth to account for any angle changes/motor mounting changes that could happen.</li>
-                    <li>Since this chassis was first cut, we never had to redo it, while also never having to compromise on the functionality of our parts.</li>
-                  </ul>
                 </div>
-                <div class="stack-layout">
-                  <div class="media-grid four">
-                    <figure class="media-frame micro"><img src="site-images/image3.png" alt="Standard wheel sketch 1" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image42.png" alt="Standard wheel sketch 2" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image33.png" alt="Standard wheel sketch 3" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image4.png" alt="Standard wheel sketch 4" /></figure>
-                  </div>
-                  <div class="media-grid three">
-                    <figure class="media-frame micro"><img src="site-images/image68.png" alt="Omni wheel image 1" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image34.png" alt="Omni wheel image 2" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image24.png" alt="Motor mount CAD" /></figure>
-                  </div>
-                  <div class="media-grid three">
-                    <figure class="media-frame micro"><img src="site-images/image64.png" alt="Motor mount CAD 2" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image37.png" alt="Wheel interface CAD" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image57.png" alt="Wheel interface front view" /></figure>
-                  </div>
-                  <div class="media-grid three">
-                    <figure class="media-frame micro"><img src="site-images/image46.png" alt="Wheel interface back view" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image14.png" alt="Wheel interface to motor" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image18.png" alt="Motor driver mount" /></figure>
+                <div class="stack-layout shooting-stack">
+                  <div class="media-grid two">
+                    <figure class="media-frame micro"><img src="site-images/image3.png" alt="Standard wheel image 1" /></figure>
+                    <figure class="media-frame micro"><img src="site-images/image33.png" alt="Standard wheel image 2" /></figure>
                   </div>
                   <div class="media-grid two">
-                    <figure class="media-frame micro"><img src="site-images/image54.png" alt="Motor driver assembly image 2" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image6.png" alt="Motor driver assembly image 3" /></figure>
+                    <figure class="media-frame micro"><img src="site-images/image4.png" alt="Standard wheel image 3" /></figure>
+                    <figure class="media-frame micro"><img src="site-images/image42.png" alt="Standard wheel image 4" /></figure>
+                  </div>
+                  <div class="media-grid two">
+                    <figure class="media-frame micro"><img src="site-images/image68.png" alt="Omni wheel image 1" /></figure>
+                    <figure class="media-frame micro"><img src="site-images/image34.png" alt="Omni wheel image 2" /></figure>
                   </div>
                 </div>
+              </div>
+              <div class="gallery-grid" style="margin-top: 18px;">
+                <figure class="media-frame micro"><img src="site-images/image24.png" alt="Motor mount CAD" /></figure>
+                <figure class="media-frame micro"><img src="site-images/image64.png" alt="Motor mount CAD 2" /></figure>
+                <figure class="media-frame micro"><img src="site-images/image37.png" alt="Wheel interface CAD" /></figure>
+                <figure class="media-frame micro"><img src="site-images/image57.png" alt="Wheel interface front view" /></figure>
+                <figure class="media-frame micro"><img src="site-images/image46.png" alt="Wheel interface back view" /></figure>
+                <figure class="media-frame micro"><img src="site-images/image14.png" alt="Wheel interface to motor" /></figure>
+                <figure class="media-frame micro"><img src="site-images/image18.png" alt="Motor driver mount" /></figure>
+                <figure class="media-frame micro"><img src="site-images/image54.png" alt="Motor driver assembly 2" /></figure>
+                <figure class="media-frame micro"><img src="site-images/image6.png" alt="Motor driver assembly 3" /></figure>
               </div>
             </section>
 
@@ -153,13 +143,9 @@
                   </ul>
                 </div>
                 <div class="stack-layout">
-                  <div class="media-grid one">
-                    <figure class="media-frame small"><img src="site-images/image58.png" alt="Ultrasonic sensor mount" /></figure>
-                  </div>
-                  <div class="media-grid two">
-                    <figure class="media-frame micro"><img src="site-images/image45.png" alt="Line sensor mount 1" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image56.png" alt="Line sensor mount 2" /></figure>
-                  </div>
+                  <figure class="media-frame compact"><img src="site-images/image58.png" alt="Ultrasonic sensor mount" /></figure>
+                  <figure class="media-frame compact"><img src="site-images/image45.png" alt="Line sensor mount 1" /></figure>
+                  <figure class="media-frame compact"><img src="site-images/image56.png" alt="Line sensor mount 2" /></figure>
                 </div>
               </div>
             </section>
@@ -172,7 +158,7 @@
                   <p>The storing/shooting pucks subsystems took a bit more iteration from us as we kept gathering data and adapting to the components we had at the time.</p>
                   <p><strong>Brainstorming:</strong></p>
                   <p>During our brainstorming session, we chose a primary shooting mechanism and a backup mechanism. Our primary shooting mechanism was a flywheel system (singular or dual). Our backup mechanism was a puncher.</p>
-                  <p><strong>Prototype Build (Attempt #1):</strong> Dual flywheel system.</p>
+                  <p><strong>Prototype Build (Attempt #1):</strong> Dual flywheel system. <a href="https://www.youtube.com/watch?v=sJGC8ACxIeE">Video link</a></p>
                   <p>The prototype was functional with some concerns:</p>
                   <ol class="detail-list">
                     <li>Friction between puck and surface puck sits on</li>
@@ -190,51 +176,80 @@
                   </ol>
                   <p>Based on that we made a design change so that the wheels are assisted in shooting the puck away and implemented a singular flywheel system with puck interfacing with roller:</p>
                   <ol class="detail-list">
-                    <li>Initial CAD work for motor mount and coupler for the shaft/flywheel</li>
-                    <li>Measurements were off and we could not assemble the system.</li>
+                    <li>
+                      Initial CAD work for motor mount and coupler for the shaft/flywheel
+                      <ul class="detail-list">
+                        <li>Measurements were off and we could not assemble the system.</li>
+                      </ul>
+                    </li>
                     <li>Further testing showed that sliding the pucks down the rollers passively was sufficient to score in the 5-point region, and it proved to be a less complicated and more robust design.</li>
-                    <li>Changed to a servo with a gate-like arm blocking pucks then releasing them at shooting location behind hog line.</li>
-                  </ol>
-                  <ol class="detail-list">
-                    <li>We had two servo motor options</li>
-                    <li>Positional servo</li>
-                    <li>Pros: Easier control</li>
-                    <li>Cons: Very weak</li>
-                    <li>Continuous rotation servo: FS5103R [LINK: <a href="https://cdn-shop.adafruit.com/product-files/154/P154+C50-003+FS5103R+SPEC.pdf">spec</a>]</li>
-                    <li>Pros: Stronger</li>
-                    <li>Cons: More complicated control code</li>
-                    <li>Ended up selecting FS5103R after software workaround to have servo behave like a positional servo</li>
-                    <li>CADed gate and initial servo mount</li>
-                    <li>Gate is press-fit on servo</li>
-                    <li>Initially, gate hole was hot glued to positional servo</li>
-                    <li>After we made the switch to continuous rotation servo, we removed the hot glue to clear the hole</li>
-                    <li>Printed another gate on competition day for redundancy</li>
-                    <li>Had last minute issues with new printed part, fit was too loose, suggesting earlier tolerances were too loose and leftover hot glue is what kept earlier gate part intact with servo</li>
-                    <li>Gate was coming off the servo gear due to pucks swinging it away</li>
-                    <li>Tight mount for servo that screws motor in</li>
-                    <li>Bracket from pillar extending past gate for it to press against</li>
+                    <li>
+                      Changed to a servo with a gate-like arm blocking pucks then releasing them at shooting location behind hog line.
+                      <ol class="detail-list">
+                        <li>
+                          We had two servo motor options
+                          <ol class="detail-list">
+                            <li>
+                              Positional servo
+                              <ul class="detail-list">
+                                <li>Pros: Easier control</li>
+                                <li>Cons: Very weak</li>
+                              </ul>
+                            </li>
+                            <li>
+                              Continuous rotation servo: FS5103R [LINK: <a href="https://cdn-shop.adafruit.com/product-files/154/P154+C50-003+FS5103R+SPEC.pdf">https://cdn-shop.adafruit.com/product-files/154/P154+C50-003+FS5103R+SPEC.pdf</a>]
+                              <ul class="detail-list">
+                                <li>Pros: Stronger</li>
+                                <li>Cons: More complicated control code</li>
+                              </ul>
+                            </li>
+                          </ol>
+                        </li>
+                        <li>Ended up selecting FS5103R [LINK: <a href="https://cdn-shop.adafruit.com/product-files/154/P154+C50-003+FS5103R+SPEC.pdf">https://cdn-shop.adafruit.com/product-files/154/P154+C50-003+FS5103R+SPEC.pdf</a>] after software workaround to have servo behave like a positional servo</li>
+                        <li>
+                          CADed gate and initial servo mount
+                          <ol class="detail-list">
+                            <li>Gate is press-fit on servo</li>
+                            <li>Initially, gate hole was hot glued to positional servo</li>
+                            <li>After we made the switch to continuous rotation servo, we removed the hot glue to clear the hole</li>
+                            <li>Printed another gate on competition day for redundancy</li>
+                            <li>Had last minute issues with new printed part, fit was too loose, suggesting earlier tolerances were too loose and leftover hot glue is what kept earlier gate part intact with servo</li>
+                          </ol>
+                        </li>
+                        <li>
+                          Gate was coming off the servo gear due to pucks swinging it away
+                          <ol class="detail-list">
+                            <li>Tight mount for servo that screws motor in</li>
+                            <li>Bracket from pillar extending past gate for it to press against</li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </li>
                   </ol>
                   <p><strong>Final Design - Full Assembly:</strong></p>
                   <a class="code-link" href="cad-viewer.html">Open interactive CAD viewer</a>
                 </div>
                 <div class="stack-layout">
                   <div class="media-grid two">
-                    <figure class="media-frame micro"><img src="site-images/image31.png" alt="Flywheel concept" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image38.png" alt="Flywheel concept side image" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image2.png" alt="Puncher concept" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image69.png" alt="Puncher concept detail" /></figure>
+                    <figure class="media-frame small"><img src="site-images/image31.png" alt="Flywheel concept" /></figure>
+                    <figure class="media-frame small"><img src="site-images/image38.png" alt="Flywheel concept side image" /></figure>
+                    <figure class="media-frame small"><img src="site-images/image2.png" alt="Puncher concept" /></figure>
+                    <figure class="media-frame small"><img src="site-images/image69.png" alt="Puncher concept detail" /></figure>
                   </div>
-                  <div class="media-grid two">
-                    <figure class="media-frame micro"><img src="site-images/image32.png" alt="Pillar CAD" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image1.png" alt="Ramp part" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image62.png" alt="Side wall CAD" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image59.png" alt="Roller cores" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image67.png" alt="Roller cores detail" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image11.png" alt="Roller sleeves 1" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image48.png" alt="Roller sleeves 2" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image7.png" alt="Servo gate design" /></figure>
+                  <div class="gallery-grid shooting-gallery">
+                    <figure class="media-frame small"><img src="site-images/image32.png" alt="Pillar CAD" /></figure>
+                    <figure class="media-frame small"><img src="site-images/image1.png" alt="Ramp part" /></figure>
+                    <figure class="media-frame small"><img src="site-images/image62.png" alt="Side wall CAD" /></figure>
+                    <figure class="media-frame small"><img src="site-images/image59.png" alt="Roller cores" /></figure>
+                    <figure class="media-frame small"><img src="site-images/image67.png" alt="Roller cores detail" /></figure>
+                    <figure class="media-frame small">
+                      <img src="site-images/image11.png" alt="Roller sleeves 1" />
+                      <figcaption><a href="https://youtu.be/41NgD6ae3Ic">Roller sleeves video link</a></figcaption>
+                    </figure>
+                    <figure class="media-frame small"><img src="site-images/image48.png" alt="Roller sleeves 2" /></figure>
+                    <figure class="media-frame small"><img src="site-images/image7.png" alt="Servo gate design" /></figure>
+                    <figure class="media-frame compact shooting-hero"><img src="site-images/image44.png" alt="Final full assembly" /></figure>
                   </div>
-                  <figure class="media-frame small"><img src="site-images/image44.png" alt="Final full assembly" /></figure>
                 </div>
               </div>
             </section>

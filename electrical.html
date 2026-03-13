@@ -139,35 +139,27 @@
             <section id="appendix" class="section-block" data-spy-section>
               <p class="section-kicker">Appendix</p>
               <h2>Resistor calculations for old tape sensor circuit</h2>
-              <div class="split-layout">
-                <div>
-                  <p>LED</p>
-                  <p>R_led = (5-1.7)/0.04 = 82.5 ohms</p>
-                  <p>5V -- 200 Ohms -- Orange</p>
-                  <p>GND ------- Green</p>
-                  <p>Common emitter config phototransistor</p>
-                  <p>Reminder: When the sensor sees white, phototransistor current is higher -> it pulls the node down. When it sees black, current is low -> node stays high.</p>
-                  <ol class="detail-list">
-                    <li>White seen as low</li>
-                  </ol>
-                  <p>I_c(on)= 0.2mA</p>
-                  <p>Vo= 5- I_c*R_pu &lt; 0.8</p>
-                  <p>I_c*R_pu &gt;4.2</p>
-                  <p>R_pu &gt; 21k ohms</p>
-                  <ol class="detail-list" start="2">
-                    <li>Black seen as high</li>
-                  </ol>
-                  <p>Vo= 5- I_c*R_pu &gt; 4</p>
-                  <p>I_c*R_pu &lt; 1</p>
-                  <p>R_pu &lt; 1/20u =50k ohms</p>
-                  <p>21k &lt; R_pull-up &lt;50k</p>
-                  <p>5V -- 10kOhms -- corner</p>
-                  <p>White (Collector) -- Arduino A0</p>
-                  <p>GND --------- bottom node</p>
-                  <p>GND --------- Blue</p>
-                </div>
-                <div class="stack-layout">
-                  <figure class="media-frame micro"><img src="site-images/image55.png" alt="Tape sensor LED circuit" /></figure>
+              <div class="appendix-math">
+                <p>LED</p>
+                <div class="math-display">\[ R_{led} = \frac{5 - 1.7}{0.04} = 82.5\ \Omega \]</div>
+                <p>Common emitter config phototransistor</p>
+                <p>Reminder: When the sensor sees white, phototransistor current is higher \(\rightarrow\) it pulls the node down. When it sees black, current is low \(\rightarrow\) node stays high.</p>
+                <ol class="detail-list">
+                  <li>White seen as low</li>
+                </ol>
+                <div class="math-display">\[ I_c(on) = 0.2\text{ mA} \]</div>
+                <div class="math-display">\[ V_o = 5 - I_cR_{pu} &lt; 0.8 \]</div>
+                <div class="math-display">\[ I_cR_{pu} &gt; 4.2 \]</div>
+                <div class="math-display">\[ R_{pu} &gt; 21\text{ k}\Omega \]</div>
+                <ol class="detail-list" start="2">
+                  <li>Black seen as high</li>
+                </ol>
+                <div class="math-display">\[ V_o = 5 - I_cR_{pu} &gt; 4 \]</div>
+                <div class="math-display">\[ I_cR_{pu} &lt; 1 \]</div>
+                <div class="math-display">\[ R_{pu} &lt; \frac{1}{20\mu} = 50\text{ k}\Omega \]</div>
+                <div class="math-display">\[ 21\text{ k}\Omega &lt; R_{pull-up} &lt; 50\text{ k}\Omega \]</div>
+                <div class="appendix-gallery">
+                  <figure class="media-frame small"><img src="site-images/image55.png" alt="Tape sensor LED circuit" /></figure>
                   <figure class="media-frame small"><img src="site-images/image15.png" alt="Phototransistor circuit" /></figure>
                 </div>
               </div>
@@ -178,5 +170,14 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['\\\\(', '\\\\)']],
+          displayMath: [['\\\\[', '\\\\]']],
+        },
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   </body>
 </html>

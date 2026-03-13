@@ -37,7 +37,7 @@
           <p class="page-kicker">Logic + code</p>
           <h1>Software</h1>
           <p class="page-subtitle">
-            The software changed from timer-driven control into a cleaner event-based state machine. This page keeps the text primary and the code imagery secondary, with a sticky local index for long reading.
+            The software changed from timer-driven control into a cleaner event-based state machine. Each section below keeps the images on the side, but now rotates them as a carousel.
           </p>
         </section>
 
@@ -75,9 +75,13 @@
                     <li>Servo motor for opening gate for shooting</li>
                   </ul>
                 </div>
-                <figure class="media-frame compact">
-                  <img src="site-images/image63.png" alt="Finite state diagram" />
-                </figure>
+                <div class="carousel-shell" data-carousel data-interval="3500">
+                  <div class="carousel-viewport">
+                    <div class="carousel-track" data-carousel-track>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image63.png" alt="Finite state diagram" /></figure></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -96,14 +100,21 @@
                     <li>Improving efficiency: return false right away in check global events bool functions if not in the appropriate corresponding state</li>
                   </ul>
                 </div>
-                <div class="stack-layout">
-                  <figure class="media-frame small"><img src="site-images/image17.png" alt="Old code structure" /></figure>
-                  <div class="media-grid three">
-                    <figure class="media-frame micro"><img src="site-images/image5.png" alt="Event based code image 1" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image40.png" alt="Event based code image 2" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image60.png" alt="Event based code image 3" /></figure>
+                <div class="carousel-shell" data-carousel data-interval="3000">
+                  <div class="carousel-viewport">
+                    <div class="carousel-track" data-carousel-track>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image17.png" alt="Old code structure" /></figure></div>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image5.png" alt="Event based code image 1" /></figure></div>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image40.png" alt="Event based code image 2" /></figure></div>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image60.png" alt="Event based code image 3" /></figure></div>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image36.png" alt="Timer debugging code image" /></figure></div>
+                    </div>
                   </div>
-                  <figure class="media-frame small"><img src="site-images/image36.png" alt="Timer debugging code image" /></figure>
+                  <div class="carousel-controls">
+                    <button type="button" data-carousel-prev>Prev</button>
+                    <button type="button" data-carousel-next>Next</button>
+                    <div class="carousel-dots" data-carousel-dots></div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -123,9 +134,18 @@
                     <li>Software debugging is also closely tied to hardware! For example, our ultrasonic sensors were not giving valid readings and we realised it was just due to flimsy wires.</li>
                   </ul>
                 </div>
-                <div class="media-grid two">
-                  <figure class="media-frame micro"><img src="site-images/image10.png" alt="Orientation code 1" /></figure>
-                  <figure class="media-frame micro"><img src="site-images/image66.png" alt="Orientation code 2" /></figure>
+                <div class="carousel-shell" data-carousel data-interval="3200">
+                  <div class="carousel-viewport">
+                    <div class="carousel-track" data-carousel-track>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image10.png" alt="Orientation code 1" /></figure></div>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image66.png" alt="Orientation code 2" /></figure></div>
+                    </div>
+                  </div>
+                  <div class="carousel-controls">
+                    <button type="button" data-carousel-prev>Prev</button>
+                    <button type="button" data-carousel-next>Next</button>
+                    <div class="carousel-dots" data-carousel-dots></div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -143,10 +163,19 @@
                     <li>Also, initially instead of the robot turning clockwise or anticlockwise, we had it move left or right, but this did not help too much as it would not straighten it which is why we moved to clockwise and anticlockwise.</li>
                   </ul>
                 </div>
-                <div class="media-grid three">
-                  <figure class="media-frame micro"><img src="site-images/image20.png" alt="Line sensing code 1" /></figure>
-                  <figure class="media-frame micro"><img src="site-images/image50.png" alt="Line sensing code 2" /></figure>
-                  <figure class="media-frame micro"><img src="site-images/image26.png" alt="Line sensing code 3" /></figure>
+                <div class="carousel-shell" data-carousel data-interval="3200">
+                  <div class="carousel-viewport">
+                    <div class="carousel-track" data-carousel-track>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image20.png" alt="Line sensing code 1" /></figure></div>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image50.png" alt="Line sensing code 2" /></figure></div>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image26.png" alt="Line sensing code 3" /></figure></div>
+                    </div>
+                  </div>
+                  <div class="carousel-controls">
+                    <button type="button" data-carousel-prev>Prev</button>
+                    <button type="button" data-carousel-next>Next</button>
+                    <div class="carousel-dots" data-carousel-dots></div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -162,11 +191,20 @@
                     <li>In the state logic decided to use delays and a boolean as the event which triggered it to move to next state (boolean was doneShooting which was false and only become true at the end of the state (this was the event that moved us to the next state in CheckGlobalEvents()))</li>
                   </ul>
                 </div>
-                <div class="media-grid two">
-                  <figure class="media-frame micro"><img src="site-images/image27.png" alt="Shooting code 1" /></figure>
-                  <figure class="media-frame micro"><img src="site-images/image28.png" alt="Shooting code 2" /></figure>
-                  <figure class="media-frame micro"><img src="site-images/image8.png" alt="Shooting code 3" /></figure>
-                  <figure class="media-frame micro"><img src="site-images/image30.png" alt="Shooting code 4" /></figure>
+                <div class="carousel-shell" data-carousel data-interval="3200">
+                  <div class="carousel-viewport">
+                    <div class="carousel-track" data-carousel-track>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image27.png" alt="Shooting code 1" /></figure></div>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image28.png" alt="Shooting code 2" /></figure></div>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image8.png" alt="Shooting code 3" /></figure></div>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image30.png" alt="Shooting code 4" /></figure></div>
+                    </div>
+                  </div>
+                  <div class="carousel-controls">
+                    <button type="button" data-carousel-prev>Prev</button>
+                    <button type="button" data-carousel-next>Next</button>
+                    <div class="carousel-dots" data-carousel-dots></div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -177,11 +215,17 @@
               <div class="split-layout">
                 <div>
                   <ol class="detail-list">
-                    <li>Decided to calculate distance in cm manually using function below. Initially tried using the library provided but we realised it was blocking code and buggy to work with. Would recommend calculating manually for teams!</li>
+                    <li>Decided to calculate distance in cm manually using function below. Initially tried using the library provided but we realised it was blocking code and buggy to work with. Would recommend calculating manually for teams.</li>
                     <li>In general for sensors, instead of reading inside the loop, we only called functions to read values when it was needed, inside the event() function itself</li>
                   </ol>
                 </div>
-                <figure class="media-frame small"><img src="site-images/image29.png" alt="Ultrasonic sensor code" /></figure>
+                <div class="carousel-shell" data-carousel data-interval="3200">
+                  <div class="carousel-viewport">
+                    <div class="carousel-track" data-carousel-track>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image29.png" alt="Ultrasonic sensor code" /></figure></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -197,9 +241,18 @@
                   </ul>
                   <a class="code-link" href="software-final-code.txt">Open final code text export</a>
                 </div>
-                <div class="stack-layout">
-                  <figure class="media-frame small"><img src="site-images/image25.png" alt="Debugging tips image" /></figure>
-                  <figure class="media-frame small"><img src="site-images/image13.png" alt="Testing codes image" /></figure>
+                <div class="carousel-shell" data-carousel data-interval="3200">
+                  <div class="carousel-viewport">
+                    <div class="carousel-track" data-carousel-track>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image25.png" alt="Debugging tips image" /></figure></div>
+                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image13.png" alt="Testing codes image" /></figure></div>
+                    </div>
+                  </div>
+                  <div class="carousel-controls">
+                    <button type="button" data-carousel-prev>Prev</button>
+                    <button type="button" data-carousel-next>Next</button>
+                    <div class="carousel-dots" data-carousel-dots></div>
+                  </div>
                 </div>
               </div>
             </section>
