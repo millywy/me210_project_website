@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curl'y Fries | CAD Viewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html">
+          <span class="brand-kicker">ME 210</span>
+          <span class="brand-title">Curl'y Fries</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav id="site-nav" class="site-nav">
+          <a href="index.html">Home</a>
+          <a href="competition.html">Competition</a>
+          <a href="brainstorm.html">Brainstorm</a>
+          <a href="mechanical.html">Mechanical</a>
+          <a href="software.html">Software</a>
+          <a href="electrical.html">Electrical</a>
+          <a href="team.html">Team</a>
+          <a href="cad-viewer.html" aria-current="page">CAD</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="page-header">
+          <p class="page-kicker">3D Model</p>
+          <h1>Board assembly viewer</h1>
+          <p class="page-subtitle">
+            This embedded viewer loads the board assembly STL directly in-browser so the chassis packaging can be inspected interactively.
+          </p>
+        </section>
+
+        <section class="viewer-panel">
+          <div class="viewer-layout">
+            <div>
+              <p class="note-label">Controls</p>
+              <h2>Inspect the build</h2>
+              <ul class="detail-list">
+                <li>Drag to orbit</li>
+                <li>Scroll to zoom</li>
+                <li>Right click or two-finger drag to pan</li>
+              </ul>
+              <p>
+                The STL source on this page is the uploaded <code>board-assembly.stl</code> file. If you want, I can later add labeled callouts or swap this for a more detailed CAD embed.
+              </p>
+            </div>
+            <div>
+              <div id="viewer" class="viewer-canvas" aria-label="3D CAD viewer"></div>
+              <p class="viewer-caption">If the model appears clipped on first load, orbit once and the camera framing will settle.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script type="module">
+      import * as THREE from 'https://unpkg.com/three@0.164.1/build/three.module.js';
+      import { OrbitControls } from 'https://unpkg.com/three@0.164.1/examples/jsm/controls/OrbitControls.js';
+      import { STLLoader } from 'https://unpkg.com/three@0.164.1/examples/jsm/loaders/STLLoader.js';
+
+      const mount = document.getElementById('viewer');
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xf7fff8);
+
+      const camera = new THREE.PerspectiveCamera(40, mount.clientWidth / mount.clientHeight, 0.1, 5000);
+      camera.position.set(170, 120, 170);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(mount.clientWidth, mount.clientHeight);
+      mount.appendChild(renderer.domElement);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.target.set(0, 0, 0);
+
+      scene.add(new THREE.AmbientLight(0xffffff, 1.6));
+      const key = new THREE.DirectionalLight(0xffffff, 1.25);
+      key.position.set(120, 160, 100);
+      scene.add(key);
+      const rim = new THREE.DirectionalLight(0x8ce2de, 0.75);
+      rim.position.set(-120, 90, -110);
+      scene.add(rim);
+
+      const floor = new THREE.Mesh(
+        new THREE.CircleGeometry(150, 64),
+        new THREE.MeshStandardMaterial({ color: 0xffe7ba, roughness: 0.95, metalness: 0.02 })
+      );
+      floor.rotation.x = -Math.PI / 2;
+      floor.position.y = -35;
+      scene.add(floor);
+
+      const loader = new STLLoader();
+      loader.load(
+        'board-assembly.stl',
+        (geometry) => {
+          geometry.computeVertexNormals();
+          geometry.center();
+          const material = new THREE.MeshStandardMaterial({
+            color: 0x1b6f74,
+            roughness: 0.45,
+            metalness: 0.08,
+          });
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.rotation.x = -Math.PI / 2;
+          scene.add(mesh);
+
+          const box = new THREE.Box3().setFromObject(mesh);
+          const size = box.getSize(new THREE.Vector3());
+          const maxDim = Math.max(size.x, size.y, size.z) || 1;
+          const fov = camera.fov * (Math.PI / 180);
+          const distance = maxDim / (2 * Math.tan(fov / 2));
+          camera.position.set(distance * 1.3, distance * 0.95, distance * 1.3);
+          controls.update();
+        },
+        undefined,
+        () => {
+          mount.innerHTML = '<p class="viewer-caption">The STL could not be loaded in the browser.</p>';
+        }
+      );
+
+      function resize() {
+        const width = mount.clientWidth;
+        const height = mount.clientHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      }
+
+      window.addEventListener('resize', resize);
+
+      function animate() {
+        controls.update();
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
+      animate();
+    </script>
+  </body>
+</html>

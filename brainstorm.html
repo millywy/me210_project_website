@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curl'y Fries | Brainstorm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html">
+          <span class="brand-kicker">ME 210</span>
+          <span class="brand-title">Curl'y Fries</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav id="site-nav" class="site-nav">
+          <a href="index.html">Home</a>
+          <a href="competition.html">Competition</a>
+          <a href="brainstorm.html" aria-current="page">Brainstorm</a>
+          <a href="mechanical.html">Mechanical</a>
+          <a href="software.html">Software</a>
+          <a href="electrical.html">Electrical</a>
+          <a href="team.html">Team</a>
+          <a href="cad-viewer.html">CAD</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="page-header">
+          <p class="page-kicker">Planning + checkpoints</p>
+          <h1>Brainstorm</h1>
+          <p class="page-subtitle">
+            This page collects the early planning artifacts, checkpoint links, bill of materials, and project milestones that shaped the final robot.
+          </p>
+        </section>
+
+        <section class="card-grid two">
+          <article class="card">
+            <p class="card-kicker">Checkpoint 1</p>
+            <h2>First checkpoint</h2>
+            <p>Embed the powerpoint and doc.</p>
+            <a class="view-link" href="https://docs.google.com/presentation/d/16VKA17C8xaEdFWA-qPjtxEcWli4_6w-67f8luQLs4Ks/edit?usp=sharing">Open first checkpoint</a>
+          </article>
+          <article class="card">
+            <p class="card-kicker">Checkpoint 2</p>
+            <h2>Second checkpoint</h2>
+            <p>The document below captured the next round of calculations, diagrams, and subsystem planning.</p>
+            <a class="view-link" href="https://docs.google.com/document/d/1JOD8y1YoX1jqARjL2hW605JBj9RjaW2tuMkyy6IWELY/edit?tab=t.0">Open second checkpoint</a>
+          </article>
+        </section>
+
+        <section class="table-wrap">
+          <p class="table-kicker">Bill Of Materials</p>
+          <h2>Key parts list</h2>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Omni wheels</td><td>4</td><td>2.20</td></tr>
+              <tr><td>Tape sensors</td><td>3</td><td></td></tr>
+              <tr><td>Ultrasonic sensors</td><td>3</td><td></td></tr>
+              <tr><td>Jameco Motors</td><td>4</td><td></td></tr>
+              <tr><td>H-Bridge (L298N)</td><td>3</td><td></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="feature-block">
+          <p class="section-kicker">Project Milestones</p>
+          <h2>Schedule we built against</h2>
+          <div class="timeline">
+            <div class="timeline-row"><strong>2/12/26</strong><span>Project Release · Finalize team</span><span>In class</span></div>
+            <div class="timeline-row"><strong>2/17/26</strong><span>First Checkpoint · First Review</span><span>In class</span></div>
+            <div class="timeline-row"><strong>2/20/26</strong><span>Second Checkpoint · Calculations, Diagrams</span><span>11:59 pm</span></div>
+            <div class="timeline-row"><strong>2/24/26</strong><span>Third Checkpoint · Working subsystems</span><span>11:59 pm</span></div>
+            <div class="timeline-row"><strong>3/6/26</strong><span>Beat the Brick · Minimum functionality</span><span>4 pm</span></div>
+            <div class="timeline-row"><strong>3/8/26</strong><span>Public Presentation · Best DROID performance</span><span>6-8 pm</span></div>
+            <div class="timeline-row"><strong>3/10/26</strong><span>Project Review · Short presentation</span><span>In class</span></div>
+            <div class="timeline-row"><strong>3/17/26</strong><span>Project Report Website</span><span>11:59 pm</span></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

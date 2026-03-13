@@ -3,147 +3,180 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Electrical | The Joy of Curling</title>
+    <title>Curl'y Fries | Electrical</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="page-template">
+  <body>
     <div class="site-shell">
       <header class="topbar">
         <a class="brand" href="index.html">
           <span class="brand-kicker">ME 210</span>
-          <span class="brand-title">The Joy of Curling</span>
+          <span class="brand-title">Curl'y Fries</span>
         </a>
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-          Menu
-        </button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
         <nav id="site-nav" class="site-nav">
           <a href="index.html">Home</a>
-          <a href="initial-design.html">Initial Design</a>
-          <a href="milestones.html">Milestones</a>
+          <a href="competition.html">Competition</a>
+          <a href="brainstorm.html">Brainstorm</a>
+          <a href="mechanical.html">Mechanical</a>
           <a href="software.html">Software</a>
           <a href="electrical.html" aria-current="page">Electrical</a>
-          <a href="mechanical.html">Mechanical</a>
-          <a href="integration-challenges.html">Integration Challenges</a>
-          <a href="team-learning.html">Team and Learning</a>
+          <a href="team.html">Team</a>
+          <a href="cad-viewer.html">CAD</a>
         </nav>
       </header>
 
       <main>
         <section class="page-header">
-          <p class="page-kicker">Imported From Report</p>
+          <p class="page-kicker">Hardware</p>
           <h1>Electrical</h1>
           <p class="page-subtitle">
-            The electrical page now keeps the full extracted writeup together and groups the tape sensor circuit work into one calculation section.
+            The electrical system handled sensing, power distribution, wiring reliability, and a lot of painful debugging. This page includes the final schematic and the old tape-sensor appendix.
           </p>
         </section>
 
-        <section class="content-stack">
-          <article class="placeholder-panel">
-            <p class="placeholder-label">Electrical Notes</p>
-            <h2>Wiring, debugging, and reliability</h2>
-            <p class="report-note">Wire Management: BE EXTRA NICE TO THE ELECTRONS!</p>
-            <p>
-              During earlier stages of testing, we spent a lot of time debugging simply due to flimsy
-              connections that would come loose as the robot moved. Adding wire connectors and cleaning
-              up our wiring, learning how to crimp important wires (and using tape when necessary!) helped
-              us a lot.
-            </p>
-            <ul class="placeholder-list">
-              <li>However, this setup was still not robust enough. Even towards the end of the project, we would sometimes still not get valid readings due to loose wires.</li>
-              <li>Overall, we believe that our logic was sound and when the robot functioned it never got stuck in a loop or failed on itself and that the main culprit was the loose connections.</li>
-              <li>As we progressed with more testing attempts, moving the robot more, we think the wiring got more and more loose which ended up sabotaging our performance in the competition as our main issue was a singular loose wire!</li>
-              <li>Conclusion: Taking the time to clean up and fix the wiring early on would have saved us hours of confusion and debugging and would have potentially led to better results for us on the competition!</li>
-            </ul>
-            <p class="report-note">Arduino</p>
-            <ul class="placeholder-list">
-              <li>Initially we were using an arduino UNO but it did not have enough pins, so we explored using I2C communication between both Arduinos. We were unable to establish a successful connection between both Arduinos and we are suspecting that ChatGPT’s generated code is the culprit in this situation.</li>
-              <li>Again, due to messy wiring, we accidentally fried our Arduino UNO since we accidentally connected it to 12V, this also led to overcurrent to our ultrasonic sensors and delayed our progress for a couple days.</li>
-              <li>Since we needed more pins and communication between two Arduinos was difficult to establish, we changed to an Arduino MEGA, and we really had to take care of this Arduino and not accidentally fry it too.</li>
-              <li>Tape the bottom of the arduino pins so that they dont short with heat sink on motor drivers!</li>
-            </ul>
-            <p class="report-note">Crimping</p>
-            <ul class="placeholder-list">
-              <li>On the day of the competition, a wire broke since it was never inserted into its Molex connector plastic cap so everytime the wire was attached and detached, we were tugging on the wire itself. During the process of crimping it again, we realized that the orientation of the plastic cap mattered as it had different shapes on both leads.</li>
-            </ul>
-            <p class="report-note">Tape sensor</p>
-            <ul class="placeholder-list">
-              <li>22k and 47k with OPB704WZ → terrible</li>
-              <li>Used instead</li>
-            </ul>
-            <p class="report-note">Ultrasound sensors</p>
-            <ul class="placeholder-list">
-              <li>Tried to use library <a href="https://projecthub.arduino.cc/Isaac100/getting-started-with-the-hc-sr04-ultrasonic-sensor-7cabe1">https://projecthub.arduino.cc/Isaac100/getting-started-with-the-hc-sr04-ultrasonic-sensor-7cabe1</a> - unreliable</li>
-              <li>Very accurate to the CM precision</li>
-            </ul>
-            <p class="report-note">Making electrical connections reliable</p>
-            <ul class="placeholder-list">
-              <li>Take the time to solder nicely with heat shrink!</li>
-              <li>Tape the connecting wires!</li>
-              <li>If you need to use a crocodile clip for more than 1 hour, use an actual wire instead.</li>
-            </ul>
-            <p class="report-note">Debugging tips</p>
-            <ul class="placeholder-list">
-              <li>Multimeter is your g</li>
-            </ul>
-            <p class="report-note">Total components fried</p>
-            <ul class="placeholder-list">
-              <li>3 Arduinos</li>
-              <li>Milly’s nice Apple adaptor</li>
-            </ul>
-          </article>
+        <div class="page-layout">
+          <aside class="local-nav">
+            <div class="local-nav-title">On this page</div>
+            <a href="#schematic" data-spy-link>KiCad</a>
+            <a href="#arduino" data-spy-link>Arduino</a>
+            <a href="#ultra" data-spy-link>Ultrasonic</a>
+            <a href="#ir" data-spy-link>IR sensors</a>
+            <a href="#power" data-spy-link>Power</a>
+            <a href="#wiring" data-spy-link>Wiring</a>
+            <a href="#appendix" data-spy-link>Appendix</a>
+          </aside>
 
-          <section class="landscape-panel">
-            <article class="placeholder-panel stacked-copy">
-              <p class="placeholder-label">Tape Sensor Circuit Calculation</p>
-              <h2>Tape sensor circuit calculation</h2>
-              <p>Tape Sensor circuit:</p>
-              <p>LED</p>
-              <p>R_led = (5-1.7)/0.04 = 82.5 ohms</p>
-              <p>5V ── 200Ω ── Orange</p>
-              <p>GND ─────── Green</p>
-              <p>Common emitter config phototransistor</p>
-              <p>
-                Reminder: When the sensor sees white, phototransistor current is higher → it pulls the node down.
-                When it sees black, current is low → node stays high.
-              </p>
-              <p>White seen as low</p>
-              <p>I_c(on)= 0.2mA</p>
-              <p>Vo= 5- I_c*R_pu &lt; 0.8</p>
-              <p>I_c*R_pu &gt;4.2</p>
-              <p>R_pu &gt; 21k ohms</p>
-              <p>Black seen as high</p>
-              <p>Vo= 5- I_c*R_pu &gt; 4</p>
-              <p>I_c*R_pu &lt; 1</p>
-              <p>R_pu &lt; 1/20u =50k ohms</p>
-              <p>21k &lt; R_pull-up &lt;50k</p>
-              <p>5V ── 10kΩ ──┐</p>
-              <p>White (Collector) ── Arduino A0</p>
-              <p>GND ─────────┘</p>
-              <p>GND ───────── Blue</p>
-              <p>
-                <a href="https://www.ttelectronics.com/TTElectronics/media/ProductFiles/Datasheet/OPB703-70_70A-70F-B-704.pdf">
-                  https://www.ttelectronics.com/TTElectronics/media/ProductFiles/Datasheet/OPB703-70_70A-70F-B-704.pdf
-                </a>
-              </p>
-              <p>KiCad final schematic (cindy doing)</p>
-            </article>
-            <article class="placeholder-panel">
-              <div class="report-figure-grid">
-                <figure class="report-figure compact micro"><img src="report-images/image3.png" alt="Tape sensor LED circuit" /></figure>
-                <figure class="report-figure compact micro"><img src="report-images/image2.png" alt="Common emitter phototransistor circuit" /></figure>
-                <figure class="report-figure compact micro"><img src="report-images/image33.png" alt="KiCad final schematic" /></figure>
+          <div class="page-sections">
+            <section id="schematic" class="section-block" data-spy-section>
+              <p class="section-kicker">KiCad</p>
+              <h2>Final schematic</h2>
+              <figure class="media-frame compact">
+                <img src="site-images/image9.png" alt="KiCad final schematic" />
+              </figure>
+            </section>
+
+            <section id="arduino" class="section-block" data-spy-section>
+              <p class="section-kicker">Control hardware</p>
+              <h2>Arduino</h2>
+              <ul class="detail-list">
+                <li>Initially we were using an arduino UNO but it did not have enough pins, so we explored using I2C communication between both Arduinos. We were unable to establish a successful connection between both Arduinos and we are suspecting that ChatGPT's generated code is the culprit in this situation.</li>
+                <li>Again, due to messy wiring, we accidentally fried our Arduino UNO since we accidentally connected it to 12V, this also led to overcurrent to our ultrasonic sensors and delayed our progress for a couple days.</li>
+                <li>Since we needed more pins and communication between two Arduinos was difficult to establish, we changed to an Arduino MEGA, and we really had to take care of this Arduino and not accidentally fry it too.</li>
+                <li>Tape the bottom of the arduino pins so that they don't short with heatsink on motor drivers!</li>
+              </ul>
+            </section>
+
+            <section id="ultra" class="section-block" data-spy-section>
+              <p class="section-kicker">Sensors</p>
+              <h2>Ultrasonic sensors</h2>
+              <ul class="detail-list">
+                <li>We used three ultrasonic sensors to detect when our bot was oriented correctly. We had one on its left side and two on the back side. When all three detected values low enough to signify that we were near a wall, as well as when the two back sensors detected values that were the same or had a difference of about 1 or 2 cm, then we knew we were also parallel to the wall.</li>
+                <li>We saved two Arduino pins by tying all three echo pins together.</li>
+              </ul>
+            </section>
+
+            <section id="ir" class="section-block" data-spy-section>
+              <p class="section-kicker">Sensors</p>
+              <h2>IR sensors</h2>
+              <ul class="detail-list">
+                <li>These were used to initially know when to stop moving to the right after orienting, line follow towards the center of the arena, as well as detect when our bot should stop when they detected the hog lines.</li>
+                <li>22k and 47k with OPB704WZ -> very poor performance with not enough reading variation between tape/no-tape <a href="https://www.ttelectronics.com/TTElectronics/media/ProductFiles/Datasheet/OPB703-70_70A-70F-B-704.pdf">datasheet</a></li>
+                <li>Used the TCRT5000 module instead which doesn't require any resistors! <a href="https://www.amazon.com/dp/B08YRCR6ML?ref=ppx_yo2ov_dt_b_fed_asin_title">module link</a></li>
+              </ul>
+            </section>
+
+            <section id="power" class="section-block" data-spy-section>
+              <p class="section-kicker">Power</p>
+              <h2>Power architecture</h2>
+              <ul class="detail-list">
+                <li>We used two 7.2 NiMH batteries connected in series to produce a combined 14.4V, which we then stepped down using a buck converter to around 8.3V.</li>
+                <li>This powered our arduino and our 12V pins on the H-bridges.</li>
+                <li>We had an on/off switch that easily stopped power from running through our entire bot as well as a fuse to protect from overcurrent production.</li>
+                <li>All our sensors, our servo, and the 5V pins on the H-bridges were powered using the 5V pin on the arduino.</li>
+              </ul>
+            </section>
+
+            <section id="wiring" class="section-block" data-spy-section>
+              <p class="section-kicker">Reliability</p>
+              <h2>Wire management and debugging</h2>
+              <p><strong>Wire Management: BE EXTRA NICE TO THE ELECTRONS!</strong></p>
+              <p>During earlier stages of testing, we spent a lot of time debugging simply due to flimsy connections that would come loose as the robot moved. Adding wire connectors and cleaning up our wiring, learning how to crimp important wires (and using tape when necessary!) helped us a lot.</p>
+              <ul class="detail-list">
+                <li>However, this setup was still not robust enough. Even towards the end of the project, we would sometimes still not get valid readings due to loose wires.</li>
+                <li>Overall, we believe that our logic was sound and when the robot functioned it never got stuck in a loop or failed on itself and that the main culprit was the loose connections.</li>
+                <li>As we progressed with more testing attempts, moving the robot more, we think the wiring got more and more loose which ended up sabotaging our performance in the competition as our main issue was a singular loose wire.</li>
+                <li><strong>Conclusion:</strong> Taking the time to clean up and fix the wiring early on would have saved us hours of confusion and debugging and would have potentially led to better results for us on the competition.</li>
+              </ul>
+              <p><strong>Crimping:</strong></p>
+              <ul class="detail-list">
+                <li>On the day of the competition, a wire broke since it was never inserted into its Molex connector plastic cap so every time the wire was attached and detached, we were tugging on the wire itself. During the process of crimping it again, we realized that the orientation of the plastic cap mattered as it had different shapes on both leads.</li>
+              </ul>
+              <p><strong>Making electrical connections reliable:</strong></p>
+              <ul class="detail-list">
+                <li>Take the time to solder nicely with heat shrink!</li>
+                <li>Tape the connecting wires!</li>
+                <li>If you need to use a crocodile clip for more than 1 hour, use an actual wire instead.</li>
+              </ul>
+              <p><strong>Debugging tips:</strong></p>
+              <ul class="detail-list">
+                <li>Multimeter is your good friend</li>
+              </ul>
+              <p><strong>Total components fried:</strong></p>
+              <ul class="detail-list">
+                <li>3 Arduinos</li>
+                <li>Milly's nice Apple adaptor</li>
+                <li>1 fuse</li>
+              </ul>
+            </section>
+
+            <section id="appendix" class="section-block" data-spy-section>
+              <p class="section-kicker">Appendix</p>
+              <h2>Resistor calculations for old tape sensor circuit</h2>
+              <div class="split-layout">
+                <div>
+                  <p>LED</p>
+                  <p>R_led = (5-1.7)/0.04 = 82.5 ohms</p>
+                  <p>5V -- 200 Ohms -- Orange</p>
+                  <p>GND ------- Green</p>
+                  <p>Common emitter config phototransistor</p>
+                  <p>Reminder: When the sensor sees white, phototransistor current is higher -> it pulls the node down. When it sees black, current is low -> node stays high.</p>
+                  <ol class="detail-list">
+                    <li>White seen as low</li>
+                  </ol>
+                  <p>I_c(on)= 0.2mA</p>
+                  <p>Vo= 5- I_c*R_pu &lt; 0.8</p>
+                  <p>I_c*R_pu &gt;4.2</p>
+                  <p>R_pu &gt; 21k ohms</p>
+                  <ol class="detail-list" start="2">
+                    <li>Black seen as high</li>
+                  </ol>
+                  <p>Vo= 5- I_c*R_pu &gt; 4</p>
+                  <p>I_c*R_pu &lt; 1</p>
+                  <p>R_pu &lt; 1/20u =50k ohms</p>
+                  <p>21k &lt; R_pull-up &lt;50k</p>
+                  <p>5V -- 10kOhms -- corner</p>
+                  <p>White (Collector) -- Arduino A0</p>
+                  <p>GND --------- bottom node</p>
+                  <p>GND --------- Blue</p>
+                </div>
+                <div class="stack-layout">
+                  <figure class="media-frame micro"><img src="site-images/image55.png" alt="Tape sensor LED circuit" /></figure>
+                  <figure class="media-frame small"><img src="site-images/image15.png" alt="Phototransistor circuit" /></figure>
+                </div>
               </div>
-            </article>
-          </section>
-        </section>
+            </section>
+          </div>
+        </div>
       </main>
     </div>
+
     <script src="script.js"></script>
   </body>
 </html>

@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Joy of Curling | ME 210</title>
+    <title>Curl'y Fries | Home</title>
     <meta
       name="description"
-      content="ME 210 project website for The Joy of Curling, an autonomous robotic curling competition entry."
+      content="Project website for Curl'y Fries, an autonomous ME210 curling robot built at Stanford in Spring 2026."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -21,44 +21,51 @@
       <header class="topbar">
         <a class="brand" href="index.html">
           <span class="brand-kicker">ME 210</span>
-          <span class="brand-title">The Joy of Curling</span>
+          <span class="brand-title">Curl'y Fries</span>
         </a>
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-          Menu
-        </button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
         <nav id="site-nav" class="site-nav">
           <a href="index.html" aria-current="page">Home</a>
-          <a href="initial-design.html">Initial Design</a>
-          <a href="milestones.html">Milestones</a>
+          <a href="competition.html">Competition</a>
+          <a href="brainstorm.html">Brainstorm</a>
+          <a href="mechanical.html">Mechanical</a>
           <a href="software.html">Software</a>
           <a href="electrical.html">Electrical</a>
-          <a href="mechanical.html">Mechanical</a>
-          <a href="integration-challenges.html">Integration Challenges</a>
-          <a href="team-learning.html">Team and Learning</a>
+          <a href="team.html">Team</a>
+          <a href="cad-viewer.html">CAD</a>
         </nav>
       </header>
 
       <main>
         <section class="hero">
           <div class="hero-copy">
-            <p class="eyebrow">2026 Competition Theme</p>
-            <h1>The Joy of Curling</h1>
+            <p class="eyebrow">Stanford University · Spring 2026</p>
+            <h1>Autonomous Curling Robot</h1>
             <p class="lede">
-              An autonomous robot built for a head-to-head robotic curling match, where every shot,
-              return path, and collision can change the score.
+              Curl'y Fries was built with curiosity, caffeine, and zip ties for The Joy of Curling,
+              a fast autonomous head-to-head game where navigation, sensing, strategy, and puck control all had to work at once.
             </p>
             <div class="hero-tags">
               <span>Autonomy</span>
-              <span>Navigation</span>
-              <span>Puck launching</span>
-              <span>Competition strategy</span>
+              <span>Omniwheel drive</span>
+              <span>Servo release</span>
+              <span>Sensor fusion</span>
+            </div>
+            <div class="quick-links">
+              <a href="competition.html">Competition day</a>
+              <a href="mechanical.html">Mechanical systems</a>
+              <a href="software.html">Software logic</a>
+              <a href="cad-viewer.html">3D CAD viewer</a>
             </div>
           </div>
 
-          <aside class="hero-card">
-            <p class="card-label">Arena + Match Facts</p>
-            <figure class="report-figure compact">
-              <img src="report-images/image26.png" alt="Arena diagram from the project report" />
+          <aside class="hero-side">
+            <p class="card-kicker">Arena + robot</p>
+            <figure class="media-frame compact">
+              <img src="site-images/image23.png" alt="Arena diagram for The Joy of Curling" />
+            </figure>
+            <figure class="media-frame small">
+              <img src="site-images/image61.jpg" alt="Curl'y Fries robot photo" />
             </figure>
             <ul>
               <li>Field size: 4 ft x 16 ft</li>
@@ -69,37 +76,24 @@
           </aside>
         </section>
 
-        <section class="content-grid">
-          <article class="feature-panel">
+        <section class="feature-grid two">
+          <article class="feature-block">
             <p class="section-kicker">The Challenge</p>
             <h2>What the robot had to do</h2>
             <p>
-              For the 2026 ME210 competition, The Joy of Curling, teams were challenged to design
-              and build an autonomous robot capable of competing in a head-to-head robotic curling
-              match. Inspired by the Olympic sport of curling, our robot had to autonomously
-              navigate a 4 ft × 16 ft playing field, collect and shoot pucks toward a target known
-              as the house, and compete against an opponent doing the same.
+              For the 2026 ME210 competition, <em>The Joy of Curling</em>, teams were challenged to design and build an autonomous robot capable of competing in a head-to-head robotic curling match. Inspired by the Olympic sport of curling, our robot had to autonomously navigate a 4 ft x 16 ft playing field, collect and shoot pucks toward a target known as the house, and compete against an opponent doing the same.
             </p>
             <p>
-              Starting from a randomly oriented position within a designated starting zone, the
-              robot begins with up to three pucks and must autonomously deliver them toward the
-              target. After launching its shots, the robot must return to the starting zone to
-              reload before continuing play. Over the course of a two-minute match, each robot can
-              play up to eight pucks while attempting to place them as close to the center of the
-              target, the button, as possible.
+              Starting from a randomly oriented position within a designated starting zone, the robot begins with up to three pucks and must autonomously deliver them toward the target. After launching its shots, the robot must return to the starting zone to reload before continuing play. Over the course of a two-minute match, each robot can play up to eight pucks while attempting to place them as close to the center of the target, the button, as possible.
             </p>
             <p>
-              Because both robots compete simultaneously, shots may collide, block opponents, or
-              knock other pucks into or out of scoring zones. Success requires precise navigation,
-              reliable sensing, and accurate puck launching, all within strict constraints on size,
-              power, and cost.
+              Because both robots compete simultaneously, shots may collide, block opponents, or knock other pucks into or out of scoring zones. Success requires precise navigation, reliable sensing, and accurate puck launching, all within strict constraints on size, power, and cost.
             </p>
           </article>
 
-          <article class="scoring-panel">
-            <p class="section-kicker">Scoring System</p>
-            <h2>How points work</h2>
-            <p>Points are awarded based on where the puck comes to rest relative to the target:</p>
+          <article class="feature-block">
+            <p class="section-kicker">Scoring</p>
+            <h2>How points were earned</h2>
             <ul class="score-list">
               <li><strong>+5</strong> for a puck landing in the center (white)</li>
               <li><strong>+2</strong> for a puck landing in the middle ring (red)</li>
@@ -108,27 +102,40 @@
               <li><strong>-3</strong> for a greater than 3 seconds stay across self hog line</li>
               <li><strong>-5</strong> for a robot that travels past the opponent's hog line</li>
             </ul>
-            <p>Additional rules affect gameplay and scoring:</p>
+            <ul class="rule-list">
+              <li>Robots may play up to eight pucks within the two-minute match.</li>
+              <li>A robot must return fully to the starting zone before reloading more pucks.</li>
+              <li>If a puck knocks another puck into a different scoring zone, the new positions determine the final score.</li>
+              <li>A manual reset during gameplay results in a 1 point penalty.</li>
+            </ul>
           </article>
         </section>
 
-        <section class="rule-strip">
-          <div class="rule-card">
-            <p class="rule-number">01</p>
-            <p>Robots may play up to eight pucks within the two-minute match.</p>
-          </div>
-          <div class="rule-card">
-            <p class="rule-number">02</p>
-            <p>A robot must return fully to the starting zone before reloading more pucks.</p>
-          </div>
-          <div class="rule-card">
-            <p class="rule-number">03</p>
-            <p>If a puck knocks another puck into a different scoring zone, the new positions determine the final score.</p>
-          </div>
-          <div class="rule-card">
-            <p class="rule-number">04</p>
-            <p>A manual reset during gameplay results in a 1 point penalty.</p>
-          </div>
+        <section class="card-grid three">
+          <article class="card">
+            <p class="card-kicker">Competition</p>
+            <h2>What happened on game day</h2>
+            <p>
+              The robot worked, failed, recovered, and still won a round. The competition page documents the real system-level failures we hit under pressure and what we learned from them.
+            </p>
+            <a class="view-link" href="competition.html">Open competition page</a>
+          </article>
+          <article class="card">
+            <p class="card-kicker">Design</p>
+            <h2>How the system evolved</h2>
+            <p>
+              The project shifted from ideas and checkpoints into a workable robot through fast hardware iteration, changing software structure, and repeated mechanical pivots.
+            </p>
+            <a class="view-link" href="brainstorm.html">Open brainstorm page</a>
+          </article>
+          <article class="card">
+            <p class="card-kicker">CAD</p>
+            <h2>View the assembly in 3D</h2>
+            <p>
+              The STL assembly is embedded directly in the site with a rotatable viewer so the chassis and subsystem packaging can be inspected interactively.
+            </p>
+            <a class="view-link" href="cad-viewer.html">Open CAD viewer</a>
+          </article>
         </section>
       </main>
     </div>

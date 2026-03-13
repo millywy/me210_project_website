@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curl'y Fries | Competition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html">
+          <span class="brand-kicker">ME 210</span>
+          <span class="brand-title">Curl'y Fries</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav id="site-nav" class="site-nav">
+          <a href="index.html">Home</a>
+          <a href="competition.html" aria-current="page">Competition</a>
+          <a href="brainstorm.html">Brainstorm</a>
+          <a href="mechanical.html">Mechanical</a>
+          <a href="software.html">Software</a>
+          <a href="electrical.html">Electrical</a>
+          <a href="team.html">Team</a>
+          <a href="cad-viewer.html">CAD</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="page-header">
+          <p class="page-kicker">Competition Day</p>
+          <h1>What went wrong and what we learned</h1>
+          <p class="page-subtitle">
+            This page follows the actual failure chain from competition day: wiring, crimping, weight distribution,
+            power budgeting, servo load, and late mechanical wear.
+          </p>
+        </section>
+
+        <section class="story-grid two">
+          <article class="story-block">
+            <p>
+              On competition day, we arrived about two hours early, and at that point the robot had previously been performing reliably. After check-off, we made a small improvement to the control logic by adding an extra state to ensure the servo consistently released the gate, and we expected the robot to perform well. However, once we began final preparation, several issues appeared in quick succession.
+            </p>
+            <p>
+              The first thing we did was improve wire management by zip-tying loose wires. Because we already had significant experience debugging the robot, we were initially not too worried when the robot stopped responding reliably, even under the basic orientation code for forward, backward, left, and right motion. We checked the usual electrical failure points by pressing on pins and reseating connections, but the problem persisted. We then attempted to replace the batteries, but during this process one of the crimped connections near the fuse came loose. Re-crimping it took much longer than expected because we were rushed and nervous, and we initially used the wrong crimp type and cap orientation. By the time this was fixed, we had only about half an hour left before the competition.
+            </p>
+            <p>
+              After restoring power, the robot behaved more reliably in simple motion tests, but a new issue appeared: it could move forward and backward, but lateral motion was poor. We investigated several possible mechanical causes, including loose wheels, shaft fit, and incorrect screws, and we tightened or replaced multiple parts. This improved performance slightly, but the left-right movement was still weak. In hindsight, one likely explanation was <strong>weight distribution</strong>. The batteries were mounted on the left and right sides of the robot, directly above those wheels, while left-right translation relied more heavily on the front and back wheels. We suspect that this created an unfavorable torque distribution, especially when battery voltage dropped and the power supply became less stable.
+            </p>
+          </article>
+
+          <article class="story-block">
+            <p>
+              A second major issue was <strong>power management</strong>, which we now believe was the root cause of much of the robot's unreliability. During debugging, we noticed that the motor driver would sometimes fail to light up when power was turned on. In a last-minute attempt to isolate the issue, we unplugged and replugged the 5V wire from the Arduino, and sometimes the system would suddenly work again. At the time, we assumed this was simply a bad connection. Only later did we realize that this 5V line was powering the servo, and that the servo could draw close to 1A of current.
+            </p>
+            <p>
+              Our power architecture had not been fully budgeted: the battery supplied 14V and buck converter stepped down to 8V to the main rail, the Arduino and motors drew from that rail and stepped down to 5V, and the 5V line powered 6 sensors as well as the servo. As a result, when the servo was connected, it likely overloaded the Arduino's 5V supply and destabilized the rest of the system. This explains why the robot would sometimes move only when the servo's 5V connection was effectively disconnected, and why in one round the robot drove correctly but failed to release the puck at the hog line.
+            </p>
+            <p>
+              Despite all of these issues, the robot still managed to perform well enough to help us win the first round, which was both surprising and rewarding. We also encountered a final mechanical failure when the gate fell off due to wear from repeated testing, but fortunately we had brought a spare part and were able to replace it quickly. Overall, competition day taught us that <strong>last-minute debugging is often dominated by system-level issues rather than isolated bugs</strong>.
+            </p>
+          </article>
+        </section>
+
+        <section class="gallery-grid">
+          <figure class="media-frame small"><img src="site-images/image35.png" alt="Competition day diagram or notes" /></figure>
+          <figure class="media-frame small"><img src="site-images/image49.jpg" alt="Competition day robot photo 1" /></figure>
+          <figure class="media-frame small"><img src="site-images/image41.jpg" alt="Competition day robot photo 2" /></figure>
+          <figure class="media-frame small"><img src="site-images/image51.jpg" alt="Competition day robot photo 3" /></figure>
+          <figure class="media-frame small"><img src="site-images/image43.jpg" alt="Competition day robot photo 4" /></figure>
+          <figure class="media-frame small"><img src="site-images/image22.png" alt="Competition day notes image" /></figure>
+          <figure class="media-frame small"><img src="site-images/image65.png" alt="Competition day performance figure" /></figure>
+          <figure class="media-frame small"><img src="site-images/image19.jpg" alt="Competition day team or arena photo" /></figure>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
