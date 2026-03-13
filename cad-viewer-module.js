@@ -49,12 +49,22 @@ try {
     'assembly.glb', // your exported GLB from Blender
     (gltf) => {
       const model = gltf.scene;
-      model.traverse((child) => {
-        if (child.isMesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-      });
+      
+JavaScript
+model.traverse((child) => {
+  if (child.isMesh) {
+    child.castShadow = true;
+    child.receiveShadow = true;
+    
+    // Preserve materials and enable color rendering
+    if (child.material) {
+      child.material.side = THREE.DoubleSide;
+      if (child.material.map) {
+        child.material.map.colorSpace = THREE.SRGBColorSpace;
+      }
+    }
+  }
+});
       scene.add(model);
 
       // Center model
