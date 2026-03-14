@@ -603,6 +603,14 @@ main {
   text-decoration: none;
 }
 
+pre[class*="language-"] {
+  margin: 16px 0;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  max-height: 420px;
+  overflow: auto;
+}
+
 .viewer-layout {
   grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
 }
