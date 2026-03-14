@@ -124,138 +124,159 @@
 
             <section id="sensing" class="section-block" data-spy-section>              
               <h2>Sensing</h2>
-              <div class="split-layout">
-                <div>
-                  <p><strong>Brainstorming/Design Tradeoffs:</strong></p>
-                  <p>We broke off the sensing subsystem into two portions:</p>
-                  <ol class="detail-list">
-                    <li>Orientation in starting zone</li>
-                    <li>Navigating to scoring zone</li>
-                  </ol>
-                  <p>We had IR beacons at the center of the sheet, so we initially thought to include IR phototransistors.</p>
-                  <ul class="detail-list">
-                    <li>Can tell us which way is forward and help with orienting the robot to the right direction.</li>
-                    <li>One of our lab assignments for the class was a similar circuit and it was very complicated</li>
-                    <li>It depended on the accuracy of the IR phototransistor and behavior could be unpredictable</li>
-                    <li>As a result, and to ensure simplicity, we ended up going with a more reliable set of sensors albeit more in quantity.</li>
-                    <li>3x Ultrasonic sensors</li>
-                    <li>3x Line sensors</li>
-                  </ul>
-                  <p><strong>Final design:</strong></p>
-                  <p>This subsystem will be discussed in more detail in the electrical section of this report. The mechanical interface with this subsystem was the sensor mounts that enabled a secure attachment to the chassis and location/angle adjustment if needed.</p>
-                  <ul class="detail-list">
-                    <li>3x Ultrasonic sensor mounts</li>
-                    <li>3x Line sensor mounts</li>
-                  </ul>
-                </div>
-                <div class="stack-layout">
-                  <figure class="media-frame compact"><img src="site-images/image58.png" alt="Ultrasonic sensor mount" /></figure>
-                  <figure class="media-frame compact"><img src="site-images/image45.png" alt="Line sensor mount 1" /></figure>
-                  <figure class="media-frame compact"><img src="site-images/image56.png" alt="Line sensor mount 2" /></figure>
-                </div>
+              <div>
+                <p><strong>Brainstorming/Design Tradeoffs:</strong></p>
+                <p>We broke off the sensing subsystem into two portions:</p>
+                <ol class="detail-list">
+                  <li>Orientation in starting zone</li>
+                  <li>Navigating to scoring zone</li>
+                </ol>
+                <p>We had IR beacons at the center of the sheet, so we initially thought to include IR phototransistors.</p>
+                <ul class="detail-list">
+                  <li>Can tell us which way is forward and help with orienting the robot to the right direction.</li>
+                  <li>One of our lab assignments for the class was a similar circuit and it was very complicated</li>
+                  <li>It depended on the accuracy of the IR phototransistor and behavior could be unpredictable</li>
+                  <li>As a result, and to ensure simplicity, we ended up going with a more reliable set of sensors albeit more in quantity.</li>
+                  <li>3x Ultrasonic sensors</li>
+                  <li>3x Line sensors</li>
+                </ul>
+                <p><strong>Final design:</strong></p>
+                <p>This subsystem will be discussed in more detail in the electrical section of this report. The mechanical interface with this subsystem was the sensor mounts that enabled a secure attachment to the chassis and location/angle adjustment if needed.</p>
+                <ul class="detail-list">
+                  <li>3x Ultrasonic sensor mounts
+                    <div class="gallery-grid" style="margin-top: 8px;">
+                      <figure class="media-frame micro"><img src="site-images/image58.png" alt="Ultrasonic sensor mount" /></figure>
+                    </div>
+                  </li>
+                  <li>3x Line sensor mounts
+                    <div class="gallery-grid" style="margin-top: 8px;">
+                      <figure class="media-frame micro"><img src="site-images/image45.png" alt="Line sensor mount 1" /></figure>
+                      <figure class="media-frame micro"><img src="site-images/image56.png" alt="Line sensor mount 2" /></figure>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </section>
 
             <section id="shooting" class="section-block" data-spy-section>              
               <h2>Storing and shooting pucks</h2>
-              <div class="split-layout">
-                <div>
-                  <p>The storing/shooting pucks subsystems took a bit more iteration from us as we kept gathering data and adapting to the components we had at the time.</p>
-                  <p><strong>Brainstorming:</strong></p>
-                  <p>During our brainstorming session, we chose a primary shooting mechanism and a backup mechanism. Our primary shooting mechanism was a flywheel system (singular or dual). Our backup mechanism was a puncher.</p>
-                  <p><strong>Prototype Build (Attempt #1):</strong> Dual flywheel system. <a href="https://www.youtube.com/watch?v=sJGC8ACxIeE">Video link</a></p>
-                  <p>The prototype was functional with some concerns:</p>
-                  <ol class="detail-list">
-                    <li>Friction between puck and surface puck sits on</li>
-                    <li>Motor has low RPM, wheels not pushing puck out far enough</li>
-                  </ol>
-                  <p>Based on that we made some design changes where we:</p>
-                  <ol class="detail-list">
-                    <li>Switched out puck interface surface for a roller system (passive conveyor rollers) to reduce friction</li>
-                    <li>Picked a different motor with higher RPM and slightly lower torque</li>
-                  </ol>
-                  <p>We tested those changes and observed the following:</p>
-                  <ol class="detail-list">
-                    <li>Roller system with a height-adjustable ramp was very reliable and smooth</li>
-                    <li>New motor with lower torque would sometimes stop based on the interference distance, adding another variable to our system</li>
-                  </ol>
-                  <p>Based on that we made a design change so that the wheels are assisted in shooting the puck away and implemented a singular flywheel system with puck interfacing with roller:</p>
-                  <ol class="detail-list">
-                    <li>
-                      Initial CAD work for motor mount and coupler for the shaft/flywheel
-                      <ul class="detail-list">
-                        <li>Measurements were off and we could not assemble the system.</li>
-                      </ul>
-                    </li>
-                    <li>Further testing showed that sliding the pucks down the rollers passively was sufficient to score in the 5-point region, and it proved to be a less complicated and more robust design.</li>
-                    <li>
-                      Changed to a servo with a gate-like arm blocking pucks then releasing them at shooting location behind hog line.
-                      <ol class="detail-list">
-                        <li>
-                          We had two servo motor options
-                          <ol class="detail-list">
-                            <li>
-                              Positional servo
-                              <ul class="detail-list">
-                                <li>Pros: Easier control</li>
-                                <li>Cons: Very weak</li>
-                              </ul>
-                            </li>
-                            <li>
-                              Continuous rotation servo: FS5103R [LINK: <a href="https://cdn-shop.adafruit.com/product-files/154/P154+C50-003+FS5103R+SPEC.pdf">https://cdn-shop.adafruit.com/product-files/154/P154+C50-003+FS5103R+SPEC.pdf</a>]
-                              <ul class="detail-list">
-                                <li>Pros: Stronger</li>
-                                <li>Cons: More complicated control code</li>
-                              </ul>
-                            </li>
-                          </ol>
-                        </li>
-                        <li>Ended up selecting FS5103R [LINK: <a href="https://cdn-shop.adafruit.com/product-files/154/P154+C50-003+FS5103R+SPEC.pdf">https://cdn-shop.adafruit.com/product-files/154/P154+C50-003+FS5103R+SPEC.pdf</a>] after software workaround to have servo behave like a positional servo</li>
-                        <li>
-                          CADed gate and initial servo mount
-                          <ol class="detail-list">
-                            <li>Gate is press-fit on servo</li>
-                            <li>Initially, gate hole was hot glued to positional servo</li>
-                            <li>After we made the switch to continuous rotation servo, we removed the hot glue to clear the hole</li>
-                            <li>Printed another gate on competition day for redundancy</li>
-                            <li>Had last minute issues with new printed part, fit was too loose, suggesting earlier tolerances were too loose and leftover hot glue is what kept earlier gate part intact with servo</li>
-                          </ol>
-                        </li>
-                        <li>
-                          Gate was coming off the servo gear due to pucks swinging it away
-                          <ol class="detail-list">
-                            <li>Tight mount for servo that screws motor in</li>
-                            <li>Bracket from pillar extending past gate for it to press against</li>
-                          </ol>
-                        </li>
-                      </ol>
-                    </li>
-                  </ol>
-                  <p><strong>Final Design - Full Assembly:</strong></p>
-                  <a class="code-link" href="cad-viewer.html">Open interactive CAD viewer</a>
+              <div>
+                <p>The storing/shooting pucks subsystems took a bit more iteration from us as we kept gathering data and adapting to the components we had at the time.</p>
+                <p><strong>Brainstorming:</strong></p>
+                <p>During our brainstorming session, we chose a primary shooting mechanism and a backup mechanism. Our primary shooting mechanism was a flywheel system (singular or dual). Our backup mechanism was a puncher.</p>
+                <p><strong>Flywheel:</strong></p>
+                <div class="gallery-grid" style="margin-top: 8px;">
+                  <figure class="media-frame micro"><img src="site-images/image31.png" alt="Flywheel concept" /></figure>
+                  <figure class="media-frame micro"><img src="site-images/image38.png" alt="Flywheel concept side image" /></figure>
                 </div>
-                <div class="stack-layout">
-                  <div class="media-grid two">
-                    <figure class="media-frame small"><img src="site-images/image31.png" alt="Flywheel concept" /></figure>
-                    <figure class="media-frame small"><img src="site-images/image38.png" alt="Flywheel concept side image" /></figure>
-                    <figure class="media-frame small"><img src="site-images/image2.png" alt="Puncher concept" /></figure>
-                    <figure class="media-frame small"><img src="site-images/image69.png" alt="Puncher concept detail" /></figure>
-                  </div>
-                  <div class="gallery-grid shooting-gallery">
-                    <figure class="media-frame small"><img src="site-images/image32.png" alt="Pillar CAD" /></figure>
-                    <figure class="media-frame small"><img src="site-images/image1.png" alt="Ramp part" /></figure>
-                    <figure class="media-frame small"><img src="site-images/image62.png" alt="Side wall CAD" /></figure>
-                    <figure class="media-frame small"><img src="site-images/image59.png" alt="Roller cores" /></figure>
-                    <figure class="media-frame small"><img src="site-images/image67.png" alt="Roller cores detail" /></figure>
-                    <figure class="media-frame small">
-                      <img src="site-images/image11.png" alt="Roller sleeves 1" />
-                      <figcaption><a href="https://youtu.be/41NgD6ae3Ic">Roller sleeves video link</a></figcaption>
-                    </figure>
-                    <figure class="media-frame small"><img src="site-images/image48.png" alt="Roller sleeves 2" /></figure>
-                    <figure class="media-frame small"><img src="site-images/image7.png" alt="Servo gate design" /></figure>
-                    <figure class="media-frame compact shooting-hero"><img src="site-images/image44.png" alt="Final full assembly" /></figure>
-                  </div>
+                <p><strong>Puncher:</strong></p>
+                <div class="gallery-grid" style="margin-top: 8px;">
+                  <figure class="media-frame micro"><img src="site-images/image2.png" alt="Puncher concept" /></figure>
+                  <figure class="media-frame micro"><img src="site-images/image69.png" alt="Puncher concept detail" /></figure>
                 </div>
+                <p><strong>Prototype Build (Attempt #1):</strong> Dual flywheel system. <a href="https://www.youtube.com/watch?v=sJGC8ACxIeE">Video link</a></p>
+                <p>The prototype was functional with some concerns:</p>
+                <ol class="detail-list">
+                  <li>Friction between puck and surface puck sits on</li>
+                  <li>Motor has low RPM, wheels not pushing puck out far enough</li>
+                </ol>
+                <p>Based on that we made some design changes where we:</p>
+                <ol class="detail-list">
+                  <li>Switched out puck interface surface for a roller system (passive conveyor rollers) to reduce friction</li>
+                  <li>Picked a different motor with higher RPM and slightly lower torque</li>
+                </ol>
+                <p>We tested those changes and observed the following:</p>
+                <ol class="detail-list">
+                  <li>Roller system with a height-adjustable ramp was very reliable and smooth</li>
+                  <li>New motor with lower torque would sometimes stop based on the interference distance, adding another variable to our system</li>
+                </ol>
+                <p><strong>Prototype Build (Attempt #2):</strong> Based on that we made a design change so that the wheels are assisted in shooting the puck away and implemented a singular flywheel system with puck interfacing with roller:</p>
+                <ol class="detail-list">
+                  <li>
+                    Initial CAD work for motor mount and coupler for the shaft/flywheel
+                    <ul class="detail-list">
+                      <li>Measurements were off and we could not assemble the system.</li>
+                    </ul>
+                  </li>
+                  <li>Further testing showed that sliding the pucks down the rollers passively was sufficient to score in the 5-point region, and it proved to be a less complicated and more robust design.</li>
+                  <li>
+                    Changed to a servo with a gate-like arm blocking pucks then releasing them at shooting location behind hog line.
+                    <ol class="detail-list" type="a">
+                      <li>
+                        We had two servo motor options
+                        <ol class="detail-list" type="a">
+                          <li>
+                            Positional servo
+                            <ul class="detail-list">
+                              <li>Pros: Easier control</li>
+                              <li>Cons: Very weak</li>
+                            </ul>
+                          </li>
+                          <li>
+                            Continuous rotation servo: <a href="https://cdn-shop.adafruit.com/product-files/154/P154+C50-003+FS5103R+SPEC.pdf">FS5103R</a>
+                            <ul class="detail-list">
+                              <li>Pros: Stronger</li>
+                              <li>Cons: More complicated control code</li>
+                            </ul>
+                          </li>
+                        </ol>
+                      </li>
+                      <li>Ended up selecting <a href="https://cdn-shop.adafruit.com/product-files/154/P154+C50-003+FS5103R+SPEC.pdf">FS5103R</a> after software workaround to have servo behave like a positional servo</li>
+                      <li>
+                        CADed gate and initial servo mount
+                        <ol class="detail-list" type="a">
+                          <li>Gate is press-fit on servo</li>
+                          <li>Initially, gate hole was hot glued to positional servo</li>
+                          <li>After we made the switch to continuous rotation servo, we removed the hot glue to clear the hole</li>
+                          <li>Printed another gate on competition day for redundancy</li>
+                          <li>Had last minute issues with new printed part, fit was too loose, suggesting earlier tolerances were too loose and leftover hot glue is what kept earlier gate part intact with servo</li>
+                        </ol>
+                      </li>
+                      <li>
+                        Gate was coming off the servo gear due to pucks swinging it away
+                        <ol class="detail-list" type="a">
+                          <li>Tight mount for servo that screws motor in</li>
+                          <li>Bracket from pillar extending past gate for it to press against
+                            <div class="gallery-grid" style="margin-top: 8px;">
+                              <figure class="media-frame micro"><img src="site-images/image7.png" alt="Servo gate design" /></figure>
+                            </div>
+                          </li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                </ol>
+                <ul class="detail-list">
+                  <li>Pillars
+                    <div class="gallery-grid" style="margin-top: 8px;">
+                      <figure class="media-frame micro"><img src="site-images/image32.png" alt="Pillar CAD" /></figure>
+                      <figure class="media-frame micro"><img src="site-images/image1.png" alt="Ramp part" /></figure>
+                    </div>
+                  </li>
+                  <li>Side walls
+                    <div class="gallery-grid" style="margin-top: 8px;">
+                      <figure class="media-frame micro"><img src="site-images/image62.png" alt="Side wall CAD" /></figure>
+                    </div>
+                  </li>
+                  <li>Roller cores
+                    <div class="gallery-grid" style="margin-top: 8px;">
+                      <figure class="media-frame micro"><img src="site-images/image59.png" alt="Roller cores" /></figure>
+                      <figure class="media-frame micro"><img src="site-images/image67.png" alt="Roller cores detail" /></figure>
+                    </div>
+                  </li>
+                  <li>Roller sleeves
+                    <div class="gallery-grid" style="margin-top: 8px;">
+                      <figure class="media-frame micro">
+                        <img src="site-images/image11.png" alt="Roller sleeves 1" />
+                        <figcaption><a href="https://youtu.be/41NgD6ae3Ic">Roller sleeves video link</a></figcaption>
+                      </figure>
+                      <figure class="media-frame micro"><img src="site-images/image48.png" alt="Roller sleeves 2" /></figure>
+                    </div>
+                  </li>
+                </ul>
+                <p style="margin-top: 2em;"><strong>Final Design - Full Assembly:</strong></p>
+                <a class="code-link" href="cad-viewer.html">Open interactive CAD viewer</a>
+                <figure class="media-frame compact shooting-hero" style="margin-top: 16px;"><img src="site-images/image44.png" alt="Final full assembly" /></figure>
               </div>
             </section>
 
