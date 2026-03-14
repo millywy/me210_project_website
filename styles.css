@@ -949,3 +949,13 @@ main {
     height: 560px;
   }
 }
+
+.positive {
+  color: #2ecc71;
+  font-weight: 700;
+}
+
+.negative {
+  color: #e74c3c;
+  font-weight: 700;
+}
