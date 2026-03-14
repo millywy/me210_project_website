@@ -52,90 +52,91 @@
           </aside>
 
          <section id="navigation" class="section-block" data-spy-section>              
-  <h2>Navigation</h2>
+         <h2>Navigation</h2>
 
-  <p><strong>Brainstorming/Design Tradeoffs:</strong></p>
-  <p>For a drivetrain subsystem, we were considering standard wheels and omni-directional wheels. We were also considering different orientations of passive vs active drive wheels based on each wheel type.</p>
-
-  <p><strong>For a standard wheel:</strong></p>
-
-  <div class="media-grid two">
-    <figure class="media-frame micro"><img src="site-images/image3.png" alt="Standard wheel image 1" /></figure>
-    <figure class="media-frame micro"><img src="site-images/image33.png" alt="Standard wheel image 2" /></figure>
-    <figure class="media-frame micro"><img src="site-images/image4.png" alt="Standard wheel image 3" /></figure>
-    <figure class="media-frame micro"><img src="site-images/image42.png" alt="Standard wheel image 4" /></figure>
-  </div>
-
-  <p><strong>For an omni-directional wheel:</strong></p>
-
-  <div class="media-grid two">
-    <figure class="media-frame micro"><img src="site-images/image68.png" alt="Omni wheel image 1" /></figure>
-    <figure class="media-frame micro"><img src="site-images/image34.png" alt="Omni wheel image 2" /></figure>
-  </div>
-
-  <p>We were leaning towards a four-wheel drive omniwheel system because:</p>
-
-  <ul class="detail-list">
-    <li>We wanted to eliminate complexity when it comes to steering and turning</li>
-    <li>Due to spatial constraints of exiting the starting box successfully and never crossing the hog lines, eliminating turn radii was the best strategy.</li>
-    <li>A two-wheel drive with omni-directional wheels risked turning instead of translating when we would turn on one motor</li>
-    <li>Especially since we will be carrying the weight of 3x pucks + 2x batteries, more drive torque was needed.</li>
-  </ul>
-
-  <p><strong>Prototype Build:</strong></p>
-
-  <ul class="detail-list">
-    <li>We cut a 10inx10in sheet of wood</li>
-    <li>We drilled holes into this board, zip-tied motors in, and hot-glued omni-directional wheels to the shafts.</li>
-    <li>Within a couple days we had a fully working navigation subsystem and had a headstart on hardware overall.</li>
-    <li>Other components added to the prototype were the sensors and they were simply taped onto the board.</li>
-  </ul>
-
-  <p><strong>Final design:</strong></p>
-
-  <ul class="detail-list">
-    <li>Make mounts for motors (L-brackets)</li>
-    <li>Make mounts for shaft-wheel interface</li>
-    <li>Make corresponding cutouts on new chassis</li>
-    <li>Push wheels into chassis so that robot outer dimension is bound by chassis and real estate is maximized while staying within guideline dimensions</li>
-
-    <li>
-      Place all navigation-related components on chassis underside to free up real estate on the upper side
-      <ul class="detail-list">
-
-        <li>
-          4x Motor mounts
-          <div class="media-grid three">
-            <figure class="media-frame micro"><img src="site-images/image24.png" alt="Motor mount CAD" /></figure>
-            <figure class="media-frame micro"><img src="site-images/image64.png" alt="Motor mount CAD 2" /></figure>
-            <figure class="media-frame micro"><img src="site-images/image37.png" alt="Wheel interface CAD" /></figure>
-          </div>
-        </li>
-
-        <li>
-          4x Wheels + Shaft-Wheel Interfaces
-          <div class="media-grid three">
-            <figure class="media-frame micro"><img src="site-images/image57.png" alt="Wheel interface front view" /></figure>
-            <figure class="media-frame micro"><img src="site-images/image46.png" alt="Wheel interface back view" /></figure>
-            <figure class="media-frame micro"><img src="site-images/image14.png" alt="Wheel interface to motor" /></figure>
-          </div>
-        </li>
-
-        <li>
-          2x L298N H-bridge Motor Drivers
-          <div class="media-grid three">
-            <figure class="media-frame micro"><img src="site-images/image18.png" alt="Motor driver mount" /></figure>
-            <figure class="media-frame micro"><img src="site-images/image54.png" alt="Motor driver assembly 2" /></figure>
-            <figure class="media-frame micro"><img src="site-images/image6.png" alt="Motor driver assembly 3" /></figure>
-          </div>
-        </li>
-
-      </ul>
-    </li>
-
-  </ul>
-
-</section>
+              <p><strong>Brainstorming/Design Tradeoffs:</strong></p>
+              <p>For a drivetrain subsystem, we were considering standard wheels and omni-directional wheels. We were also considering different orientations of passive vs active drive wheels based on each wheel type.</p>
+            
+              <p><strong>For a standard wheel:</strong></p>
+            
+              <div class="media-grid two">
+                <figure class="media-frame micro"><img src="site-images/image3.png" alt="Standard wheel image 1" /></figure>
+                <figure class="media-frame micro"><img src="site-images/image33.png" alt="Standard wheel image 2" /></figure>
+                <figure class="media-frame micro"><img src="site-images/image4.png" alt="Standard wheel image 3" /></figure>
+                <figure class="media-frame micro"><img src="site-images/image42.png" alt="Standard wheel image 4" /></figure>
+              </div>
+            
+              <p><strong>For an omni-directional wheel:</strong></p>
+            
+              <div class="media-grid two">
+                <figure class="media-frame micro"><img src="site-images/image68.png" alt="Omni wheel image 1" /></figure>
+                <figure class="media-frame micro"><img src="site-images/image34.png" alt="Omni wheel image 2" /></figure>
+              </div>
+            
+              <p>We were leaning towards a four-wheel drive omniwheel system because:</p>
+            
+              <ul class="detail-list">
+                <li>We wanted to eliminate complexity when it comes to steering and turning</li>
+                <li>Due to spatial constraints of exiting the starting box successfully and never crossing the hog lines, eliminating turn radii was the best strategy.</li>
+                <li>A two-wheel drive with omni-directional wheels risked turning instead of translating when we would turn on one motor</li>
+                <li>Especially since we will be carrying the weight of 3x pucks + 2x batteries, more drive torque was needed.</li>
+              </ul>
+            
+              <p><strong>Prototype Build:</strong></p>
+            
+              <ul class="detail-list">
+                <li>We cut a 10inx10in sheet of wood</li>
+                <li>We drilled holes into this board, zip-tied motors in, and hot-glued omni-directional wheels to the shafts.</li>
+                <li>Within a couple days we had a fully working navigation subsystem and had a headstart on hardware overall.</li>
+                <li>Other components added to the prototype were the sensors and they were simply taped onto the board.</li>
+              </ul>
+            
+              <p><strong>Final design:</strong></p>
+            
+              <ul class="detail-list">
+                <li>Make mounts for motors (L-brackets)</li>
+                <li>Make mounts for shaft-wheel interface</li>
+                <li>Make corresponding cutouts on new chassis</li>
+                <li>Push wheels into chassis so that robot outer dimension is bound by chassis and real estate is maximized while staying within guideline dimensions</li>
+            
+                <li>
+                  Place all navigation-related components on chassis underside to free up real estate on the upper side
+                  <ul class="detail-list">
+            
+                    <li>
+                      4x Motor mounts
+                      <div class="media-grid three">
+                        <figure class="media-frame micro"><img src="site-images/image24.png" alt="Motor mount CAD" /></figure>
+                        <figure class="media-frame micro"><img src="site-images/image64.png" alt="Motor mount CAD 2" /></figure>
+                        <figure class="media-frame micro"><img src="site-images/image37.png" alt="Wheel interface CAD" /></figure>
+                      </div>
+                    </li>
+            
+                    <li>
+                      4x Wheels + Shaft-Wheel Interfaces
+                      <div class="media-grid three">
+                        <figure class="media-frame micro"><img src="site-images/image57.png" alt="Wheel interface front view" /></figure>
+                        <figure class="media-frame micro"><img src="site-images/image46.png" alt="Wheel interface back view" /></figure>
+                        <figure class="media-frame micro"><img src="site-images/image14.png" alt="Wheel interface to motor" /></figure>
+                      </div>
+                    </li>
+            
+                    <li>
+                      2x L298N H-bridge Motor Drivers
+                      <div class="media-grid three">
+                        <figure class="media-frame micro"><img src="site-images/image18.png" alt="Motor driver mount" /></figure>
+                        <figure class="media-frame micro"><img src="site-images/image54.png" alt="Motor driver assembly 2" /></figure>
+                        <figure class="media-frame micro"><img src="site-images/image6.png" alt="Motor driver assembly 3" /></figure>
+                      </div>
+                    </li>
+            
+                  </ul>
+                </li>
+            
+              </ul>
+            </div>
+            </section>
+          
             <section id="sensing" class="section-block" data-spy-section>              
               <h2>Sensing</h2>
               <div class="split-layout">
