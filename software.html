@@ -23,8 +23,8 @@
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
         <nav id="site-nav" class="site-nav">
           <a href="index.html">Home</a>
-          <a href="competition.html">Competition</a>
-          <a href="brainstorm.html">Brainstorm</a>
+          <a href="competition.html">Game Day</a>
+          <a href="brainstorm.html">Brainstorming</a>
           <a href="mechanical.html">Mechanical</a>
           <a href="software.html" aria-current="page">Software</a>
           <a href="electrical.html">Electrical</a>
@@ -39,7 +39,7 @@
           <p class="page-kicker">Logic + code</p>
           <h1>Software</h1>
           <p class="page-subtitle">
-            The software changed from timer-driven control into a cleaner event-based state machine. Each section below keeps the images on the side, but now rotates them as a carousel.
+            The software changed from timer-driven control into a cleaner event-based state machine. Each section below details the code snippets.
           </p>
         </section>
 
@@ -76,14 +76,7 @@
                     <li>Moving forward, backward, left, right, clockwise, anticlockwise</li>
                     <li>Servo motor for opening gate for shooting</li>
                   </ul>
-                </div>
-                <div class="carousel-shell" data-carousel data-interval="3500">
-                  <div class="carousel-viewport">
-                    <div class="carousel-track" data-carousel-track>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image63.png" alt="Finite state diagram" /></figure></div>
-                    </div>
-                  </div>
-                </div>
+                </div>          
               </div>
             </section>
 
@@ -179,23 +172,7 @@ prevState = STATE_COUNTERCLOCKWISE;
                     <li>When we started using the metro() timer we were pretty perplexed because it would keep saying the timer automatically expired even when it had not started. After trying a lot of Serial.print statements and debugging, we realised it is because we started them in the switch state, not within the previous response function (RespToMovedRight()) in global events, and in the loop global events was first so it would automatically expire the timer.</li>
                     <li>Improving efficiency: return false right away in check global events bool functions if not in the appropriate corresponding state</li>
                   </ul>
-                </div>
-                <div class="carousel-shell" data-carousel data-interval="3000">
-                  <div class="carousel-viewport">
-                    <div class="carousel-track" data-carousel-track>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image17.png" alt="Old code structure" /></figure></div>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image5.png" alt="Event based code image 1" /></figure></div>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image40.png" alt="Event based code image 2" /></figure></div>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image60.png" alt="Event based code image 3" /></figure></div>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image36.png" alt="Timer debugging code image" /></figure></div>
-                    </div>
-                  </div>
-                  <div class="carousel-controls">
-                    <button type="button" data-carousel-prev>Prev</button>
-                    <button type="button" data-carousel-next>Next</button>
-                    <div class="carousel-dots" data-carousel-dots></div>
-                  </div>
-                </div>
+                </div>             
               </div>
             </section>
 
@@ -259,20 +236,7 @@ void respToUSInitialised() {
 currentState = STATE_MOVE_BACKWARDS;
 prevState = STATE_COUNTERCLOCKWISE;
 }</code></pre>
-                </div>
-                <div class="carousel-shell" data-carousel data-interval="3200">
-                  <div class="carousel-viewport">
-                    <div class="carousel-track" data-carousel-track>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image10.png" alt="Orientation code 1" /></figure></div>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image66.png" alt="Orientation code 2" /></figure></div>
-                    </div>
-                  </div>
-                  <div class="carousel-controls">
-                    <button type="button" data-carousel-prev>Prev</button>
-                    <button type="button" data-carousel-next>Next</button>
-                    <div class="carousel-dots" data-carousel-dots></div>
-                  </div>
-                </div>
+                </div>               
               </div>
             </section>
 
@@ -380,21 +344,7 @@ void respToReachedHogLine() {
 currentState = STATE_SHOOTING;
 prevState = STATE_TAPE_MOVE_FORWARD_2;
 }</code></pre>
-                </div>
-                <div class="carousel-shell" data-carousel data-interval="3200">
-                  <div class="carousel-viewport">
-                    <div class="carousel-track" data-carousel-track>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image20.png" alt="Line sensing code 1" /></figure></div>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image50.png" alt="Line sensing code 2" /></figure></div>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image26.png" alt="Line sensing code 3" /></figure></div>
-                    </div>
-                  </div>
-                  <div class="carousel-controls">
-                    <button type="button" data-carousel-prev>Prev</button>
-                    <button type="button" data-carousel-next>Next</button>
-                    <div class="carousel-dots" data-carousel-dots></div>
-                  </div>
-                </div>
+                </div>               
               </div>
             </section>
 
@@ -532,22 +482,7 @@ void respToReloadFinished(){
 currentState = STATE_TAPE_MOVE_RIGHT;
 prevState = STATE_RELOAD;
 }</code></pre>
-                </div>
-                <div class="carousel-shell" data-carousel data-interval="3200">
-                  <div class="carousel-viewport">
-                    <div class="carousel-track" data-carousel-track>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image27.png" alt="Shooting code 1" /></figure></div>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image28.png" alt="Shooting code 2" /></figure></div>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image8.png" alt="Shooting code 3" /></figure></div>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image30.png" alt="Shooting code 4" /></figure></div>
-                    </div>
-                  </div>
-                  <div class="carousel-controls">
-                    <button type="button" data-carousel-prev>Prev</button>
-                    <button type="button" data-carousel-next>Next</button>
-                    <div class="carousel-dots" data-carousel-dots></div>
-                  </div>
-                </div>
+                </div>               
               </div>
             </section>
 
@@ -582,14 +517,7 @@ if (duration == 0) return -1;  // timeout =&gt; invalid
 int cm = (int)(duration / 58UL);
 return cm;
 }</code></pre>
-                </div>
-                <div class="carousel-shell" data-carousel data-interval="3200">
-                  <div class="carousel-viewport">
-                    <div class="carousel-track" data-carousel-track>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image29.png" alt="Ultrasonic sensor code" /></figure></div>
-                    </div>
-                  </div>
-                </div>
+                </div>               
               </div>
             </section>
 
@@ -1056,20 +984,7 @@ moveForward(in2_, in1_); //L
 moveBackward(in3_, in4_); //F
 }</code></pre>
                   <a class="code-link" href="software-final-code.txt">Open final code text export</a>
-                </div>
-                <div class="carousel-shell" data-carousel data-interval="3200">
-                  <div class="carousel-viewport">
-                    <div class="carousel-track" data-carousel-track>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image25.png" alt="Debugging tips image" /></figure></div>
-                      <div class="carousel-slide" data-carousel-slide><figure class="media-frame compact"><img src="site-images/image13.png" alt="Testing codes image" /></figure></div>
-                    </div>
-                  </div>
-                  <div class="carousel-controls">
-                    <button type="button" data-carousel-prev>Prev</button>
-                    <button type="button" data-carousel-next>Next</button>
-                    <div class="carousel-dots" data-carousel-dots></div>
-                  </div>
-                </div>
+                </div>               
               </div>
             </section>
           </div>
