@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
   </head>
   <body>
     <div class="site-shell">
@@ -91,12 +92,90 @@
               <h2>Changing the entire structure of our code</h2>
               <div class="split-layout">
                 <div>
+                  <p><strong>Before event driven programming</strong></p>
                   <ul class="detail-list">
-                    <li><strong>Before event driven programming</strong></li>
                     <li>We had a metro timer that called the sensor reading functions every 500 milliseconds and called the state machine ie. The state machine was not in the loop because we were scared of it being called too many times. But that was causing there to be a delay where it would not stop parallel, but drift/would keep spinning forever. Our states would also update and change the motors and check the sensors within the same functions, which made it really hard to debug exactly what was going wrong with software. For example:</li>
+                  </ul>
+                  <pre><code class="language-cpp">case STATE_COUNTERCLOCKWISE: {
+    bool valid = (back_L_cm &gt; 0) &amp;&amp; (back_R_cm &gt; 0) &amp;&amp; (left_cm &gt; 0);
+
+    uint16_t diff = (back_L_cm &gt; back_R_cm) ? (back_L_cm - back_R_cm) : (back_R_cm - back_L_cm);
+
+    bool nearWalls =
+      (back_L_cm &lt; NEAR_WALL_CM) &amp;&amp;
+      (back_R_cm &lt; NEAR_WALL_CM) &amp;&amp;
+      (left_cm   &lt; NEAR_WALL_CM);
+
+    bool parallel = (diff &lt; PARALLEL_TOL_CM);
+
+    if (valid &amp;&amp; nearWalls &amp;&amp; parallel) {
+      botStop();
+      //delay(30);
+      state = STATE_MOVE_BACK;
+    } else {
+      botAnticlockwise(160);
+    }
+    break;
+  }</code></pre>
+                  <pre><code class="language-cpp">void loop() {
+checkGlobalEvents();
+
+switch (currentState) {
+
+// ---------------- ORIENTATION PHASE ----------------
+case STATE_COUNTERCLOCKWISE: {
+if (prevState != STATE_COUNTERCLOCKWISE) {
+botAnticlockwise(speed);
+prevState = STATE_COUNTERCLOCKWISE;
+}
+}
+break;</code></pre>
+                  <pre><code class="language-cpp">void checkGlobalEvents(void){
+if (eventUSInitialised()) {respToUSInitialised();}
+if (eventMovedBackwards()) {respToMovedBackwards();}
+if (eventMovedLeft()) {respToMovedLeft();}
+if (eventMovedRight()) {respToMovedRight();}
+if (eventReachedHogLine()) {respToReachedHogLine();}
+}
+
+bool eventUSInitialised() {
+if (currentState != STATE_COUNTERCLOCKWISE) return false;
+if (currentState == STATE_COUNTERCLOCKWISE) { //should run if we are rotating anticlockwise
+readUltrasonicSensors();
+bool valid = (back_L_cm &gt; 0) &amp;&amp; (back_R_cm &gt; 0) &amp;&amp; (left_cm &gt; 0);
+int diff = (back_L_cm &gt; back_R_cm) ? (back_L_cm - back_R_cm) : (back_R_cm - back_L_cm);
+bool nearWalls =
+(back_L_cm &lt; NEAR_WALL_CM) &amp;&amp;
+(back_R_cm &lt; NEAR_WALL_CM) &amp;&amp;
+(left_cm   &lt; NEAR_WALL_CM);
+
+bool parallel = (diff &lt; PARALLEL_TOL_CM);
+
+if (valid &amp;&amp; nearWalls &amp;&amp; parallel) {
+  botStop();
+  Serial.print("Robot in correct position, now going to move back");
+   Serial.print("state!="); Serial.print(currentState);
+   Serial.print(" | ULTRA: BL!!:"); Serial.print(back_L_cm); Serial.print(", L:!!!");
+   Serial.print(left_cm); Serial.print(", BR:!!! "); Serial.print(back_R_cm);
+  return true;
+}
+else {
+  return false;
+}
+}
+}
+
+void respToUSInitialised() {
+currentState = STATE_MOVE_BACKWARDS;
+prevState = STATE_COUNTERCLOCKWISE;
+}</code></pre>
+                  <ul class="detail-list">
                     <li>Changed to event based programming completely, with states inside loops and global event checkers. The structure of this was we had our loop which had a switch state statement. The different states would ONLY call the motors/servo. Then we have a checkGlobalEvents() function inside the loop which were a set of event checking functions and responding functions. The event checking functions would respond a boolean depending on the input they got from the timers/ultrasonic sensors/line sensors and if they responded true, it would trigger the corresponding response function which would ONLY change the previous state and current state variable.</li>
                     <li>This helped us separate sensor and motor logic and helped SO much with debugging.</li>
-                    <li><strong>Timers:</strong> We were also using delays which were blocking code, and used metro() timer instead for small timers in our code.</li>
+                  </ul>
+                  <p><strong>Timers:</strong></p>
+                  <ul class="detail-list">
+                    <li>We were also using delays which were blocking code, and used metro() timer instead for small timers in our code.</li>
                     <li>When we started using the metro() timer we were pretty perplexed because it would keep saying the timer automatically expired even when it had not started. After trying a lot of Serial.print statements and debugging, we realised it is because we started them in the switch state, not within the previous response function (RespToMovedRight()) in global events, and in the loop global events was first so it would automatically expire the timer.</li>
                     <li>Improving efficiency: return false right away in check global events bool functions if not in the appropriate corresponding state</li>
                   </ul>
@@ -134,6 +213,52 @@
                     <li>We also had the motors only run once instead of continuously being called in the loop ie. become set (using prevState logic) which reduces jitters.</li>
                     <li>Software debugging is also closely tied to hardware! For example, our ultrasonic sensors were not giving valid readings and we realised it was just due to flimsy wires.</li>
                   </ul>
+                  <p><strong>Code snippets:</strong></p>
+                  <pre><code class="language-cpp">case STATE_COUNTERCLOCKWISE: {
+if (prevState != STATE_COUNTERCLOCKWISE) {
+botAnticlockwise(225);
+prevState = STATE_COUNTERCLOCKWISE;
+}
+}
+break;
+
+case STATE_TAPE_MOVE_RIGHT:
+if (prevState != STATE_TAPE_MOVE_RIGHT) {
+botRight(speed);
+prevState = STATE_TAPE_MOVE_RIGHT;
+}
+break;</code></pre>
+                  <pre><code class="language-cpp">bool eventUSInitialised() {
+if (currentState != STATE_COUNTERCLOCKWISE) return false;
+if (currentState == STATE_COUNTERCLOCKWISE) { //should run if we are rotating anticlockwise
+readUltrasonicSensors();
+bool valid = (back_L_cm &gt; 0) &amp;&amp; (back_R_cm &gt; 0) &amp;&amp; (left_cm &gt; 0);
+int diff = (back_L_cm &gt; back_R_cm) ? (back_L_cm - back_R_cm) : (back_R_cm - back_L_cm);
+bool nearWalls =
+(back_L_cm &lt; NEAR_WALL_CM) &amp;&amp;
+(back_R_cm &lt; NEAR_WALL_CM) &amp;&amp;
+(left_cm   &lt; NEAR_WALL_CM);
+
+bool parallel = (diff &lt; PARALLEL_TOL_CM);
+
+if (valid &amp;&amp; nearWalls &amp;&amp; parallel) {
+ botStop();
+ Serial.print("Robot in correct position, now going to move back");
+  Serial.print("state!="); Serial.print(currentState);
+  Serial.print(" | ULTRA: BL!!:"); Serial.print(back_L_cm); Serial.print(", L:!!!");
+  Serial.print(left_cm); Serial.print(", BR:!!! "); Serial.print(back_R_cm);
+ return true;
+}
+else {
+ return false;
+}
+}
+}
+
+void respToUSInitialised() {
+currentState = STATE_MOVE_BACKWARDS;
+prevState = STATE_COUNTERCLOCKWISE;
+}</code></pre>
                 </div>
                 <div class="carousel-shell" data-carousel data-interval="3200">
                   <div class="carousel-viewport">
@@ -163,6 +288,98 @@
                     <li>We also noticed that because of the inertia/tremors, the robot would sometimes be not perfectly pointing straight ahead even after orientation was working completely, and if so, would move diagonally across the board instead of directly straight to shoot as we wanted. To mitigate this, we added a block of line following logic.</li>
                     <li>Also, initially instead of the robot turning clockwise or anticlockwise, we had it move left or right, but this did not help too much as it would not straighten it which is why we moved to clockwise and anticlockwise.</li>
                   </ul>
+                  <p><strong>Code snippets:</strong></p>
+                  <pre><code class="language-cpp">case STATE_TAPE_MOVE_RIGHT:
+if (prevState != STATE_TAPE_MOVE_RIGHT) {
+botRight(speed);
+prevState = STATE_TAPE_MOVE_RIGHT;
+}
+break;
+
+case STATE_TAPE_MOVE_FORWARD_1:
+if (prevState != STATE_TAPE_MOVE_FORWARD_1) {
+botForward(speed);
+timer = millis();
+Serial.println("Started timer");
+prevState = STATE_TAPE_MOVE_FORWARD_1;
+}
+break;
+
+case STATE_TAPE_MOVE_FORWARD_2:
+if (prevState != STATE_TAPE_MOVE_FORWARD_2) {
+botForward(speed);
+prevState = STATE_TAPE_MOVE_FORWARD_2;
+}
+break;</code></pre>
+                  <pre><code class="language-cpp">bool eventMovedRight() {
+if (currentState != STATE_TAPE_MOVE_RIGHT) return false;
+if (currentState == STATE_TAPE_MOVE_RIGHT) {
+readLineSensors();
+if (lineM &gt; TAPE_TH) {
+ botStop(); //botStop is to reduce the motor overshooting
+ Serial.print("Reached the center line!");
+ Serial.print(" | Line:!! "); Serial.print(lineL); Serial.print(",");
+ Serial.print(lineM); Serial.print(","); Serial.println(lineR);
+ return true;
+}
+else {
+ return false;
+}
+}
+}
+
+void respToMovedRight() {
+currentState = STATE_TAPE_MOVE_FORWARD_1;
+prevState = STATE_TAPE_MOVE_RIGHT;
+}
+
+bool eventTimerExpired(){
+ if (currentState != STATE_TAPE_MOVE_FORWARD_1) return false;
+ if (currentState == STATE_TAPE_MOVE_FORWARD_1) {
+   if (timer - millis() &gt; 3000) {
+     Serial.println("timer expired");
+     respToTimerExpired();
+     return true;
+   }else {
+   return false;
+ }
+}
+}
+
+void respToTimerExpired(){
+ currentState = STATE_TAPE_MOVE_FORWARD_2;
+ prevState = STATE_TAPE_MOVE_FORWARD_1;
+}
+
+bool eventReachedHogLine() {
+if (currentState != STATE_TAPE_MOVE_FORWARD_2) return false;
+if (currentState == STATE_TAPE_MOVE_FORWARD_2) {
+readLineSensors();
+ bool left_sensor_black = lineL &gt; TAPE_LTH;
+ bool middle_sensor_black = lineM &gt; TAPE_TH;
+ bool right_sensor_black = lineR &gt; TAPE_TH;
+
+ if(left_sensor_black &amp;&amp; !middle_sensor_black &amp;&amp; !right_sensor_black) {
+   botLeft(255);
+ } else if (!left_sensor_black &amp;&amp; !middle_sensor_black &amp;&amp; right_sensor_black) {
+   botRight(255);
+ }
+
+if (lineL &gt; TAPE_LTH &amp;&amp; lineR &gt; TAPE_TH) {
+  botStop();
+ Serial.println("Tape target reached!");
+ return true;
+}
+else {
+ return false;
+}
+}
+}
+
+void respToReachedHogLine() {
+currentState = STATE_SHOOTING;
+prevState = STATE_TAPE_MOVE_FORWARD_2;
+}</code></pre>
                 </div>
                 <div class="carousel-shell" data-carousel data-interval="3200">
                   <div class="carousel-viewport">
@@ -191,6 +408,130 @@
                     <li>Used a continuous rotation servo instead of normal, needed to use a timer for it as could only set speeds</li>
                     <li>In the state logic decided to use delays and a boolean as the event which triggered it to move to next state (boolean was doneShooting which was false and only become true at the end of the state (this was the event that moved us to the next state in CheckGlobalEvents()))</li>
                   </ul>
+                  <p><strong>Code snippets:</strong></p>
+                  <pre><code class="language-cpp">case STATE_SHOOTING:
+if (prevState != STATE_SHOOTING) {
+myservo.write(-100);
+delay(200);
+myservo.write(90);
+prevState = STATE_SHOOTING;
+}
+break;</code></pre>
+                  <pre><code class="language-cpp">case STATE_SHOOTING:
+if (prevState != STATE_SHOOTING) {
+myservo.write(-100);
+delay(200);
+myservo.write(90);
+delay(500);
+shootingComplete = true;
+prevState = STATE_SHOOTING;
+}
+break;
+
+case STATE_MOVE_BACKWARDS: {
+if (prevState != STATE_MOVE_BACKWARDS) {
+botBackward(speed);
+prevState = STATE_MOVE_BACKWARDS;
+}
+}
+break;
+
+case STATE_MOVE_LEFT:
+if (prevState != STATE_MOVE_LEFT) {
+botLeft(speed);
+Serial.print("Put in instruction to move left!");
+prevState = STATE_MOVE_LEFT;
+}
+break;
+
+case STATE_RELOAD:
+if (prevState != STATE_RELOAD) {
+ botStop();
+ prevState = STATE_RELOAD;
+}
+break;</code></pre>
+                  <pre><code class="language-cpp">bool eventDoneShooting() {
+ if (currentState != STATE_SHOOTING) return false;
+ if (currentState == STATE_SHOOTING) {
+   if (shootingComplete) {
+     shootingComplete = false;
+     return true;
+   }
+   else {
+     return false;
+   }
+ }
+}
+
+void respToDoneShooting() {
+currentState = STATE_MOVE_BACKWARDS;
+prevState = STATE_SHOOTING;
+}
+
+bool eventMovedBackwards() {
+if (currentState != STATE_MOVE_BACKWARDS) return false;
+if (currentState == STATE_MOVE_BACKWARDS) {
+readUltrasonicSensors();
+if (back_L_cm &gt; 0 &amp;&amp; back_L_cm &lt;= 5) {
+botStop();
+Serial.print("Robot moved back, now going to move left");
+Serial.print("state!="); Serial.print(currentState);
+ Serial.print(" | ULTRA: BL!!:"); Serial.print(back_L_cm); Serial.print(", L:!!!");
+ Serial.print(left_cm); Serial.print(", BR:!!! "); Serial.print(back_R_cm);
+return true;
+}
+else {
+return false;
+}
+}
+}
+
+void respToMovedBackwards() {
+currentState = STATE_MOVE_LEFT;
+prevState = STATE_MOVE_BACKWARDS;
+}
+
+bool eventMovedLeft() {
+if (currentState != STATE_MOVE_LEFT) return false;
+if (currentState == STATE_MOVE_LEFT) {
+readUltrasonicSensors();
+if (left_cm &lt;= 3) {
+botStop();
+Serial.print("Robot moved left, initialisation complete!");
+Serial.print("state!="); Serial.print(currentState);
+ Serial.print(" | ULTRA: BL!!:"); Serial.print(back_L_cm); Serial.print(", L:!!!");
+ Serial.print(left_cm); Serial.print(", BR:!!! "); Serial.print(back_R_cm);
+return true;
+}
+else {
+return false;
+}
+}
+}
+
+void respToMovedLeft() {
+currentState = STATE_RELOAD;
+prevState = STATE_MOVE_LEFT;
+timer = millis();
+Serial.println("Started timer");
+}
+
+bool eventReloadFinished(){
+if (currentState != STATE_RELOAD) return false;
+if (currentState == STATE_RELOAD) {
+  if (millis() - timer &gt; 3000) {
+    Serial.println("timer expired");
+    return true;
+  }else {
+  return false;
+}
+}
+}
+
+void respToReloadFinished(){
+currentState = STATE_TAPE_MOVE_RIGHT;
+prevState = STATE_RELOAD;
+}</code></pre>
                 </div>
                 <div class="carousel-shell" data-carousel data-interval="3200">
                   <div class="carousel-viewport">
@@ -219,6 +560,28 @@
                     <li>Decided to calculate distance in cm manually using function below. Initially tried using the library provided but we realised it was blocking code and buggy to work with. Would recommend calculating manually for teams.</li>
                     <li>In general for sensors, instead of reading inside the loop, we only called functions to read values when it was needed, inside the event() function itself</li>
                   </ol>
+                  <pre><code class="language-cpp">// Returns distance in cm.
+// Returns -1 if no echo within timeout
+int calculateUltrasonicDistance(int trigPin, int echoPin) {
+digitalWrite(trigPin, LOW);
+delayMicroseconds(2);
+
+// Trigger: 10us HIGH pulse
+digitalWrite(trigPin, HIGH);
+delayMicroseconds(10);
+digitalWrite(trigPin, LOW);
+
+// Read echo pulse width (microseconds)
+// Timeout set to 25,000us (~4.3m). Reduce to cut blocking/crosstalk.
+unsigned long duration = pulseIn(echoPin, HIGH, 25000UL);
+
+if (duration == 0) return -1;  // timeout =&gt; invalid
+
+// Sound speed conversion:
+// distance(cm) = duration(us) / 58.0
+int cm = (int)(duration / 58UL);
+return cm;
+}</code></pre>
                 </div>
                 <div class="carousel-shell" data-carousel data-interval="3200">
                   <div class="carousel-viewport">
@@ -238,8 +601,460 @@
                   <ul class="detail-list">
                     <li>Do not use ChatGPT to help write your code! We initially used it to help us write some functions but this became really buggy and hard to debug! We recommend creating a clear state diagram, and within your loop have a switch state which only controls your outputs, and a checkGlobalEvents() consisting of a series of boolean Event() functions which check for changes in input, and Resp() functions which switch between states</li>
                     <li>Serial.print() values within our loop (every 250 ms using another Metro() timer: Metro debugMetro(250);) helped us a lot with debugging, as was changing the initial state to focus on a specific part of our state diagram</li>
+                  </ul>
+                  <pre><code class="language-cpp">if (debugMetro.check()) {
+Serial.print("state="); Serial.print(currentState);
+Serial.print(" | ULTRA: BL:"); Serial.print(back_L_cm); Serial.print(", L:");
+Serial.print(left_cm); Serial.print(", BR: "); Serial.print(back_R_cm);
+Serial.print(" | Line: "); Serial.print(lineL); Serial.print(",");
+Serial.print(lineM); Serial.print(","); Serial.println(lineR);
+}</code></pre>
+                  <ul class="detail-list">
                     <li>We incrementally tested our codes from subsystems to integration.</li>
                   </ul>
+                  <p><strong>Final Code:</strong></p>
+                  <pre><code class="language-cpp">#include &lt;Metro.h&gt;
+#include &lt;Servo.h&gt;
+Metro debugMetro(250); // print every 200ms
+Servo myservo;
+const unsigned long RUN_LIMIT_MS = 120000UL; // 2 minutes
+unsigned long runStartMs = 0;
+unsigned long stateStartMs = 0;
+bool runActive = false;
+bool shootingComplete = false;
+const uint16_t NEAR_WALL_CM = 35;
+const uint16_t PARALLEL_TOL_CM = 4;
+unsigned long timer = 30000;
+// Latest ultrasonic readings (cm)
+int back_L_cm = 0, left_cm = 0, back_R_cm = 0;
+const int trigPin_back_L = 23;
+const int echoPin_back_L = 25;
+const int trigPin_left = 27;
+const int echoPin_left = 29;
+const int trigPin_back_R = 31;
+const int echoPin_back_R = 33;
+// Line sensor pins
+const int line0Pin = A0;
+const int line1Pin = A1;
+const int line2Pin = A2;
+// Line sensor readings
+int lineL = 0, lineM = 0, lineR = 0;
+const int TAPE_TH = 650;
+const int TAPE_LTH = 350;
+// State machine
+typedef enum {
+// orientation phase
+STATE_COUNTERCLOCKWISE,
+// tape phase
+STATE_TAPE_MOVE_RIGHT,
+STATE_TAPE_MOVE_FORWARD_1,
+STATE_TAPE_MOVE_FORWARD_2,
+STATE_TAPE_DONE,
+// SHOOTING PHASE
+STATE_SHOOTING,
+STATE_MOVE_BACKWARDS,
+STATE_MOVE_LEFT,
+STATE_RELOAD,
+// GAME OVER
+STATE_EMPTY
+} States_t;
+States_t currentState;
+States_t prevState;
+// Motion settings
+const int speed = 255;
+// RIGHT MOTOR PINS
+const int enableA = 9;
+const int in1 = 30;
+const int in2 = 32;
+// BACK MOTOR PINS
+const int enableB = 6;
+const int in3 = 34;
+const int in4 = 36;
+// LEFT MOTOR PINS
+const int enableA_ = 10;
+const int in1_ = 38;
+const int in2_ = 24;
+// FRONT MOTOR PINS
+const int enableB_ = 11;
+const int in3_ = 26;
+const int in4_ = 28;
+//FLYWHEEL MOTOR PINS
+const int enableA_front = 7;
+const int in1_front = 40;
+const int in2_front = 42;
+// -------- Prototypes --------
+void readLineSensors();
+void readUltrasonicSensors();
+void CalculateUltrasonicDistance();
+bool eventUSInitialised();
+void checkGlobalEvents(void);
+void respToUSInitialised();
+bool eventMovedBackwards();
+void respToMovedBackwards();
+bool eventMovedLeft();
+void respToMovedLeft();
+bool eventMovedRight();
+void respToMovedRight();
+bool eventReachedHogLine();
+void respToReachedHogLine();
+void moveForward(int, int);
+void moveBackward(int, int);
+void motorStop(int, int);
+void botBackward(int);
+void botLeft(int);
+void botForward(int);
+void botRight(int);
+void botStop(void);
+void botAnticlockwise(int);
+void setup() {
+Serial.begin(9600);
+myservo.attach(7);
+myservo.write(90); //stops it
+pinMode(line0Pin, INPUT);
+pinMode(line1Pin, INPUT);
+pinMode(line2Pin, INPUT);
+pinMode(trigPin_back_L, OUTPUT); pinMode(echoPin_back_L, INPUT);
+pinMode(trigPin_left, OUTPUT); pinMode(echoPin_left, INPUT);
+pinMode(trigPin_back_R, OUTPUT); pinMode(echoPin_back_R, INPUT);
+pinMode(enableA, OUTPUT); pinMode(in1, OUTPUT); pinMode(in2, OUTPUT);
+pinMode(enableB, OUTPUT); pinMode(in3, OUTPUT); pinMode(in4, OUTPUT);
+pinMode(enableA_, OUTPUT); pinMode(in1_, OUTPUT); pinMode(in2_, OUTPUT);
+pinMode(enableB_, OUTPUT); pinMode(in3_, OUTPUT); pinMode(in4_, OUTPUT);
+prevState = STATE_EMPTY; //this state is a fill in state so that the motor gets trigerred
+currentState = STATE_COUNTERCLOCKWISE;
+botStop();
+runStartMs = millis();
+runActive = true;
+//Serial.println(&quot;setup complete&quot;);
+}
+void loop() {
+checkGlobalEvents();
+switch (currentState) {
+// ---------------- ORIENTATION PHASE ----------------
+case STATE_COUNTERCLOCKWISE: {
+if (prevState != STATE_COUNTERCLOCKWISE) {
+botAnticlockwise(250);
+prevState = STATE_COUNTERCLOCKWISE;
+}
+}
+break;
+case STATE_TAPE_MOVE_RIGHT:
+if (prevState != STATE_TAPE_MOVE_RIGHT) {
+botRight(speed);
+prevState = STATE_TAPE_MOVE_RIGHT;
+}
+break;
+case STATE_TAPE_MOVE_FORWARD_1:
+if (prevState != STATE_TAPE_MOVE_FORWARD_1) {
+botForward(speed);
+prevState = STATE_TAPE_MOVE_FORWARD_1;
+}
+break;
+case STATE_TAPE_MOVE_FORWARD_2:
+if (prevState != STATE_TAPE_MOVE_FORWARD_2) {
+botForward(speed);
+prevState = STATE_TAPE_MOVE_FORWARD_2;
+}
+break;
+case STATE_SHOOTING:
+if (prevState != STATE_SHOOTING) {
+myservo.write(-100);
+delay(200);
+myservo.write(90);
+delay(500);
+shootingComplete = true;
+prevState = STATE_SHOOTING;
+}
+break;
+case STATE_MOVE_BACKWARDS: {
+if (prevState != STATE_MOVE_BACKWARDS) {
+botBackward(speed);
+prevState = STATE_MOVE_BACKWARDS;
+}
+}
+break;
+case STATE_MOVE_LEFT:
+if (prevState != STATE_MOVE_LEFT) {
+botLeft(speed);
+Serial.print(&quot;Put in instruction to move left!&quot;);
+prevState = STATE_MOVE_LEFT;
+}
+break;
+case STATE_RELOAD:
+if (prevState != STATE_RELOAD) {
+botStop();
+prevState = STATE_RELOAD;
+}
+break;
+}
+if (debugMetro.check()) {
+Serial.print(&quot;state=&quot;); Serial.print(currentState);
+Serial.print(&quot; | ULTRA: BL:&quot;); Serial.print(back_L_cm); Serial.print(&quot;, L:&quot;);
+Serial.print(left_cm); Serial.print(&quot;, BR: &quot;); Serial.print(back_R_cm);
+Serial.print(&quot; | Line: &quot;); Serial.print(lineL); Serial.print(&quot;,&quot;);
+Serial.print(lineM); Serial.print(&quot;,&quot;); Serial.println(lineR);
+}
+}
+void checkGlobalEvents(void){
+if (eventUSInitialised()) {respToUSInitialised();}
+if (eventMovedRight()) {respToMovedRight();}
+if (eventTimerExpired()) {respToTimerExpired();}
+if (eventReachedHogLine()) {respToReachedHogLine();}
+if (eventDoneShooting()) {respToDoneShooting();}
+if (eventMovedBackwards()) {respToMovedBackwards();}
+if (eventMovedLeft()) {respToMovedLeft();}
+if (eventReloadFinished()) {respToReloadFinished();}
+}
+bool eventUSInitialised() {
+if (currentState != STATE_COUNTERCLOCKWISE) return false;
+if (currentState == STATE_COUNTERCLOCKWISE) { //should run if we are rotating anticlockwise
+readUltrasonicSensors();
+bool valid = (back_L_cm &gt; 0) &amp;&amp; (back_R_cm &gt; 0) &amp;&amp; (left_cm &gt; 0);
+int diff = (back_L_cm &gt; back_R_cm) ? (back_L_cm - back_R_cm) : (back_R_cm - back_L_cm);
+bool nearWalls =
+(back_L_cm &lt; NEAR_WALL_CM) &amp;&amp;
+(back_R_cm &lt; NEAR_WALL_CM) &amp;&amp;
+(left_cm &lt; NEAR_WALL_CM);
+bool parallel = (diff &lt; PARALLEL_TOL_CM);
+if (valid &amp;&amp; nearWalls &amp;&amp; parallel) {
+botStop();
+Serial.print(&quot;Robot in correct position, now going to move back&quot;);
+Serial.print(&quot;state!=&quot;); Serial.print(currentState);
+Serial.print(&quot; | ULTRA: BL!!:&quot;); Serial.print(back_L_cm); Serial.print(&quot;, L:!!!&quot;);
+Serial.print(left_cm); Serial.print(&quot;, BR:!!! &quot;); Serial.print(back_R_cm);
+return true;
+}
+else {
+return false;
+}
+}
+}
+void respToUSInitialised() {
+currentState = STATE_TAPE_MOVE_RIGHT;
+prevState = STATE_COUNTERCLOCKWISE;
+}
+bool eventMovedRight() {
+if (currentState != STATE_TAPE_MOVE_RIGHT) return false;
+if (currentState == STATE_TAPE_MOVE_RIGHT) {
+readLineSensors();
+if (lineM &gt; TAPE_TH) {
+botStop(); //botStop is to reduce the motor overshooting
+Serial.print(&quot;Reached the center line!&quot;);
+Serial.print(&quot; | Line:!! &quot;); Serial.print(lineL); Serial.print(&quot;,&quot;);
+Serial.print(lineM); Serial.print(&quot;,&quot;); Serial.println(lineR);
+return true;
+}
+else {
+return false;
+}
+}
+}
+void respToMovedRight() {
+currentState = STATE_TAPE_MOVE_FORWARD_1;
+prevState = STATE_TAPE_MOVE_RIGHT;
+timer = millis();
+Serial.println(&quot;Started timer&quot;);
+}
+bool eventTimerExpired(){
+if (currentState != STATE_TAPE_MOVE_FORWARD_1) return false;
+if (currentState == STATE_TAPE_MOVE_FORWARD_1) {
+if (millis() - timer &gt; 500) {
+Serial.println(&quot;timer expired&quot;);
+return true;
+}else {
+return false;
+}
+}
+}
+void respToTimerExpired(){
+currentState = STATE_TAPE_MOVE_FORWARD_2;
+prevState = STATE_TAPE_MOVE_FORWARD_1;
+}
+bool eventReachedHogLine() {
+if (currentState != STATE_TAPE_MOVE_FORWARD_2) return false;
+if (currentState == STATE_TAPE_MOVE_FORWARD_2) {
+readLineSensors();
+bool left_sensor_black = lineL &gt; TAPE_LTH;
+bool middle_sensor_black = lineM &gt; TAPE_TH;
+bool right_sensor_black = lineR &gt; TAPE_TH;
+if(left_sensor_black &amp;&amp; !middle_sensor_black &amp;&amp; !right_sensor_black) {
+botAnticlockwise(225);
+prevState = STATE_EMPTY; //so it continues to move forward
+} else if (!left_sensor_black &amp;&amp; !middle_sensor_black &amp;&amp; right_sensor_black) {
+botClockwise(225);
+prevState = STATE_EMPTY;
+}
+if (lineL &gt; TAPE_LTH &amp;&amp; lineR &gt; TAPE_TH) {
+botStop();
+Serial.println(&quot;Tape target reached!&quot;);
+return true;
+}
+else {
+return false;
+}
+}
+}
+void respToReachedHogLine() {
+currentState = STATE_SHOOTING;
+prevState = STATE_TAPE_MOVE_FORWARD_2;
+}
+bool eventDoneShooting() {
+if (currentState != STATE_SHOOTING) return false;
+if (currentState == STATE_SHOOTING) {
+if (shootingComplete) {
+shootingComplete = false;
+return true;
+}
+else {
+return false;
+}
+}
+}
+void respToDoneShooting() {
+currentState = STATE_MOVE_BACKWARDS;
+prevState = STATE_SHOOTING;
+}
+bool eventMovedBackwards() {
+if (currentState != STATE_MOVE_BACKWARDS) return false;
+if (currentState == STATE_MOVE_BACKWARDS) {
+readUltrasonicSensors();
+if (back_L_cm &gt; 0 &amp;&amp; back_L_cm &lt;= 5) {
+botStop();
+Serial.print(&quot;Robot moved back, now going to move left&quot;);
+Serial.print(&quot;state!=&quot;); Serial.print(currentState);
+Serial.print(&quot; | ULTRA: BL!!:&quot;); Serial.print(back_L_cm); Serial.print(&quot;, L:!!!&quot;);
+Serial.print(left_cm); Serial.print(&quot;, BR:!!! &quot;); Serial.print(back_R_cm);
+return true;
+}
+else {
+return false;
+}
+}
+}
+void respToMovedBackwards() {
+currentState = STATE_MOVE_LEFT;
+prevState = STATE_MOVE_BACKWARDS;
+}
+bool eventMovedLeft() {
+if (currentState != STATE_MOVE_LEFT) return false; //cos we need to return true or false, guard clause
+if (currentState == STATE_MOVE_LEFT) {
+readUltrasonicSensors();
+if (left_cm &lt;= 3) {
+botStop();
+Serial.print(&quot;Robot moved left, initialisation complete!&quot;);
+Serial.print(&quot;state!=&quot;); Serial.print(currentState);
+Serial.print(&quot; | ULTRA: BL!!:&quot;); Serial.print(back_L_cm); Serial.print(&quot;, L:!!!&quot;);
+Serial.print(left_cm); Serial.print(&quot;, BR:!!! &quot;); Serial.print(back_R_cm);
+return true;
+}
+else {
+return false;
+}
+}
+}
+void respToMovedLeft() {
+currentState = STATE_RELOAD;
+prevState = STATE_MOVE_LEFT;
+timer = millis();
+Serial.println(&quot;Started timer&quot;);
+}
+bool eventReloadFinished(){
+if (currentState != STATE_RELOAD) return false;
+if (currentState == STATE_RELOAD) {
+if (millis() - timer &gt; 3000) {
+Serial.println(&quot;timer expired&quot;);
+return true;
+}else {
+return false;
+}
+}
+}
+void respToReloadFinished(){
+currentState = STATE_TAPE_MOVE_RIGHT;
+prevState = STATE_RELOAD;
+}
+void readUltrasonicSensors() {
+back_L_cm = calculateUltrasonicDistance(trigPin_back_L, echoPin_back_L);
+left_cm = calculateUltrasonicDistance(trigPin_left, echoPin_left);
+back_R_cm = calculateUltrasonicDistance(trigPin_back_R, echoPin_back_R);
+}
+void readLineSensors() {
+lineL = analogRead(line0Pin); // left
+lineM = analogRead(line1Pin); // middle
+lineR = analogRead(line2Pin); // right
+}
+// Returns distance in cm.
+// Returns -1 if no echo within timeout
+int calculateUltrasonicDistance(int trigPin, int echoPin) {
+digitalWrite(trigPin, LOW);
+delayMicroseconds(2);
+// Trigger: 10us HIGH pulse
+digitalWrite(trigPin, HIGH);
+delayMicroseconds(10);
+digitalWrite(trigPin, LOW);
+// Read echo pulse width (microseconds)
+// Timeout set to 25,000us (~4.3m). Reduce to cut blocking/crosstalk.
+unsigned long duration = pulseIn(echoPin, HIGH, 25000UL);
+if (duration == 0) return -1; // timeout =&gt; invalid
+// Sound speed conversion:
+// distance(cm) = duration(us) / 58.0
+int cm = (int)(duration / 58UL);
+return cm;
+}
+// -------- Motor helpers --------
+void moveForward(int high_pin, int low_pin) { digitalWrite(high_pin, HIGH); digitalWrite(low_pin, LOW); }
+void moveBackward(int high_pin, int low_pin){ digitalWrite(low_pin, HIGH); digitalWrite(high_pin, LOW); }
+void motorStop(int high_pin, int low_pin) { digitalWrite(low_pin, LOW); digitalWrite(high_pin, LOW); }
+void botBackward(int speed) {
+analogWrite(enableA, speed);
+analogWrite(enableA_, speed);
+moveBackward(in1, in2);
+moveBackward(in2_, in1_);
+}
+void botLeft(int speed) {
+analogWrite(enableB, speed);
+analogWrite(enableB_, speed);
+moveForward(in4, in3);
+moveForward(in3_, in4_);
+}
+void botForward(int speed) {
+analogWrite(enableA, speed);
+analogWrite(enableA_, speed);
+moveForward(in1, in2); // Right forward
+moveForward(in2_, in1_); // Left forward
+}
+void botRight(int speed) {
+analogWrite(enableB, speed);
+analogWrite(enableB_, speed);
+moveBackward(in4, in3);
+moveBackward(in3_, in4_);
+}
+void botStop(){
+motorStop(in1, in2);
+motorStop(in3, in4);
+motorStop(in1_, in2_);
+motorStop(in3_, in4_);
+}
+void botAnticlockwise(int speed){
+analogWrite(enableA, speed);
+analogWrite(enableB, speed);
+analogWrite(enableA_, speed);
+analogWrite(enableB_, speed);
+moveForward(in1, in2); // Right forward
+moveBackward(in4, in3); // back forward
+moveForward(in1_, in2_); // Left backward
+moveBackward(in4_, in3_); // front backward
+}
+void botClockwise(int speed){
+analogWrite(enableA, speed);
+analogWrite(enableB, speed);
+analogWrite(enableA_, speed);
+analogWrite(enableB_, speed);
+moveBackward(in1, in2); //R
+moveForward(in4, in3); //B
+moveForward(in2_, in1_); //L
+moveBackward(in3_, in4_); //F
+}</code></pre>
                   <a class="code-link" href="software-final-code.txt">Open final code text export</a>
                 </div>
                 <div class="carousel-shell" data-carousel data-interval="3200">
@@ -263,5 +1078,7 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
   </body>
 </html>
