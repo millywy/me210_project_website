@@ -21,9 +21,9 @@
         </a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
         <nav id="site-nav" class="site-nav">
-          <a href="index.html">Home</a>
-          <a href="competition.html" aria-current="page">Competition</a>
-          <a href="brainstorm.html">Brainstorm</a>
+          <a href="index.html" >Home</a>
+          <a href="competition.html"aria-current="page">Game Day</a>
+          <a href="brainstorm.html">Brainstorming</a>
           <a href="mechanical.html">Mechanical</a>
           <a href="software.html">Software</a>
           <a href="electrical.html">Electrical</a>
@@ -34,9 +34,8 @@
       </header>
 
       <main>
-        <section class="page-header">
-          <p class="page-kicker">Competition Day</p>
-          <h1>What went wrong and what we learned</h1>
+        <section class="page-header">          
+          <h1>What Went Wrong and What We Learned</h1>
           <p class="page-subtitle">
             This page follows the actual failure chain from competition day: wiring, crimping, weight distribution,
             power budgeting, servo load, and late mechanical wear.
@@ -52,7 +51,7 @@
               The first thing we did was improve wire management by zip-tying loose wires. Because we already had significant experience debugging the robot, we were initially not too worried when the robot stopped responding reliably, even under the basic orientation code for forward, backward, left, and right motion. We checked the usual electrical failure points by pressing on pins and reseating connections, but the problem persisted. We then attempted to replace the batteries, but during this process one of the crimped connections near the fuse came loose. Re-crimping it took much longer than expected because we were rushed and nervous, and we initially used the wrong crimp type and cap orientation. By the time this was fixed, we had only about half an hour left before the competition.
             </p>
             <p>
-              After restoring power, the robot behaved more reliably in simple motion tests, but a new issue appeared: it could move forward and backward, but lateral motion was poor. We investigated several possible mechanical causes, including loose wheels, shaft fit, and incorrect screws, and we tightened or replaced multiple parts. This improved performance slightly, but the left-right movement was still weak. In hindsight, one likely explanation was <strong>weight distribution</strong>. The batteries were mounted on the left and right sides of the robot, directly above those wheels, while left-right translation relied more heavily on the front and back wheels. We suspect that this created an unfavorable torque distribution, especially when battery voltage dropped and the power supply became less stable.
+              After restoring power, the robot behaved more reliably in simple motion tests, but a new issue appeared: it could move forward and backward, but lateral motion was poor. We investigated several possible mechanical causes, including loose wheels, shaft fit, and incorrect screws, and we tightened or replaced multiple parts. This improved performance slightly, but the left-right movement was still weak. In hindsight, one likely explanation was <strong>weight distribution</strong>. The batteries were mounted on the left and right sides of the robot, directly above those wheels, while the pucks were placed at the center of the chassis slightly closer to the back. We suspect that this caused the front wheel to not have enough normal force and hence lose traction which explains why lateral motion was compromised. 
             </p>
           </article>
 
