@@ -22,9 +22,9 @@
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
         <nav id="site-nav" class="site-nav">
           <a href="index.html">Home</a>
-          <a href="competition.html">Competition</a>
-          <a href="brainstorm.html">Brainstorm</a>
-          <a href="mechanical.html" aria-current="page">Mechanical</a>
+          <a href="competition.html">Game Day</a>
+          <a href="brainstorm.html">Brainstorming</a>
+          <a href="mechanical.html"aria-current="page">Mechanical</a>
           <a href="software.html">Software</a>
           <a href="electrical.html">Electrical</a>
           <a href="team.html">Team</a>
@@ -45,79 +45,98 @@
         <div class="page-layout">
           <aside class="local-nav">
             <div class="local-nav-title">On this page</div>
-            <a href="#navigation" data-spy-link>Subsystem 1</a>
-            <a href="#sensing" data-spy-link>Subsystem 2</a>
-            <a href="#shooting" data-spy-link>Subsystems 3/4</a>
+            <a href="#navigation" data-spy-link>Navigation</a>
+            <a href="#sensing" data-spy-link>Sensing</a>
+            <a href="#shooting" data-spy-link>Shooting/Storing Puck</a>
             <a href="#rapid" data-spy-link>Rapid prototyping</a>
           </aside>
 
-          <div class="page-sections">
-            <section id="navigation" class="section-block" data-spy-section>
-              <p class="section-kicker">Subsystem 1</p>
-              <h2>Navigation</h2>
-              <div class="split-layout shooting-layout nav-layout">
-                <div>
-                  <p><strong>Brainstorming/Design Tradeoffs:</strong></p>
-                  <p>For a drivetrain subsystem, we were considering standard wheels and omni-directional wheels. We were also considering different orientations of passive vs active drive wheels based on each wheel type.</p>
-                  <p><strong>For a standard wheel:</strong></p>
-                  <p><strong>For an omni-directional wheel:</strong></p>
-                  <p>We were leaning towards a four-wheel drive omniwheel system because:</p>
-                  <ul class="detail-list">
-                    <li>We wanted to eliminate complexity when it comes to steering and turning</li>
-                    <li>Due to spatial constraints of exiting the starting box successfully and never crossing the hog lines, eliminating turn radii was the best strategy.</li>
-                    <li>A two-wheel drive with omni-directional wheels risked turning instead of translating when we would turn on one motor</li>
-                    <li>Especially since we will be carrying the weight of 3x pucks + 2x batteries, more drive torque was needed.</li>
-                  </ul>
-                  <p><strong>Prototype Build:</strong></p>
-                  <p>One of our main priorities was to put together hardware and start testing as early as possible and avoid getting too invested in perfecting the design from the first pass.</p>
-                  <ul class="detail-list">
-                    <li>We cut a 10inx10in sheet of wood</li>
-                    <li>We drilled holes into this board, zip-tied motors in, and hot-glued omni-directional wheels to the shafts.</li>
-                    <li>Within a couple days we had a fully working navigation subsystem and had a headstart on hardware overall.</li>
-                    <li>Other components added to the prototype were the sensors and they were simply taped onto the board.</li>
-                  </ul>
-                  <p><strong>Final design:</strong></p>
-                  <ul class="detail-list">
-                    <li>Make mounts for motors (L-brackets)</li>
-                    <li>Make mounts for shaft-wheel interface</li>
-                    <li>Make corresponding cutouts on new chassis</li>
-                    <li>Push wheels into chassis so that robot outer dimension is bound by chassis and real estate is maximized while staying within guideline dimensions</li>
-                    <li>Place all navigation-related components on chassis underside to free up real estate on the upper side</li>
-                    <li>4x Motor mounts</li>
-                    <li>4x Wheels + Shaft-Wheel Interfaces</li>
-                    <li>2x L298N H-bridge Motor Drivers</li>
-                  </ul>
-                </div>
-                <div class="stack-layout shooting-stack nav-gallery-tight">
-                  <div class="media-grid two nav-pair">
-                    <figure class="media-frame micro"><img src="site-images/image3.png" alt="Standard wheel image 1" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image33.png" alt="Standard wheel image 2" /></figure>
-                  </div>
-                  <div class="media-grid two nav-pair">
-                    <figure class="media-frame micro"><img src="site-images/image4.png" alt="Standard wheel image 3" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image42.png" alt="Standard wheel image 4" /></figure>
-                  </div>
-                  <div class="media-grid two nav-pair">
-                    <figure class="media-frame micro"><img src="site-images/image68.png" alt="Omni wheel image 1" /></figure>
-                    <figure class="media-frame micro"><img src="site-images/image34.png" alt="Omni wheel image 2" /></figure>
-                  </div>
-                </div>
-              </div>
-              <div class="gallery-grid" style="margin-top: 18px;">
-                <figure class="media-frame micro"><img src="site-images/image24.png" alt="Motor mount CAD" /></figure>
-                <figure class="media-frame micro"><img src="site-images/image64.png" alt="Motor mount CAD 2" /></figure>
-                <figure class="media-frame micro"><img src="site-images/image37.png" alt="Wheel interface CAD" /></figure>
-                <figure class="media-frame micro"><img src="site-images/image57.png" alt="Wheel interface front view" /></figure>
-                <figure class="media-frame micro"><img src="site-images/image46.png" alt="Wheel interface back view" /></figure>
-                <figure class="media-frame micro"><img src="site-images/image14.png" alt="Wheel interface to motor" /></figure>
-                <figure class="media-frame micro"><img src="site-images/image18.png" alt="Motor driver mount" /></figure>
-                <figure class="media-frame micro"><img src="site-images/image54.png" alt="Motor driver assembly 2" /></figure>
-                <figure class="media-frame micro"><img src="site-images/image6.png" alt="Motor driver assembly 3" /></figure>
-              </div>
-            </section>
+         <section id="navigation" class="section-block" data-spy-section>              
+  <h2>Navigation</h2>
 
-            <section id="sensing" class="section-block" data-spy-section>
-              <p class="section-kicker">Subsystem 2</p>
+  <p><strong>Brainstorming/Design Tradeoffs:</strong></p>
+  <p>For a drivetrain subsystem, we were considering standard wheels and omni-directional wheels. We were also considering different orientations of passive vs active drive wheels based on each wheel type.</p>
+
+  <p><strong>For a standard wheel:</strong></p>
+
+  <div class="media-grid two">
+    <figure class="media-frame micro"><img src="site-images/image3.png" alt="Standard wheel image 1" /></figure>
+    <figure class="media-frame micro"><img src="site-images/image33.png" alt="Standard wheel image 2" /></figure>
+    <figure class="media-frame micro"><img src="site-images/image4.png" alt="Standard wheel image 3" /></figure>
+    <figure class="media-frame micro"><img src="site-images/image42.png" alt="Standard wheel image 4" /></figure>
+  </div>
+
+  <p><strong>For an omni-directional wheel:</strong></p>
+
+  <div class="media-grid two">
+    <figure class="media-frame micro"><img src="site-images/image68.png" alt="Omni wheel image 1" /></figure>
+    <figure class="media-frame micro"><img src="site-images/image34.png" alt="Omni wheel image 2" /></figure>
+  </div>
+
+  <p>We were leaning towards a four-wheel drive omniwheel system because:</p>
+
+  <ul class="detail-list">
+    <li>We wanted to eliminate complexity when it comes to steering and turning</li>
+    <li>Due to spatial constraints of exiting the starting box successfully and never crossing the hog lines, eliminating turn radii was the best strategy.</li>
+    <li>A two-wheel drive with omni-directional wheels risked turning instead of translating when we would turn on one motor</li>
+    <li>Especially since we will be carrying the weight of 3x pucks + 2x batteries, more drive torque was needed.</li>
+  </ul>
+
+  <p><strong>Prototype Build:</strong></p>
+
+  <ul class="detail-list">
+    <li>We cut a 10inx10in sheet of wood</li>
+    <li>We drilled holes into this board, zip-tied motors in, and hot-glued omni-directional wheels to the shafts.</li>
+    <li>Within a couple days we had a fully working navigation subsystem and had a headstart on hardware overall.</li>
+    <li>Other components added to the prototype were the sensors and they were simply taped onto the board.</li>
+  </ul>
+
+  <p><strong>Final design:</strong></p>
+
+  <ul class="detail-list">
+    <li>Make mounts for motors (L-brackets)</li>
+    <li>Make mounts for shaft-wheel interface</li>
+    <li>Make corresponding cutouts on new chassis</li>
+    <li>Push wheels into chassis so that robot outer dimension is bound by chassis and real estate is maximized while staying within guideline dimensions</li>
+
+    <li>
+      Place all navigation-related components on chassis underside to free up real estate on the upper side
+      <ul class="detail-list">
+
+        <li>
+          4x Motor mounts
+          <div class="media-grid three">
+            <figure class="media-frame micro"><img src="site-images/image24.png" alt="Motor mount CAD" /></figure>
+            <figure class="media-frame micro"><img src="site-images/image64.png" alt="Motor mount CAD 2" /></figure>
+            <figure class="media-frame micro"><img src="site-images/image37.png" alt="Wheel interface CAD" /></figure>
+          </div>
+        </li>
+
+        <li>
+          4x Wheels + Shaft-Wheel Interfaces
+          <div class="media-grid three">
+            <figure class="media-frame micro"><img src="site-images/image57.png" alt="Wheel interface front view" /></figure>
+            <figure class="media-frame micro"><img src="site-images/image46.png" alt="Wheel interface back view" /></figure>
+            <figure class="media-frame micro"><img src="site-images/image14.png" alt="Wheel interface to motor" /></figure>
+          </div>
+        </li>
+
+        <li>
+          2x L298N H-bridge Motor Drivers
+          <div class="media-grid three">
+            <figure class="media-frame micro"><img src="site-images/image18.png" alt="Motor driver mount" /></figure>
+            <figure class="media-frame micro"><img src="site-images/image54.png" alt="Motor driver assembly 2" /></figure>
+            <figure class="media-frame micro"><img src="site-images/image6.png" alt="Motor driver assembly 3" /></figure>
+          </div>
+        </li>
+
+      </ul>
+    </li>
+
+  </ul>
+
+</section>
+            <section id="sensing" class="section-block" data-spy-section>              
               <h2>Sensing</h2>
               <div class="split-layout">
                 <div>
@@ -151,8 +170,7 @@
               </div>
             </section>
 
-            <section id="shooting" class="section-block" data-spy-section>
-              <p class="section-kicker">Subsystems 3/4</p>
+            <section id="shooting" class="section-block" data-spy-section>            
               <h2>Storing and shooting pucks</h2>
               <div class="split-layout">
                 <div>
@@ -255,8 +273,7 @@
               </div>
             </section>
 
-            <section id="rapid" class="section-block" data-spy-section>
-              <p class="section-kicker">Summary</p>
+            <section id="rapid" class="section-block" data-spy-section>              
               <h2>Rapid prototyping</h2>
               <p>We gathered a lot of data on these subsystems from day one and that is why we were able to adapt to many changes and still deliver the system early enough.</p>
               <ul class="detail-list">
