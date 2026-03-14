@@ -80,7 +80,30 @@ a {
   backdrop-filter: blur(16px);
   box-shadow: var(--shadow);
 }
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
+.timeline-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  padding: 10px 14px;
+  border-left: 4px solid #4a6cf7;
+  background: #f8f9fc;
+  border-radius: 6px;
+}
+
+.timeline-row strong {
+  font-weight: 600;
+  color: #333;
+}
+
+.timeline-row span {
+  color: #555;
+}
 .brand {
   display: inline-flex;
   flex-direction: column;
